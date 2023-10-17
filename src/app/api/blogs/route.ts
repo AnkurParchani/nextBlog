@@ -1,25 +1,24 @@
-import mongoose from "mongoose";
 import { NextResponse } from "next/server";
 
 import connectMongoDB from "../../../../lib/dbConnect";
+import Blog from "../../../../models/blogModel";
 
-const Blog = mongoose.model("Blog");
-
+// Getting all the blogs
 export async function GET() {
+  connectMongoDB();
+  const blogs = await Blog.find();
+
   return NextResponse.json({
     status: "success",
-    message: "From the blog GET function",
+    blogs,
   });
 }
 
-export async function POST(req: Request): Promise<NextResponse> {
+// Creating a blog
+export async function POST(req: Request) {
   const { title, content } = await req.json();
-  console.log(title, content);
-  console.log("Connecting to database");
 
   connectMongoDB();
-
-  console.log("Database connection successfull");
   await Blog.create({ title, content });
   return NextResponse.json({ status: "success", message: "created" });
 }

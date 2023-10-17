@@ -19,6 +19,6 @@ const blogSchema = new mongoose.Schema<IBlog>({
 });
 
 // Defining and exporting the model
-const Blog = mongoose.model("Blog", blogSchema);
+const Blog = mongoose.models.Blog || mongoose.model("Blog", blogSchema);
 
 export default Blog;
