@@ -19,12 +19,12 @@ export async function GET() {
 
 // Creating a blog
 export async function POST(req: Request) {
-  const { title, content } = await req.json();
-
   connectMongoDB();
+  const { title, content, isGlobal } = await req.json();
+
   const user = await getUser();
   if (!user) return NextResponse.json(new AppError(401, "Please login first"));
 
-  const blog = await Blog.create({ title, content });
+  const blog = await Blog.create({ title, content, user: user._id, isGlobal });
   return NextResponse.json({ status: "success", blog });
 }

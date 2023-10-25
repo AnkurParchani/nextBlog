@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import User from "./userModel";
 
 // Interface that defines the structure of seperate document
 interface IBlog {
@@ -7,11 +8,13 @@ interface IBlog {
   isGlobal: boolean;
   createdAt: Date;
   likes: number;
+  user: object;
 }
 
 // Creating the schema
 const blogSchema = new mongoose.Schema<IBlog>({
   title: String,
+  user: { type: mongoose.Schema.ObjectId, ref: User },
   content: String,
   isGlobal: { type: Boolean, default: true },
   createdAt: { type: Date, default: new Date() },
