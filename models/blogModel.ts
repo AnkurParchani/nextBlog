@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-// Interface that defines the structure of seperate docuement
+// Interface that defines the structure of seperate document
 interface IBlog {
   title: string;
   content: string;
