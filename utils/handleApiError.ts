@@ -10,6 +10,8 @@ export default function handleApiError(err: unknown) {
     }
   }
 
+  console.log(err);
+
   // If don't know what the error is about
   return NextResponse.json({
     status: "fail",

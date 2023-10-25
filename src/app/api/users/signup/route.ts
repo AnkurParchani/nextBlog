@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
-import { setCookie } from "cookies-next";
-import jwt from "jsonwebtoken";
+import { cookies } from "next/headers";
 
 import connectMongoDB from "../../../../../lib/dbConnect";
 import catchAsync from "../../../../../utils/catchAsync";
 import AppError from "../../../../../utils/appError";
 import User from "../../../../../models/userModel";
+import { sign } from "../../../../../utils/jwt_verify_sign";
 
 // Creating the user (login)
 export const POST = catchAsync(async (req: Request) => {
@@ -21,11 +21,14 @@ export const POST = catchAsync(async (req: Request) => {
   // Creating the user
   const user = await User.create({ name, email, password, passwordConfirm });
 
-  // Creating the jsonwebtoken
-  const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET!);
+  // Creating the token using jose
+  const token = await sign(
+    { userId: user._id },
+    process.env.JWT_SECRET as string
+  );
 
-  // Assigning the token as a cookie
-  setCookie("token", token);
+  // Setting the cookie
+  cookies().set("token", token);
 
   return NextResponse.json({ status: "success", user });
 });
