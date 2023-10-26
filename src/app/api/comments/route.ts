@@ -25,7 +25,7 @@ export const GET = catchAsync(async (req: Request) => {
 export const POST = catchAsync(async (req: Request) => {
   connectMongoDB();
 
-  // Seeing if the user is signed in or not
+  // Checking Authentication
   const user = await getUser();
   if (!user) return NextResponse.json(new AppError(401, "Please login first"));
 

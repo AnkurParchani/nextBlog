@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
 import User from "./userModel";
+import Comment from "./commentModel";
 
 // Interface that defines the structure of seperate document
 interface IBlog {
   title: string;
   content: string;
   isGlobal: boolean;
-  createdAt: Date;
   likes: number;
+  createdAt: Date;
   user: object;
 }
 
@@ -15,10 +16,10 @@ interface IBlog {
 const blogSchema = new mongoose.Schema<IBlog>({
   title: String,
   user: { type: mongoose.Schema.ObjectId, ref: User },
+  likes: { type: Number, default: 0 },
   content: String,
   isGlobal: { type: Boolean, default: true },
   createdAt: { type: Date, default: new Date() },
-  likes: Number,
 });
 
 // Defining and exporting the model
