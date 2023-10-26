@@ -4,6 +4,10 @@ import connectMongoDB from "../../../../lib/dbConnect";
 import User from "../../../../models/userModel";
 import catchAsync from "../../../../utils/catchAsync";
 import AppError from "../../../../utils/appError";
+import Blog from "../../../../models/blogModel";
+import Comment from "../../../../models/commentModel";
+import Like from "../../../../models/likeModel";
+
 import { getUser } from "../../../../utils/getUser";
 
 // Getting a particular user
@@ -27,9 +31,15 @@ export const DELETE = catchAsync(async (req: Request) => {
   if (!user || !user._id)
     return NextResponse.json(new AppError(401, "Please Login first"));
 
+  // Deleting the blogs of the user
+  await Blog.deleteMany({ user: user._id });
+  // Deleting the comments of the user
+  await Comment.deleteMany({ user: user._id });
+  // Deleting the Likes of the user
+  await Like.deleteMany({ user: user._id });
   // Deleting the user
   await User.findByIdAndDelete(user._id);
 
   // Seding success response
-  return NextResponse.json({ status: "success" });
+  return NextResponse.json({ status: "success", message: "user deleted" });
 });
