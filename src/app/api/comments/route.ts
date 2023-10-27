@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 
 import Comment from "../../../../models/commentModel";
-import AppError from "../../../../utils/appError";
+import AppError from "../../../../utils/errors/appError";
 import connectMongoDB from "../../../../lib/dbConnect";
-import catchAsync from "../../../../utils/catchAsync";
+import catchAsync from "../../../../utils/errors/catchAsync";
 
-import { getUser } from "../../../../utils/getUser";
+import { getUser } from "../../../../utils/auth/getUser";
 
 // Getting all the comments of a particular blog
 export const GET = catchAsync(async (req: Request) => {

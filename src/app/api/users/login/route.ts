@@ -2,12 +2,12 @@ import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 
 import connectMongoDB from "../../../../../lib/dbConnect";
-import catchAsync from "../../../../../utils/catchAsync";
-import AppError from "../../../../../utils/appError";
+import catchAsync from "../../../../../utils/errors/catchAsync";
+import AppError from "../../../../../utils/errors/appError";
 import User from "../../../../../models/userModel";
-import checkCredentials from "../../../../../utils/checkCredentials";
+import checkCredentials from "../../../../../utils/auth/checkCredentials";
 import { cookies } from "next/headers";
-import { sign } from "../../../../../utils/jwt_verify_sign";
+import { sign } from "../../../../../utils/auth/jwt_verify_sign";
 
 // Getting  the user (login)
 export const POST = catchAsync(async (req: Request) => {
@@ -40,5 +40,5 @@ export const POST = catchAsync(async (req: Request) => {
   cookies().set("token", token);
 
   // If user is found and password is also correct then returning success
-  return NextResponse.json({ status: "success", user });
+  return NextResponse.json({ status: "success", email: user.email, token });
 });

@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 
 import Blog from "../../../../../models/blogModel";
 import connectMongoDB from "../../../../../lib/dbConnect";
-import { getUser } from "../../../../../utils/getUser";
-import AppError from "../../../../../utils/appError";
-import handleApiError from "../../../../../utils/handleApiError";
+import { getUser } from "../../../../../utils/auth/getUser";
+import AppError from "../../../../../utils/errors/appError";
+import handleApiError from "../../../../../utils/errors/handleApiError";
 import Comment from "../../../../../models/commentModel";
 
 // type for params

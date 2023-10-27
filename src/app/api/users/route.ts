@@ -2,13 +2,13 @@ import { NextResponse } from "next/server";
 
 import connectMongoDB from "../../../../lib/dbConnect";
 import User from "../../../../models/userModel";
-import catchAsync from "../../../../utils/catchAsync";
-import AppError from "../../../../utils/appError";
+import catchAsync from "../../../../utils/errors/catchAsync";
+import AppError from "../../../../utils/errors/appError";
 import Blog from "../../../../models/blogModel";
 import Comment from "../../../../models/commentModel";
 import Like from "../../../../models/likeModel";
 
-import { getUser } from "../../../../utils/getUser";
+import { getUser } from "../../../../utils/auth/getUser";
 
 // Getting a particular user
 export const GET = catchAsync(async () => {

@@ -1,12 +1,12 @@
 import { NextResponse } from "next/server";
 
 import connectMongoDB from "../../../../../lib/dbConnect";
-import catchAsync from "../../../../../utils/catchAsync";
-import AppError from "../../../../../utils/appError";
+import catchAsync from "../../../../../utils/errors/catchAsync";
+import AppError from "../../../../../utils/errors/appError";
 import Like from "../../../../../models/likeModel";
 import Blog from "../../../../../models/blogModel";
 
-import { getUser } from "../../../../../utils/getUser";
+import { getUser } from "../../../../../utils/auth/getUser";
 
 // Function to dislike a blog
 export const POST = catchAsync(async (req: Request) => {

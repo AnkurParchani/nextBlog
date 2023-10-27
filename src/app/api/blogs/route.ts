@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 
 import connectMongoDB from "../../../../lib/dbConnect";
 import Blog from "../../../../models/blogModel";
-import AppError from "../../../../utils/appError";
+import AppError from "../../../../utils/errors/appError";
 
-import { getUser } from "../../../../utils/getUser";
+import { getUser } from "../../../../utils/auth/getUser";
 
 // Getting all the blogs
 export async function GET() {

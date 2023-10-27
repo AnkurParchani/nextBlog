@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { JwtPayload } from "jsonwebtoken";
 
-import User from "../models/userModel";
+import User from "../../models/userModel";
 
 import { verify } from "./jwt_verify_sign";
 

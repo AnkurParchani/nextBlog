@@ -2,10 +2,10 @@ import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 
 import connectMongoDB from "../../../../../lib/dbConnect";
-import catchAsync from "../../../../../utils/catchAsync";
-import AppError from "../../../../../utils/appError";
+import catchAsync from "../../../../../utils/errors/catchAsync";
+import AppError from "../../../../../utils/errors/appError";
 import User from "../../../../../models/userModel";
-import { sign } from "../../../../../utils/jwt_verify_sign";
+import { sign } from "../../../../../utils/auth/jwt_verify_sign";
 
 // Creating the user (login)
 export const POST = catchAsync(async (req: Request) => {
