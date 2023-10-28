@@ -21,6 +21,7 @@ export async function login(e: FormData) {
       headers: {
         "Content-Type": "application/json",
       },
+      cache: "no-cache",
     });
     const data = await res.json();
 
@@ -30,6 +31,9 @@ export async function login(e: FormData) {
 
     // Setting the cookie
     cookies().set("token", data.token);
+
+    // Returning success
+    return true;
   } catch (err: unknown) {
     return handleClientError(err);
   }
