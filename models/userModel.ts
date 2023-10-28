@@ -7,6 +7,7 @@ interface IUser {
   email: { type: string; unique: boolean; message: string };
   password: string;
   passwordConfirm: string | undefined;
+  img: string;
 }
 
 // Creating the schema
@@ -17,8 +18,9 @@ const userSchema = new mongoose.Schema<IUser>({
     unique: true,
     message: "This email has already been used by someone else",
   },
-  password: String,
+  password: { type: String, select: false },
   passwordConfirm: String,
+  img: String,
 });
 
 // Encrypting the password before saving it to DB

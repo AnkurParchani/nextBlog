@@ -1,16 +1,24 @@
-import AddBlogIcon from "@/components/AddBlogIcon";
+import AddBlogIcon from "@/components/others/AddBlogIcon";
 import SubNav from "@/components/nav/SubNav";
+import Container from "@/components/others/Container";
+import Blog from "@/components/blogs/Blog";
+
 import { getBlogs } from "../../utils/blogs/apiBlogs";
 
 export default async function Home() {
-  const data = await getBlogs();
-  console.log(data);
+  const blogs = await getBlogs();
 
   return (
-    <main>
+    <main className="min-h-[90vh] bg-black text-gray-200">
       <AddBlogIcon />
-      <SubNav name="Liked Blogs" />
-      <h1>This is the checking line</h1>
+      <SubNav name="Home" />
+      <Container>
+        <div className="grid grid-cols-1 gap-3">
+          {blogs.map((blog: Blog) => (
+            <Blog key={blog._id} blog={blog} />
+          ))}
+        </div>
+      </Container>
     </main>
   );
 }

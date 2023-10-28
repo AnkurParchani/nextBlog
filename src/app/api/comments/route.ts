@@ -4,6 +4,7 @@ import Comment from "../../../../models/commentModel";
 import AppError from "../../../../utils/errors/appError";
 import connectMongoDB from "../../../../lib/dbConnect";
 import catchAsync from "../../../../utils/errors/catchAsync";
+import Blog from "../../../../models/blogModel";
 
 import { getUser } from "../../../../utils/auth/getUser";
 
@@ -56,6 +57,9 @@ export const POST = catchAsync(async (req: Request) => {
     user: user._id,
   });
 
+  // Updating the number of comments on the blog (+1)
+  await Blog.findByIdAndUpdate(blogId, { $inc: { comments: 1 } });
+
   // The response
   return NextResponse.json({ status: "success", comment });
 });
@@ -65,13 +69,19 @@ export const DELETE = catchAsync(async (req: Request) => {
   connectMongoDB();
 
   const { commentId } = await req.json();
+
+  // Authentication
   const user = await getUser();
   if (!user) return NextResponse.json(new AppError(401, "Please login first"));
 
+  // Deleting the comment
   const comment = await Comment.findByIdAndDelete(commentId).where({
     user: user._id,
   });
   if (!comment) return NextResponse.json(new AppError(404, "No comment found"));
+
+  // Updating the number of comments on the blog (+1)
+  await Blog.findByIdAndUpdate(comment.blog, { $inc: { comments: -1 } });
 
   return NextResponse.json({ status: "success" });
 });

@@ -1,4 +1,3 @@
-import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 
 import connectMongoDB from "../../../../../lib/dbConnect";
@@ -21,7 +20,7 @@ export const POST = catchAsync(async (req: Request) => {
     );
 
   // Getting the user according to provided email and checking the password
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email }).select("+password");
   const correct = user && (await checkCredentials(password, user.password));
 
   // If no user found or password is not correct

@@ -5,20 +5,21 @@ import Blog from "../../../../models/blogModel";
 import AppError from "../../../../utils/errors/appError";
 
 import { getUser } from "../../../../utils/auth/getUser";
+import catchAsync from "../../../../utils/errors/catchAsync";
 
 // Getting all the blogs
-export async function GET() {
+export const GET = catchAsync(async () => {
   connectMongoDB();
-  const blogs = await Blog.find();
+  const blogs = await Blog.find().populate({ path: "user" });
 
   return NextResponse.json({
     status: "success",
     blogs,
   });
-}
+});
 
 // Creating a blog
-export async function POST(req: Request) {
+export const POST = catchAsync(async (req: Request) => {
   connectMongoDB();
   const { title, content, isGlobal } = await req.json();
 
@@ -27,4 +28,4 @@ export async function POST(req: Request) {
 
   const blog = await Blog.create({ title, content, user: user._id, isGlobal });
   return NextResponse.json({ status: "success", blog });
-}
+});

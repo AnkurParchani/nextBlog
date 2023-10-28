@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
 import BottomNav from "@/components/nav/BottomNav";
-import MainNav from "@/components/TopLogo";
+import MainNav from "@/components/others/TopLogo";
 
 import "./globals.css";
 

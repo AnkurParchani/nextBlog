@@ -10,18 +10,6 @@ import Like from "../../../../models/likeModel";
 
 import { getUser } from "../../../../utils/auth/getUser";
 
-// Getting a particular user
-export const GET = catchAsync(async () => {
-  connectMongoDB();
-
-  // Checking authentication
-  const user = await getUser();
-  if (!user || !user._id)
-    return NextResponse.json(new AppError(401, "Please Login first"));
-
-  return NextResponse.json({ status: "success", user });
-});
-
 // Deleting a particular user
 export const DELETE = catchAsync(async (req: Request) => {
   connectMongoDB();

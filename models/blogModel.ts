@@ -8,6 +8,8 @@ interface IBlog {
   content: string;
   isGlobal: boolean;
   likes: number;
+  img: string;
+  comments: number;
   createdAt: Date;
   user: object;
 }
@@ -18,7 +20,9 @@ const blogSchema = new mongoose.Schema<IBlog>({
   user: { type: mongoose.Schema.ObjectId, ref: User },
   likes: { type: Number, default: 0 },
   content: String,
+  img: String,
   isGlobal: { type: Boolean, default: true },
+  comments: { type: Number, default: 0 },
   createdAt: { type: Date, default: new Date() },
 });
 
