@@ -5,7 +5,7 @@ type ContainerProps = {
 };
 
 function Container({ children }: ContainerProps) {
-  return <div className="px-3 pt-5 pb-16 mt-20">{children}</div>;
+  return <div className="px-4 pt-5 pb-20 mt-20">{children}</div>;
 }
 
 export default Container;

@@ -9,9 +9,9 @@ export default async function Home() {
   const blogs = await getBlogs();
 
   return (
-    <main className="min-h-[90vh] bg-black text-gray-200">
+    <main>
       <AddBlogIcon />
-      <SubNav name="Home" />
+      <SubNav heading="Home" />
       <Container>
         <div className="grid grid-cols-1 gap-3">
           {blogs.map((blog: Blog) => (

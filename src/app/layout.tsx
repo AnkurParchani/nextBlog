@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { ToastContainer } from "react-toastify";
 
 import BottomNav from "@/components/nav/BottomNav";
 import MainNav from "@/components/others/TopLogo";
 
 import "./globals.css";
+import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,10 +22,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body
+        className={`${inter.className} bg-black text-gray-300 min-h-[80vh] `}
+      >
         <MainNav />
         {children}
         <BottomNav />
+        <ToastContainer />
       </body>
     </html>
   );

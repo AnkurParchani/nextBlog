@@ -15,7 +15,7 @@ const BottomNav = () => {
   const [value, setValue] = useState("/");
 
   return (
-    <div className="fixed bottom-0 inset-x-0">
+    <div className="fixed bottom-0 inset-x-0 border-t border-gray-900">
       <Box>
         <BottomNavigation className="bg-[black]" showLabels>
           <BottomNavigationAction

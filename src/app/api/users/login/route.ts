@@ -25,9 +25,7 @@ export const POST = catchAsync(async (req: Request) => {
 
   // If no user found or password is not correct
   if (!correct)
-    return NextResponse.json(
-      new AppError(400, "Invalide username or password")
-    );
+    return NextResponse.json(new AppError(400, "Invalid username or password"));
 
   // Creating the token using jose
   const token = await sign(
