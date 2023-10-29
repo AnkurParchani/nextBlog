@@ -32,8 +32,8 @@ export async function login(e: FormData) {
     // Setting the cookie
     cookies().set("token", data.token);
 
-    // Returning success
-    return true;
+    // Returning back to the preious page
+    return data;
   } catch (err: unknown) {
     return handleClientError(err);
   }

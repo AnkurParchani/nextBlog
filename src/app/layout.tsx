@@ -6,7 +6,6 @@ import BottomNav from "@/components/nav/BottomNav";
 import MainNav from "@/components/others/TopLogo";
 
 import "./globals.css";
-import "react-toastify/dist/ReactToastify.css";
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {

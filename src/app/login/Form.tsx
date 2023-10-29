@@ -1,33 +1,42 @@
 "use client";
 
-import Input from "@/components/others/Input";
-import Button from "@/components/others/Button";
-
-import { login } from "@/actions/login";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 
-const Form = () => {
-  async function clientLogin(event: FormData) {
-    const data = await login(event);
+import Input from "@/components/others/Input";
+import Button from "@/components/others/Button";
+import getErrorMessage from "../../../utils/errors/getErrorMessage";
 
-    // change this using that video
-    if (data && typeof data === "object" && "error" in data) {
-      const errorData = data as { error: string };
-      toast.error(errorData.error);
-    } else {
-      toast.success("Logged in");
+import { login } from "@/actions/login";
+
+const Form = () => {
+  const [isLogging, setIsLogging] = useState<boolean>(false);
+  const router = useRouter();
+
+  async function userLogin(event: FormData) {
+    const data = await login(event);
+    setIsLogging(false);
+
+    // If data found OR error in data;
+    if ("error" in data) return toast.error(getErrorMessage(data));
+    else {
+      toast.success("Logged In");
+      router.back();
     }
   }
 
   return (
     <form
-      action={clientLogin}
+      action={userLogin}
       className="flex flex-col gap-5 mt-2"
       autoComplete="off"
     >
       <Input label="Email" inputId="email" type="email" />
       <Input label="Password" inputId="password" type="password" />
-      <Button>Login</Button>
+      <Button onClick={() => setIsLogging(true)}>
+        {isLogging ? "Logging in..." : "Login"}
+      </Button>
     </form>
   );
 };
