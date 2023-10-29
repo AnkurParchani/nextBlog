@@ -37,5 +37,5 @@ export const POST = catchAsync(async (req: Request) => {
   cookies().set("token", token);
 
   // If user is found and password is also correct then returning success
-  return NextResponse.json({ status: "success", email: user.email, token });
+  return NextResponse.json({ status: "success", name: user.name, token });
 });

@@ -1,22 +1,23 @@
+import Link from "next/link";
+
 import SubNav from "@/components/nav/SubNav";
 import Container from "@/components/others/Container";
 import Form from "./Form";
-import Link from "next/link";
 
 const page = () => {
   return (
     <div>
-      <SubNav heading="Login" />
+      <SubNav heading="Sign up" />
       <Container>
         <Form />
 
         <p className="text-sm text-center mt-5">
-          Don&apos;t have an account?{" "}
+          Already have an account?{" "}
           <Link
-            href="/signup"
+            href="/login"
             className="text-blue-400 hover:underline cursor-pointer"
           >
-            Register
+            Login
           </Link>
         </p>
       </Container>
