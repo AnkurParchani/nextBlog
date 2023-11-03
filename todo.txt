@@ -1,2 +1,2 @@
-1. Add the back button
-2. Loading sign when the blog is adding
+- State for back button
+- State for loading text to see what page we're going

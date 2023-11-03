@@ -5,13 +5,10 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import getErrorMessage from "../../../utils/errors/getErrorMessage";
-import Button from "@/components/others/Button";
-import Input from "@/components/others/Input";
-import TextArea from "@/components/others/TextArea";
-import Checkbox from "@/components/others/Checkbox";
 
 import { addBlog } from "@/actions/blog";
-import { revalidateTag } from "next/cache";
+
+import { RingSpinner } from "../../../utils/others/Spinner";
 
 const Form = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -64,10 +61,10 @@ const Form = () => {
         </label>
 
         <button
-          className="bg-[#1d9bf0] hover:bg-[#51aeec] duration-200 self-end px-5 py-1 mt-2 rounded-md text-base"
+          className="bg-[#1d9bf0] hover:bg-[#51aeec] duration-200 self-end px-5 py-1 mt-2 rounded-md text-base outline-none"
           onClick={() => setIsLoading(true)}
         >
-          {isLoading ? "Posting..." : "Post"}
+          {isLoading ? <RingSpinner /> : "Post"}
         </button>
       </form>
     </div>

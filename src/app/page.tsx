@@ -5,6 +5,7 @@ import Blog from "@/components/blogs/Blog";
 
 import { getBlogs } from "../../utils/blogs/apiBlogs";
 import TopLogo from "@/components/others/TopLogo";
+import { OvalSpinner, RingSpinner } from "../../utils/others/Spinner";
 
 export default async function Home() {
   const blogs = await getBlogs();
