@@ -23,11 +23,7 @@ const Form = () => {
 
     // If data found OR error in data;
     if (!data?.error) {
-      const name = String(event.get("name")).split(" ")[0];
-      const nameToShow = name.charAt(0).toUpperCase() + name.slice(1);
-
       toast.success(`Added new Blog`);
-      // revalidateTag("blogs");
       router.push("/");
     } else {
       return toast.error(getErrorMessage(data));
@@ -35,19 +31,46 @@ const Form = () => {
   }
 
   return (
-    <form
-      action={handleAddBlog}
-      className="flex flex-col gap-5 mt-2"
-      autoComplete="off"
-    >
-      <Input required inputId="title" type="text" label="Title" />
-      <TextArea required id="content" cols={2} rows={5} label="Content" />
-      <Checkbox defaultChecked id="global" label="Make your Blog Global" />
+    <div className="bg-gray-900 p-3 rounded-md">
+      <form
+        action={handleAddBlog}
+        className="flex flex-col gap-4"
+        autoComplete="off"
+      >
+        <input
+          type="text"
+          placeholder="Enter Title"
+          name="title"
+          className="bg-gray-900 border-b py-1 focus:outline-none font-semibold text-white"
+        />
 
-      <Button onClick={() => setIsLoading(true)}>
-        {isLoading ? "Adding..." : "Add"}
-      </Button>
-    </form>
+        <textarea
+          cols={5}
+          rows={5}
+          name="content"
+          placeholder="Enter Content"
+          className="bg-gray-900 font-medium text-white focus:outline-none"
+        />
+
+        <label htmlFor="global" className="flex gap-2 items-center">
+          <input
+            type="checkbox"
+            id="global"
+            name="global"
+            defaultChecked={true}
+            className="h-4 w-4 appearance-none checked:bg-green-600 bg-red-600"
+          />
+          <span className="text-blue-200">Make your Blog Global</span>
+        </label>
+
+        <button
+          className="bg-[#1d9bf0] hover:bg-[#51aeec] duration-200 self-end px-5 py-1 mt-2 rounded-md text-base"
+          onClick={() => setIsLoading(true)}
+        >
+          {isLoading ? "Posting..." : "Post"}
+        </button>
+      </form>
+    </div>
   );
 };
 
