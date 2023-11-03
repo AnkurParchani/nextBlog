@@ -1,0 +1,2 @@
+1. Add the back button
+2. Loading sign when the blog is adding

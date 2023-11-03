@@ -7,9 +7,9 @@ const page = () => {
   return (
     <div>
       <SubNav heading="Login" />
+
       <Container>
         <Form />
-
         <p className="text-sm text-center mt-5">
           Don&apos;t have an account?{" "}
           <Link

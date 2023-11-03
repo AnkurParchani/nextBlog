@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 
 import BottomNav from "@/components/nav/BottomNav";
-import MainNav from "@/components/others/TopLogo";
 
 import "./globals.css";
 
@@ -23,7 +22,6 @@ export default function RootLayout({
       <body
         className={`${inter.className} bg-black text-gray-300 min-h-[80vh] `}
       >
-        <MainNav />
         {children}
         <BottomNav />
         <Toaster />
