@@ -6,6 +6,7 @@ import AppError from "../../../../utils/errors/appError";
 
 import { getUser } from "../../../../utils/auth/getUser";
 import catchAsync from "../../../../utils/errors/catchAsync";
+import { cookies } from "next/headers";
 
 // Getting all the blogs
 export const GET = catchAsync(async () => {

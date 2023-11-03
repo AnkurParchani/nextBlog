@@ -21,7 +21,7 @@ export async function getUser() {
       payload: { userId },
     } = decode;
 
-    // Gettiing the user according to userId
+    // Getting the user according to userId
     const user = await User.findOne({ _id: userId });
 
     // Sending back the user

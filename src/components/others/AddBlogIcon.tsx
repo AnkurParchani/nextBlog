@@ -1,10 +1,14 @@
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
+import Link from "next/link";
 
 const AddBlogIcon = () => {
   return (
-    <button className="bg-[#1d9bf0] hover:bg-[#41acf4] duration-100 rounded-full h-12 w-12 fixed right-4 bottom-16 text-white">
+    <Link
+      href="/add-blog"
+      className="bg-[#1d9bf0] hover:bg-[#41acf4] duration-100 rounded-full p-2.5 fixed right-4 bottom-16 text-white"
+    >
       <AddRoundedIcon className="text-3xl" />
-    </button>
+    </Link>
   );
 };
 
