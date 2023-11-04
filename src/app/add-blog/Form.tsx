@@ -36,7 +36,7 @@ const Form = () => {
       >
         <input
           type="text"
-          placeholder="Enter Title"
+          placeholder="Title"
           name="title"
           className="bg-gray-900 border-b py-1 focus:outline-none font-semibold text-white"
         />
@@ -45,7 +45,7 @@ const Form = () => {
           cols={5}
           rows={5}
           name="content"
-          placeholder="Enter Content"
+          placeholder="Content"
           className="bg-gray-900 font-medium text-white focus:outline-none"
         />
 

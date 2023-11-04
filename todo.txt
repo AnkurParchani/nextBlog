@@ -1,6 +1,7 @@
 - State for back button
 - State for loading text to see what page we're going
 - Check bottom nav text
+- Add comment section in a particular blog
 
 // Tomorrow's task
 - Create a seperate user page where people can go and visit their blogs (non-global)

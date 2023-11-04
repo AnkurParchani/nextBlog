@@ -50,7 +50,7 @@ async function BlogContainer({ blog }: BlogType) {
       </div>
 
       <div className="flex flex-col gap-0.5 font-medium">
-        <p className="font-semibold text-blue-300">{title}</p>
+        <p className="text-blue-300">{title}</p>
         <BlogText content={content} />
         {blogImg && <p>Blog Img</p>}
       </div>

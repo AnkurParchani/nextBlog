@@ -30,7 +30,7 @@ const BlogText = ({ content }: BlogTextType) => {
             e.preventDefault();
             setReadMore(true);
           }}
-          className="text-[#1d9bf0] hover:underline"
+          className="text-[#1d9bf0] text-sm hover:underline"
         >
           Read more
         </p>

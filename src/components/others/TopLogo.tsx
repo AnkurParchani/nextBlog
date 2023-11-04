@@ -6,9 +6,11 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 function TopLogo({
   backLinkTo,
   showUserIcon,
+  userId,
 }: {
   backLinkTo?: string;
   showUserIcon?: boolean;
+  userId?: string;
 }) {
   return (
     <div className="fixed top-0 left-0 w-full bg-black flex items-center px-4 py-1.5">
@@ -24,7 +26,11 @@ function TopLogo({
         </Link>
       </div>
 
-      {showUserIcon && <AccountCircleIcon className="text-3xl text-gray-300" />}
+      {showUserIcon && (
+        <Link href={`/users/blogs?userId=${userId}`}>
+          <AccountCircleIcon className="text-3xl text-gray-300" />
+        </Link>
+      )}
     </div>
   );
 }
