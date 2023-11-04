@@ -7,11 +7,21 @@ type Blog = {
   createdAt: string;
   _id: string;
   img: string;
-  user: {
-    name: string;
-    email: string;
-    img: string;
-  };
+  user: User;
+};
+
+type Comment = {
+  _id: string;
+  isEdited: boolean;
+  content: string;
+  blog: string;
+  user: string;
+};
+
+type User = {
+  _id: string;
+  name: string;
+  email: string;
 };
 
 type formattedDateType = {

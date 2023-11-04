@@ -27,8 +27,8 @@ export const POST = catchAsync(async (req: Request) => {
     process.env.JWT_SECRET as string
   );
 
-  // Setting the cookie
+  // Setting the cookie (for postman)
   cookies().set("token", token);
 
-  return NextResponse.json({ status: "success", user });
+  return NextResponse.json({ status: "success", user, token });
 });

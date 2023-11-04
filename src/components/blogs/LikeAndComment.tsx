@@ -8,19 +8,25 @@ type LikeCommentType = {
   comments: number;
 };
 
-function LikeAndComment({ likes, comments }: LikeCommentType) {
+export default function LikeAndComment({ likes, comments }: LikeCommentType) {
+  function handleBlogLike(e: React.MouseEvent) {
+    e.preventDefault();
+    console.log("Liked");
+  }
+  function handleBlogComment(e: React.MouseEvent) {
+    e.preventDefault();
+    console.log("commented");
+  }
+
   return (
     <div className="text-xs flex justify-start mt-3 gap-5 text-gray-500">
       <p className="flex items-center gap-1">
-        <FavoriteBorderIcon
-          onClick={() => console.log("liked")}
-          className="text-base"
-        />
+        <FavoriteBorderIcon onClick={handleBlogLike} className="text-base" />
         {likes}
       </p>
       <p className="flex items-center gap-1">
         <ChatBubbleOutlineRoundedIcon
-          onClick={() => console.log("commented")}
+          onClick={handleBlogComment}
           className="text-base"
         />
         {comments}
@@ -28,5 +34,3 @@ function LikeAndComment({ likes, comments }: LikeCommentType) {
     </div>
   );
 }
-
-export default LikeAndComment;

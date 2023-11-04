@@ -1,6 +1,13 @@
 import { serverApi } from "../../lib/globals";
 
-export const getBlogs = async () => {
+type SingleBlog = {
+  success: string;
+  blog: Blog;
+  comments: Comment[];
+};
+
+// Get all blogs (of every user)
+export const getBlogs = async (): Promise<Blog[]> => {
   const res = await fetch(`${serverApi}/api/blogs`, {
     next: { tags: ["blogs"] },
   });
@@ -9,4 +16,14 @@ export const getBlogs = async () => {
   const data = await res.json();
 
   return data.blogs;
+};
+
+// Get a single blog
+export const getBlog = async (blogId: string): Promise<SingleBlog> => {
+  const res = await fetch(`${serverApi}/api/blogs/${blogId}`);
+  if (!res.ok) throw new Error("Failed to fetch");
+
+  const blog = await res.json();
+
+  return blog;
 };

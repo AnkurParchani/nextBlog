@@ -15,8 +15,7 @@ export async function addBlog(e: FormData) {
     const content = e.get("content");
     const isGlobal = e.get("global");
 
-    if (!title || !content || !isGlobal)
-      throw new Error("Please provide all the details");
+    if (!title || !content) throw new Error("Please provide all the details");
 
     const blogDetails = { title, content, isGlobal: isGlobal === "on" };
 

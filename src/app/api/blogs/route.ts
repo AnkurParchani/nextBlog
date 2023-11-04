@@ -6,16 +6,16 @@ import AppError from "../../../../utils/errors/appError";
 
 import { getUser } from "../../../../utils/auth/getUser";
 import catchAsync from "../../../../utils/errors/catchAsync";
-import { cookies } from "next/headers";
 
 // Getting all the blogs
 export const GET = catchAsync(async () => {
   connectMongoDB();
   const blogs = await Blog.find().populate({ path: "user" });
+  const blogsToShow = blogs.filter((blog) => blog.isGlobal);
 
   return NextResponse.json({
     status: "success",
-    blogs,
+    blogs: blogsToShow,
   });
 });
 

@@ -1,8 +1,10 @@
-import Image from "next/image";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import formatDate from "../../../lib/formatDate";
 import LikeAndComment from "./LikeAndComment";
+import Link from "next/link";
+
+import BlogText from "./BlogText";
 
 type BlogType = {
   blog: Blog;
@@ -12,7 +14,10 @@ const Blog = async ({ blog }: BlogType) => {
   const { img: blogImg } = blog;
 
   return (
-    <div className=" bg-[#111] px-3 py-4 rounded-xl">
+    <Link
+      href={`/blogs/${blog._id}`}
+      className=" bg-[#111] px-3 py-4 rounded-xl"
+    >
       <div className="flex gap-2">
         {blogImg ? (
           <h1>User Img</h1>
@@ -20,16 +25,16 @@ const Blog = async ({ blog }: BlogType) => {
           <AccountCircleIcon className="text-gray-400 text-4xl" />
         )}
         <div className="flex flex-col gap-2">
-          <BlogContent blog={blog} />
+          <BlogContainer blog={blog} />
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
 export default Blog;
 
-async function BlogContent({ blog }: BlogType) {
+async function BlogContainer({ blog }: BlogType) {
   const { img: blogImg, title, content, createdAt, likes, comments } = blog;
   const { name } = blog.user;
   const { day, month }: formattedDateType = formatDate(createdAt);
@@ -37,7 +42,7 @@ async function BlogContent({ blog }: BlogType) {
   return (
     <>
       <div className="flex items-center gap-1">
-        <p className="text-gray-100 font-semibold">{name}</p>
+        <p className="text-gray-100 font-medium capitalize">{name}</p>
         <p className="text-gray-500 -mt-1.5">.</p>
         <p className="text-gray-500 text-sm">
           {month} {day}
@@ -45,8 +50,8 @@ async function BlogContent({ blog }: BlogType) {
       </div>
 
       <div className="flex flex-col gap-0.5 font-medium">
-        <p>{title}</p>
-        <p className="text-sm font-light">{content}</p>
+        <p className="font-semibold text-blue-300">{title}</p>
+        <BlogText content={content} />
         {blogImg && <p>Blog Img</p>}
       </div>
 

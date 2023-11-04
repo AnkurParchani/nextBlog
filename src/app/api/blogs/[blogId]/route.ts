@@ -19,7 +19,7 @@ export async function GET(req: Request, { params: { blogId } }: BlogParams) {
   try {
     connectMongoDB();
 
-    const blog = await Blog.findById(blogId);
+    const blog = await Blog.findById(blogId).populate("user");
     const comments = await Comment.find().where({ blog: blogId });
 
     return NextResponse.json({ status: "success", blog, comments });

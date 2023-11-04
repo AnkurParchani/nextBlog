@@ -3,9 +3,9 @@ import SubNav from "@/components/nav/SubNav";
 import Container from "@/components/others/Container";
 import Blog from "@/components/blogs/Blog";
 
-import { getBlogs } from "../../utils/blogs/apiBlogs";
 import TopLogo from "@/components/others/TopLogo";
-import { OvalSpinner, RingSpinner } from "../../utils/others/Spinner";
+
+import { getBlogs } from "../../utils/blogs/apiBlogs";
 
 export default async function Home() {
   const blogs = await getBlogs();

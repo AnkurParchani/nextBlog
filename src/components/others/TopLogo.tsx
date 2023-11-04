@@ -1,8 +1,15 @@
+import Link from "next/link";
 import Image from "next/image";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import Link from "next/link";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-function TopLogo({ backLinkTo }: { backLinkTo?: string }) {
+function TopLogo({
+  backLinkTo,
+  showUserIcon,
+}: {
+  backLinkTo?: string;
+  showUserIcon?: boolean;
+}) {
   return (
     <div className="fixed top-0 left-0 w-full bg-black flex items-center px-4 py-1.5">
       {backLinkTo && (
@@ -10,11 +17,14 @@ function TopLogo({ backLinkTo }: { backLinkTo?: string }) {
           <ArrowBackIcon className="text-2xl text-gray-300" />
         </Link>
       )}
+
       <div className="mx-auto">
         <Link href="/">
           <Image width={32} height={32} alt="logo" src="/nb-logo.png" />
         </Link>
       </div>
+
+      {showUserIcon && <AccountCircleIcon className="text-3xl text-gray-300" />}
     </div>
   );
 }
