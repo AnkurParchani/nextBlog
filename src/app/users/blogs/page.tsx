@@ -1,15 +1,16 @@
+import Link from "next/link";
 import TopLogo from "@/components/others/TopLogo";
 import AddBlogIcon from "@/components/others/AddBlogIcon";
 import SubNav from "@/components/nav/SubNav";
 import Container from "@/components/others/Container";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-import { getBlogsOfSingleUser } from "../../../../utils/blogs/apiBlogs";
 import formatDate from "../../../../lib/formatDate";
 import BlogText from "@/components/blogs/BlogText";
 import LikeButton from "@/components/others/LikeButton";
 import CommentButton from "@/components/others/CommentButton";
-import Link from "next/link";
+
+import { getBlogsOfSingleUser } from "../../../../utils/blogs/apiBlogs";
 
 const page = async ({
   searchParams: { userId },
@@ -39,7 +40,7 @@ const page = async ({
                 <AccountCircleIcon className="text-4xl text-gray-400" />
               )}
 
-              <Blog blog={blog} />
+              <BlogWithoutLink blog={blog} />
             </div>
           ))}
         </div>
@@ -49,7 +50,7 @@ const page = async ({
 };
 
 // Template for the Blog (container which will render whole info about a particular blog)
-function Blog({ blog }: { blog: Blog }) {
+export function BlogWithoutLink({ blog }: { blog: Blog }) {
   const { title, likes, content, createdAt, comments, _id: blogId } = blog;
   const { day, month }: formattedDateType = formatDate(createdAt);
 

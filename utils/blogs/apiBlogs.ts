@@ -45,6 +45,7 @@ export const getBlog = async (blogId: string): Promise<SingleBlog> => {
   return blog;
 };
 
+// Get my liked blogs
 export const getLikedBlogs = async (): Promise<LikedBlogsType> => {
   const token = getTokenFromCookie();
   const res = await fetch(`${serverApi}/api/likes/my-liked-blogs`, {
@@ -57,4 +58,19 @@ export const getLikedBlogs = async (): Promise<LikedBlogsType> => {
   const data = await res.json();
 
   return data;
+};
+
+// Get my blogs (of current logged in one)
+export const getMyBlogs = async (): Promise<Blog[]> => {
+  const token: string = getTokenFromCookie();
+  const res = await fetch(`${serverApi}/api/blogs/my-blogs`, {
+    headers: {
+      Cookie: `token=${token}`,
+    },
+  });
+
+  if (!res.ok) throw new Error("Failed to fetch");
+
+  const data = await res.json();
+  return data.blogs;
 };
