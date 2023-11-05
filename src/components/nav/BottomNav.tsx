@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { BottomNavigation, BottomNavigationAction, Box } from "@mui/material";
+
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import WbSunnyRoundedIcon from "@mui/icons-material/WbSunnyRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
@@ -13,6 +15,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const BottomNav = () => {
   const [value, setValue] = useState("/");
+  const router = useRouter();
 
   return (
     <div className="fixed bottom-0 inset-x-0 border-t border-gray-900">
@@ -23,7 +26,10 @@ const BottomNav = () => {
               value === "/" ? "text-[#66B2FF]" : "text-white"
             }`}
             icon={<HomeRoundedIcon />}
-            onClick={() => setValue("/")}
+            onClick={() => {
+              setValue("/");
+              router.push("/");
+            }}
           />
 
           <BottomNavigationAction
@@ -31,7 +37,10 @@ const BottomNav = () => {
               value === "/fav" ? "text-[#66B2FF]" : "text-white"
             }`}
             icon={<FavoriteIcon />}
-            onClick={() => setValue("/fav")}
+            onClick={() => {
+              setValue("/fav");
+              router.push("/liked-blogs");
+            }}
           />
 
           <BottomNavigationAction

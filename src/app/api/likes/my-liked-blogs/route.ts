@@ -22,5 +22,5 @@ export const GET = catchAsync(async (req: Request) => {
 
   const blogsToShow = blogs.map((blog) => blog.blog);
 
-  return NextResponse.json({ success: "success", blogs: blogsToShow });
+  return NextResponse.json({ status: "success", blogs: blogsToShow, user });
 });

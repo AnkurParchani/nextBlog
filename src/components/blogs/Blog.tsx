@@ -9,10 +9,11 @@ import CommentButton from "../others/CommentButton";
 
 type BlogType = {
   blog: Blog;
+  userName?: string;
 };
 
 // Seperate blog template
-const Blog = async ({ blog }: BlogType) => {
+const Blog = async ({ blog, userName }: BlogType) => {
   const { img: blogImg } = blog;
 
   return (
@@ -27,7 +28,7 @@ const Blog = async ({ blog }: BlogType) => {
           <AccountCircleIcon className="text-gray-400 text-4xl" />
         )}
         <div className="flex flex-col gap-2">
-          <BlogContainer blog={blog} />
+          <BlogContainer blog={blog} userName={userName} />
         </div>
       </div>
     </Link>
@@ -37,7 +38,7 @@ const Blog = async ({ blog }: BlogType) => {
 export default Blog;
 
 // Container of seperate blog (will render content, user and title)
-async function BlogContainer({ blog }: BlogType) {
+async function BlogContainer({ blog, userName }: BlogType) {
   const { img: blogImg, title, content, createdAt, likes, comments } = blog;
   const { name } = blog.user;
   const { day, month }: formattedDateType = formatDate(createdAt);
@@ -45,7 +46,9 @@ async function BlogContainer({ blog }: BlogType) {
   return (
     <>
       <div className="flex items-center gap-1">
-        <p className="text-gray-100 font-medium capitalize">{name}</p>
+        <p className="text-gray-100 font-medium capitalize">
+          {name || userName}
+        </p>
         <p className="text-gray-500 -mt-1.5">.</p>
         <p className="text-gray-500 text-sm">
           {month} {day}

@@ -1,9 +1,16 @@
 import { serverApi } from "../../lib/globals";
+import { getTokenFromCookie } from "../auth/getCookie";
 
 type SingleBlog = {
-  success: string;
+  status: string;
   blog: Blog;
   comments: Comment[];
+};
+
+type LikedBlogsType = {
+  status: string;
+  blogs: Blog[];
+  user: User;
 };
 
 // Get all blogs (of every user)
@@ -20,7 +27,6 @@ export const getBlogs = async (): Promise<Blog[]> => {
 
 // Get all blogs (of a particular user - global ones)
 export const getBlogsOfSingleUser = async (userId: string): Promise<Blog[]> => {
-  console.log("Inside the getblogofsingleuser and running");
   const res = await fetch(`${serverApi}/api/users/blogs?userId=${userId}`);
   if (!res.ok) throw new Error("Failed to fetch");
 
@@ -37,4 +43,18 @@ export const getBlog = async (blogId: string): Promise<SingleBlog> => {
   const blog = await res.json();
 
   return blog;
+};
+
+export const getLikedBlogs = async (): Promise<LikedBlogsType> => {
+  const token = getTokenFromCookie();
+  const res = await fetch(`${serverApi}/api/likes/my-liked-blogs`, {
+    headers: {
+      Cookie: `token=${token}`,
+    },
+  });
+  if (!res.ok) throw new Error("Failed to fetch");
+
+  const data = await res.json();
+
+  return data;
 };
