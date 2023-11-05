@@ -4,7 +4,7 @@ import Container from "@/components/others/Container";
 import TopLogo from "@/components/others/TopLogo";
 
 import { getBlog } from "../../../../utils/blogs/apiBlogs";
-import Likes from "@/components/others/Likes";
+import Likes from "@/components/others/LikeButton";
 
 const page = async ({ params }: { params: { blogId: string } }) => {
   const blog = await getBlog(params.blogId);

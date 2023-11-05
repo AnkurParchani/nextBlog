@@ -1,22 +1,24 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import formatDate from "../../../lib/formatDate";
-import LikeAndComment from "./LikeAndComment";
 import Link from "next/link";
 
 import BlogText from "./BlogText";
+import Likes from "../others/LikeButton";
+import CommentButton from "../others/CommentButton";
 
 type BlogType = {
   blog: Blog;
 };
 
+// Seperate blog template
 const Blog = async ({ blog }: BlogType) => {
   const { img: blogImg } = blog;
 
   return (
     <Link
       href={`/blogs/${blog._id}`}
-      className=" bg-[#111] px-3 py-4 rounded-xl"
+      className="bg-[#111] px-3 py-4 rounded-xl"
     >
       <div className="flex gap-2">
         {blogImg ? (
@@ -34,6 +36,7 @@ const Blog = async ({ blog }: BlogType) => {
 
 export default Blog;
 
+// Container of seperate blog (will render content, user and title)
 async function BlogContainer({ blog }: BlogType) {
   const { img: blogImg, title, content, createdAt, likes, comments } = blog;
   const { name } = blog.user;
@@ -55,7 +58,10 @@ async function BlogContainer({ blog }: BlogType) {
         {blogImg && <p>Blog Img</p>}
       </div>
 
-      <LikeAndComment likes={likes} comments={comments} />
+      <div className="flex gap-5 text-sm">
+        <Likes likes={likes} />
+        <CommentButton comments={comments} />
+      </div>
     </>
   );
 }

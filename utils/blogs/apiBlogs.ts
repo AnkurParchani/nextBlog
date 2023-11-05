@@ -20,6 +20,7 @@ export const getBlogs = async (): Promise<Blog[]> => {
 
 // Get all blogs (of a particular user - global ones)
 export const getBlogsOfSingleUser = async (userId: string): Promise<Blog[]> => {
+  console.log("Inside the getblogofsingleuser and running");
   const res = await fetch(`${serverApi}/api/users/blogs?userId=${userId}`);
   if (!res.ok) throw new Error("Failed to fetch");
 

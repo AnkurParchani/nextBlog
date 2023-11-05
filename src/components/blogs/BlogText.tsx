@@ -7,12 +7,13 @@ type BlogTextType = { content: string };
 
 const BlogText = ({ content }: BlogTextType) => {
   const [readMore, setReadMore] = useState<boolean>(true);
+  const isBig = content.length > 100;
 
   useEffect(() => {
-    if (content.length > 100) {
+    if (isBig) {
       setReadMore(false);
     }
-  }, [content]);
+  }, [isBig]);
 
   const contentToShow = readMore ? content : content.slice(0, 100);
 
@@ -20,19 +21,19 @@ const BlogText = ({ content }: BlogTextType) => {
     <>
       <p className="text-sm mt-1 leading-relaxed tracking-wide">
         {contentToShow}
-        {!readMore && "..."}
+        {!readMore && isBig && "..."}
       </p>
 
-      {/* If read more is false, i.e show less content */}
-      {!readMore && (
+      {/* If content is big then show "read more" or "show less" buttons */}
+      {isBig && (
         <p
           onClick={(e) => {
             e.preventDefault();
-            setReadMore(true);
+            setReadMore((val) => !val);
           }}
-          className="text-[#1d9bf0] text-sm hover:underline"
+          className="text-[#1d9bf0] text-sm hover:underline cursor-pointer w-fit"
         >
-          Read more
+          {readMore ? "Show less" : "Read more"}
         </p>
       )}
     </>

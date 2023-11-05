@@ -10,10 +10,13 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const userId = searchParams.get("userId");
 
-    const blogs = await Blog.find().where({ user: userId });
-    const blogsToShow = blogs.filter((blog) => blog.isGlobal);
+    const tempBlogs = await Blog.find()
+      .where({ user: userId })
+      .populate("user");
 
-    return NextResponse.json({ status: "success", blogs: blogsToShow });
+    const blogs = tempBlogs.filter((blog) => blog.isGlobal);
+
+    return NextResponse.json({ status: "success", blogs });
   } catch (err) {
     handleApiError(err);
   }

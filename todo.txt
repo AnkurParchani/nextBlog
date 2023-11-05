@@ -2,7 +2,7 @@
 - State for loading text to see what page we're going
 - Check bottom nav text
 - Add comment section in a particular blog
+- particular blog page is under construction
 
-// Tomorrow's task
 - Create a seperate user page where people can go and visit their blogs (non-global)
 - Create a page to show your blogs both global and non global

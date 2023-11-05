@@ -7,9 +7,12 @@ const Likes = ({ likes }: { likes: number }) => {
   }
 
   return (
-    <span className="text-gray-500">
+    <span className="text-gray-500 ">
       {likes}
-      <FavoriteBorderIcon className="text-base ml-0.5 cursor-pointer" />
+      <FavoriteBorderIcon
+        onClick={handleBlogLike}
+        className="text-base ml-0.5 cursor-pointer"
+      />
     </span>
   );
 };
