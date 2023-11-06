@@ -36,8 +36,8 @@ export function Blog({
 // Intersection
 export function InterSection() {
   return (
-    <div className="flex justify-center items-end h-20 border-l-2 border-r-2 mx-2 border-white">
-      <span className="uppercase mb-3 text-white">Comments</span>
+    <div className="flex justify-center items-end h-16 border-x-2 mx-2 border-blue-400">
+      <span className="uppercase text-white">Comments</span>
     </div>
   );
 }
@@ -63,20 +63,19 @@ export function Comment({ comment }: { comment: CommentType }) {
   const { month, day, year } = formatDate(createdAt);
 
   return (
-    <div className="pb-12 pt-2 px-2.5 bg-slate-900 rounded-md">
-      {/* If no image of the user */}
-      <div className="flex gap-2">
-        <AccountCircle className="text-4xl text-gray-400" />
-        <NameForBlog name={name} month={month} day={day} year={year} />
+    <>
+      <div className="h-3 border-x-2 mx-2 border-blue-400"></div>
+      <div className="pb-8 pt-2 px-2.5 bg-slate-900 rounded-md">
+        {/* If no image of the user */}
+        <div className="flex gap-2">
+          <AccountCircle className="text-4xl text-gray-400" />
+          <div>
+            <NameForBlog name={name} month={month} day={day} year={year} />
+            {isEdited && <p className="text-gray-400 text-sm">(Edited)</p>}
+            <p className="mt-1">{content}</p>
+          </div>
+        </div>
       </div>
-    </div>
-    // <div className="pb-12 pt-2 px-2.5 bg-slate-900 rounded-md">
-    //   <p className="font-normal leading-relaxed tracking-wide">Content</p>
-    //   <div className="mt-5 flex justify-between px-1">
-    //     <p className="text-blue-400 font-semibold uppercase text-sm tracking-wider">
-    //       - Name
-    //     </p>
-    //   </div>
-    // </div>
+    </>
   );
 }

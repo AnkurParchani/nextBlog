@@ -14,7 +14,6 @@ const page = async ({ params }: { params: { blogId: string } }) => {
   // Extracting all the details from the response
   const {
     blog: {
-      comments: numComments,
       content,
       likes: numLikes,
       createdAt: blogCreatedAt,
@@ -27,8 +26,6 @@ const page = async ({ params }: { params: { blogId: string } }) => {
 
   const blogCreatedAtDate: formattedDateType = formatDate(blogCreatedAt);
 
-  console.log(blog);
-
   return (
     <>
       <TopLogo backLinkTo="/" showUserIcon userId={userId} />
@@ -40,14 +37,14 @@ const page = async ({ params }: { params: { blogId: string } }) => {
         <div className="flex flex-col">
           <Blog
             content={content}
-            comments={numComments}
+            comments={comments.length}
             likes={numLikes}
             name={name}
           />
 
           <InterSection />
 
-          <div className="grid grid-cols-1 gap-3">
+          <div className="grid grid-cols-1">
             {comments.map((comment) => (
               // @ts-ignore
               <Comment key={comment._id} comment={comment} />
