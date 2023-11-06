@@ -8,6 +8,7 @@ interface IComment {
   isEdited: object;
   user: object;
   blog: object;
+  createdAt: Date;
 }
 
 // Creating the schema
@@ -19,6 +20,7 @@ const commentSchema = new mongoose.Schema<IComment>({
   },
   blog: { type: mongoose.Schema.ObjectId, ref: Blog },
   user: { type: mongoose.Schema.ObjectId, ref: User },
+  createdAt: { type: Date, default: new Date() },
 });
 
 // Defining and exporting the model

@@ -4,8 +4,9 @@ import formatDate from "../../../lib/formatDate";
 import Link from "next/link";
 
 import BlogText from "./BlogText";
-import Likes from "../others/LikeButton";
+import LikeButton from "../others/LikeButton";
 import CommentButton from "../others/CommentButton";
+import NameForBlog from "./NameForBlog";
 
 type BlogType = {
   blog: Blog;
@@ -35,8 +36,6 @@ const Blog = async ({ blog, userName }: BlogType) => {
   );
 };
 
-export default Blog;
-
 // Container of seperate blog (will render content, user and title)
 async function BlogContainer({ blog, userName }: BlogType) {
   const { img: blogImg, title, content, createdAt, likes, comments } = blog;
@@ -45,15 +44,11 @@ async function BlogContainer({ blog, userName }: BlogType) {
 
   return (
     <>
-      <div className="flex items-center gap-1">
-        <p className="text-gray-100 font-medium capitalize">
-          {name || userName}
-        </p>
-        <p className="text-gray-500 -mt-1.5">.</p>
-        <p className="text-gray-500 text-sm">
-          {month} {day}
-        </p>
-      </div>
+      <NameForBlog
+        name={name || (userName as string)}
+        day={day}
+        month={month}
+      />
 
       <div className="flex flex-col gap-0.5 font-medium">
         <p className="text-blue-300">{title}</p>
@@ -62,9 +57,11 @@ async function BlogContainer({ blog, userName }: BlogType) {
       </div>
 
       <div className="flex gap-5 text-sm">
-        <Likes likes={likes} />
+        <LikeButton likes={likes} />
         <CommentButton comments={comments} />
       </div>
     </>
   );
 }
+
+export default Blog;

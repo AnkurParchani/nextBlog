@@ -55,6 +55,7 @@ export const POST = catchAsync(async (req: Request) => {
     blog: blogId,
     isEdited: false,
     user: user._id,
+    createdAt: new Date(),
   });
 
   // Updating the number of comments on the blog (+1)

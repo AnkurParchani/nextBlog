@@ -3,8 +3,10 @@ import AddBlogIcon from "@/components/others/AddBlogIcon";
 import Container from "@/components/others/Container";
 import TopLogo from "@/components/others/TopLogo";
 
+import formatDate from "../../../../lib/formatDate";
+
 import { getBlog } from "../../../../utils/blogs/apiBlogs";
-import Likes from "@/components/others/LikeButton";
+import { Blog, Comment, InterSection } from "./SeperateBlogLayout";
 
 const page = async ({ params }: { params: { blogId: string } }) => {
   const blog = await getBlog(params.blogId);
@@ -14,8 +16,8 @@ const page = async ({ params }: { params: { blogId: string } }) => {
     blog: {
       comments: numComments,
       content,
-      likes,
-      createdAt,
+      likes: numLikes,
+      createdAt: blogCreatedAt,
       img,
       title,
       user: { email, name, _id: userId },
@@ -23,24 +25,37 @@ const page = async ({ params }: { params: { blogId: string } }) => {
     comments,
   } = blog;
 
+  const blogCreatedAtDate: formattedDateType = formatDate(blogCreatedAt);
+
+  console.log(blog);
+
   return (
-    <div>
+    <>
       <TopLogo backLinkTo="/" showUserIcon userId={userId} />
       <AddBlogIcon />
-      <SubNav heading={title} />
+
+      <SubNav heading={title} showDate={blogCreatedAtDate} />
 
       <Container>
-        <div className="pb-12 pt-2 px-2.5 bg-slate-900 rounded-md">
-          <p className="font-normal leading-relaxed tracking-wide">{content}</p>
-          <div className="mt-5 flex justify-between px-1">
-            <Likes likes={likes} />
-            <p className="text-blue-400 font-semibold uppercase text-sm tracking-wider">
-              - {name}
-            </p>
+        <div className="flex flex-col">
+          <Blog
+            content={content}
+            comments={numComments}
+            likes={numLikes}
+            name={name}
+          />
+
+          <InterSection />
+
+          <div className="grid grid-cols-1 gap-3">
+            {comments.map((comment) => (
+              // @ts-ignore
+              <Comment key={comment._id} comment={comment} />
+            ))}
           </div>
         </div>
       </Container>
-    </div>
+    </>
   );
 };
 

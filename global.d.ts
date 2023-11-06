@@ -16,6 +16,7 @@ type Comment = {
   content: string;
   blog: string;
   user: string;
+  createdAt: string;
 };
 
 type User = {
