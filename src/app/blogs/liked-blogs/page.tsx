@@ -2,7 +2,7 @@ import SubNav from "@/components/nav/SubNav";
 import Container from "@/components/others/Container";
 
 import TopLogo from "@/components/others/TopLogo";
-import { getLikedBlogs } from "../../../utils/blogs/apiBlogs";
+import { getLikedBlogs } from "../../../../utils/blogs/apiBlogs";
 import Blog from "@/components/blogs/Blog";
 
 const page = async () => {

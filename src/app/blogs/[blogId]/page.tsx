@@ -25,6 +25,7 @@ const page = async ({ params }: { params: { blogId: string } }) => {
   } = blog;
 
   const blogCreatedAtDate: formattedDateType = formatDate(blogCreatedAt);
+  const hasComments = comments.length > 0;
 
   return (
     <>
@@ -42,14 +43,22 @@ const page = async ({ params }: { params: { blogId: string } }) => {
             name={name}
           />
 
-          <InterSection />
+          {hasComments ? (
+            <>
+              <InterSection />
 
-          <div className="grid grid-cols-1">
-            {comments.map((comment) => (
-              // @ts-ignore
-              <Comment key={comment._id} comment={comment} />
-            ))}
-          </div>
+              <div className="grid grid-cols-1">
+                {comments.map((comment) => (
+                  // @ts-ignore
+                  <Comment key={comment._id} comment={comment} />
+                ))}
+              </div>
+            </>
+          ) : (
+            <p className="text-center mt-1 border-b py-1 border-blue-400">
+              No Comments yet
+            </p>
+          )}
         </div>
       </Container>
     </>

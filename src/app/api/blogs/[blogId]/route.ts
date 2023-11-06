@@ -24,6 +24,11 @@ export async function GET(req: Request, { params: { blogId } }: BlogParams) {
       .where({ blog: blogId })
       .populate("user");
 
+    console.log("Loggin blog from the server side", blog);
+
+    if (!blog.isGlobal)
+      return NextResponse.json(new AppError(404, "No Blog found"));
+
     return NextResponse.json({ status: "success", blog, comments });
   } catch (err) {
     handleApiError(err);

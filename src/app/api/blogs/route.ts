@@ -2,10 +2,10 @@ import { NextResponse } from "next/server";
 
 import connectMongoDB from "../../../../lib/dbConnect";
 import Blog from "../../../../models/blogModel";
+import catchAsync from "../../../../utils/errors/catchAsync";
 import AppError from "../../../../utils/errors/appError";
 
 import { getUser } from "../../../../utils/auth/getUser";
-import catchAsync from "../../../../utils/errors/catchAsync";
 
 // Getting all the blogs
 export const GET = catchAsync(async () => {

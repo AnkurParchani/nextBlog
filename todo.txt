@@ -3,7 +3,7 @@
 - Check bottom nav text
 - Add comment section in a particular blog
 - particular blog page is under construction
-- The error handling
+- The ERROR Handling
 
 - Create a seperate user page where people can go and visit their blogs (non-global)
 - Create a page to show your blogs both global and non global

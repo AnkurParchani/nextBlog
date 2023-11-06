@@ -64,9 +64,7 @@ export const getLikedBlogs = async (): Promise<LikedBlogsType> => {
 export const getMyBlogs = async (): Promise<Blog[]> => {
   const token: string = getTokenFromCookie();
   const res = await fetch(`${serverApi}/api/blogs/my-blogs`, {
-    headers: {
-      Cookie: `token=${token}`,
-    },
+    headers: { Cookie: `token=${token}` },
   });
 
   if (!res.ok) throw new Error("Failed to fetch");

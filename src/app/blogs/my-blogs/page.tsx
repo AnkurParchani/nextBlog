@@ -5,7 +5,7 @@ import Container from "@/components/others/Container";
 import TopLogo from "@/components/others/TopLogo";
 
 import { getMyBlogs } from "../../../../utils/blogs/apiBlogs";
-import { BlogWithoutLink } from "@/app/users/blogs/page";
+import { BlogWithoutLink } from "@/app/users/blogs/BlogWithoutLink";
 
 const page = async () => {
   const blogs = await getMyBlogs();
@@ -17,8 +17,7 @@ const page = async () => {
       <SubNav heading="My-Blogs" />
 
       <Container>
-        <h1>My-blogs</h1>
-        <div className="grid grid-cols-1 gap-3 mt-5">
+        <div className="grid grid-cols-1 gap-3">
           {blogs.map((blog) => (
             <div
               key={blog._id}
