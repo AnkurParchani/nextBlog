@@ -1,17 +1,24 @@
 "use client";
-
-import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-
+import { ChangeEvent, useState } from "react";
+import toast from "react-hot-toast";
 import getErrorMessage from "../../../utils/errors/getErrorMessage";
 
 import { addBlog } from "@/actions/blog";
-
 import { RingSpinner } from "../../../utils/others/Spinner";
+
+type NumCharType = {
+  title: string;
+  content: string;
+};
 
 const Form = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [numCharacters, setNumCharacters] = useState<NumCharType>({
+    title: "",
+    content: "",
+  });
+
   const router = useRouter();
 
   async function handleAddBlog(event: FormData) {
@@ -27,6 +34,20 @@ const Form = () => {
     }
   }
 
+  function handleTitleChange(e: ChangeEvent<HTMLInputElement>) {
+    const title = e.target.value;
+    if (title.length > 20) return;
+
+    setNumCharacters({ ...numCharacters, title });
+  }
+
+  function handleContentChange(e: ChangeEvent<HTMLTextAreaElement>) {
+    const content = e.target.value;
+    if (content.length > 500) return;
+
+    setNumCharacters({ ...numCharacters, content });
+  }
+
   return (
     <div className="bg-gray-900 p-3 rounded-md">
       <form
@@ -36,18 +57,38 @@ const Form = () => {
       >
         <input
           type="text"
+          value={numCharacters.title}
           placeholder="Title"
           name="title"
-          className="bg-gray-900 border-b py-1 focus:outline-none font-semibold text-white"
+          onChange={handleTitleChange}
+          className="bg-gray-900 border-b py-1 duration-100 focus:border-blue-400 outline-none font-semibold flex-1 text-white"
         />
+
+        <p
+          className={`text-blue-400 text-xs text-end -mt-1.5 ${
+            numCharacters.title.length ? "visible" : "invisible"
+          }`}
+        >
+          {numCharacters.title.length}/20
+        </p>
 
         <textarea
           cols={5}
+          value={numCharacters.content}
+          onChange={handleContentChange}
           rows={5}
           name="content"
           placeholder="Content"
           className="bg-gray-900 font-medium text-white focus:outline-none"
         />
+
+        <p
+          className={`text-blue-400 text-xs text-end -mt-1.5 ${
+            numCharacters.content.length ? "visible" : "invisible"
+          }`}
+        >
+          {numCharacters.content.length}/500
+        </p>
 
         <label htmlFor="global" className="flex gap-2 items-center">
           <input
@@ -55,7 +96,7 @@ const Form = () => {
             id="global"
             name="global"
             defaultChecked={true}
-            className="h-4 w-4 appearance-none checked:bg-green-600 bg-red-600"
+            className="h-4 w-4 rounded-full appearance-none checked:bg-green-600 bg-red-600"
           />
           <span className="text-blue-200">Make your Blog Global</span>
         </label>

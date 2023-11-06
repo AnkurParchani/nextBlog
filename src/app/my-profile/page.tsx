@@ -12,6 +12,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import { getLoggedInUser } from "../../../utils/users/apiUsers";
+import AddBlogIcon from "@/components/others/AddBlogIcon";
 
 const page = async () => {
   const { name, email, _id } = await getLoggedInUser();
@@ -20,6 +21,7 @@ const page = async () => {
     <div>
       <TopLogo />
       <SubNav heading="My-Profile" />
+      <AddBlogIcon />
 
       <Container>
         <ProfileIntro userName={name} userEmail={email} />

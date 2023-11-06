@@ -11,7 +11,7 @@ import { getUser } from "../../../../utils/auth/getUser";
 export const GET = catchAsync(async () => {
   connectMongoDB();
   const blogs = await Blog.find().populate({ path: "user" });
-  const blogsToShow = blogs.filter((blog) => blog.isGlobal);
+  const blogsToShow = blogs.filter((blog) => blog.isGlobal).reverse();
 
   return NextResponse.json({
     status: "success",

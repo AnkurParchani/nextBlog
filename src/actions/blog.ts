@@ -16,6 +16,8 @@ export async function addBlog(e: FormData) {
     const isGlobal = e.get("global");
 
     if (!title || !content) throw new Error("Please provide all the details");
+    if ((title as string).length > 20 || (content as string).length > 500)
+      throw new Error("Unexpected Content length");
 
     const blogDetails = { title, content, isGlobal: isGlobal === "on" };
 
