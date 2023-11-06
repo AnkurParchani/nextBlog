@@ -15,6 +15,7 @@ export async function addBlog(e: FormData) {
     const content = e.get("content");
     const isGlobal = e.get("global");
 
+    // If there is not content or title OR either one of them has exceeded the specified limit
     if (!title || !content) throw new Error("Please provide all the details");
     if ((title as string).length > 20 || (content as string).length > 500)
       throw new Error("Unexpected Content length");
@@ -37,8 +38,10 @@ export async function addBlog(e: FormData) {
     if (data.isOperational || data.status === "fail")
       throw new Error(data.message);
 
+    // Revalidating desired tags
     revalidateTag("blogs");
-    // Returning back to the preious page
+
+    // Returning the data
     return data;
   } catch (err: unknown) {
     return handleClientError(err);

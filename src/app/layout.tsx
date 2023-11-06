@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import BottomNav from "@/components/nav/BottomNav";
 
 import "./globals.css";
+import StoreProvider from "./store/StoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
@@ -18,14 +19,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body
-        className={`${inter.className} bg-black text-gray-300 min-h-[80vh] `}
-      >
-        {children}
-        <BottomNav />
-        <Toaster />
-      </body>
-    </html>
+    <StoreProvider>
+      <html lang="en">
+        <body
+          className={`${inter.className} bg-black text-gray-300 min-h-[80vh] `}
+        >
+          {children}
+          <BottomNav />
+          <Toaster />
+        </body>
+      </html>
+    </StoreProvider>
   );
 }

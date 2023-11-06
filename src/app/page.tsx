@@ -2,7 +2,6 @@ import AddBlogIcon from "@/components/others/AddBlogIcon";
 import SubNav from "@/components/nav/SubNav";
 import Container from "@/components/others/Container";
 import Blog from "@/components/blogs/Blog";
-
 import TopLogo from "@/components/others/TopLogo";
 
 import { getBlogs } from "../../utils/blogs/apiBlogs";

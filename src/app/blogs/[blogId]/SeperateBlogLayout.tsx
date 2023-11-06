@@ -57,7 +57,7 @@ export function Comment({ comment }: { comment: CommentType }) {
     isEdited,
     content,
     createdAt,
-    user: { name, _id },
+    user: { name },
   } = comment;
 
   const { month, day, year } = formatDate(createdAt);

@@ -1,12 +1,12 @@
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-
 import formatDate from "../../../lib/formatDate";
-import Link from "next/link";
 
 import BlogText from "./BlogText";
 import LikeButton from "../others/LikeButton";
 import CommentButton from "../others/CommentButton";
 import NameForBlog from "./NameForBlog";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
+import { Blog as BlogTemplate } from "./BlogClientSide";
 
 type BlogType = {
   blog: Blog;
@@ -16,12 +16,10 @@ type BlogType = {
 // Seperate blog template
 const Blog = async ({ blog, userName }: BlogType) => {
   const { img: blogImg } = blog;
+  const { name } = blog.user;
 
   return (
-    <Link
-      href={`/blogs/${blog._id}`}
-      className="bg-[#111] px-3 py-4 rounded-xl"
-    >
+    <BlogTemplate blogId={blog._id} name={name} userName={userName as string}>
       <div className="flex gap-2">
         {blogImg ? (
           <h1>User Img</h1>
@@ -32,7 +30,7 @@ const Blog = async ({ blog, userName }: BlogType) => {
           <BlogContainer blog={blog} userName={userName} />
         </div>
       </div>
-    </Link>
+    </BlogTemplate>
   );
 };
 

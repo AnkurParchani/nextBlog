@@ -1,3 +1,5 @@
+import AddBlogIcon from "@/components/others/AddBlogIcon";
+
 import SubNav from "@/components/nav/SubNav";
 import Container from "@/components/others/Container";
 import TopLogo from "@/components/others/TopLogo";
@@ -6,7 +8,6 @@ import EmptyBlogList from "@/components/blogs/EmptyBlogList";
 import Blog from "@/components/blogs/Blog";
 
 import { getLikedBlogs } from "../../../../utils/blogs/apiBlogs";
-import AddBlogIcon from "@/components/others/AddBlogIcon";
 
 const page = async () => {
   const { blogs, user } = await getLikedBlogs();

@@ -10,6 +10,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import LogoutIcon from "@mui/icons-material/Logout";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import DeleteIcon from "@mui/icons-material/Delete";
+import LoginIcon from "@mui/icons-material/Login";
 
 import { getLoggedInUser } from "../../../utils/users/apiUsers";
 import AddBlogIcon from "@/components/others/AddBlogIcon";
@@ -21,7 +22,6 @@ const page = async () => {
     <div>
       <TopLogo />
       <SubNav heading="My-Profile" />
-      <AddBlogIcon />
 
       <Container>
         <ProfileIntro userName={name} userEmail={email} />
@@ -55,6 +55,11 @@ const page = async () => {
           <ActionBox
             icon={<LogoutIcon className="text-3xl text-red-500" />}
             action="sign out"
+          />
+          <ActionBox
+            icon={<LoginIcon className="text-3xl text-red-500" />}
+            action="login to different account"
+            linkHref="/login"
           />
           <ActionBox
             icon={<DeleteIcon className="text-3xl text-red-500" />}

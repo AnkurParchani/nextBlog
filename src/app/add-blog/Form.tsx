@@ -13,14 +13,38 @@ type NumCharType = {
 };
 
 const Form = () => {
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [numCharacters, setNumCharacters] = useState<NumCharType>({
     title: "",
     content: "",
   });
 
-  const router = useRouter();
+  let titleColor = "text-blue-400",
+    contentColor = "text-blue-400";
 
+  // Tracking title characters
+  if (numCharacters.title.length >= 15 && numCharacters.title.length < 19) {
+    titleColor = "text-yellow-400";
+  } else if (numCharacters.title.length > 18) {
+    titleColor = "text-red-500";
+  } else {
+    titleColor = "text-blue-400";
+  }
+
+  // Tracking content characters
+  if (
+    numCharacters.content.length >= 450 &&
+    numCharacters.content.length < 490
+  ) {
+    contentColor = "text-yellow-400";
+  } else if (numCharacters.content.length >= 490) {
+    contentColor = "text-red-500";
+  } else {
+    contentColor = "text-blue-400";
+  }
+
+  // Main function to add Blog
   async function handleAddBlog(event: FormData) {
     const data = await addBlog(event);
     setIsLoading(false);
@@ -34,6 +58,7 @@ const Form = () => {
     }
   }
 
+  // Function to track title characters
   function handleTitleChange(e: ChangeEvent<HTMLInputElement>) {
     const title = e.target.value;
     if (title.length > 20) return;
@@ -41,6 +66,7 @@ const Form = () => {
     setNumCharacters({ ...numCharacters, title });
   }
 
+  // Function to track content characters
   function handleContentChange(e: ChangeEvent<HTMLTextAreaElement>) {
     const content = e.target.value;
     if (content.length > 500) return;
@@ -48,6 +74,7 @@ const Form = () => {
     setNumCharacters({ ...numCharacters, content });
   }
 
+  // The JSX
   return (
     <div className="bg-gray-900 p-3 rounded-md">
       <form
@@ -65,7 +92,7 @@ const Form = () => {
         />
 
         <p
-          className={`text-blue-400 text-xs text-end -mt-1.5 ${
+          className={`${titleColor} text-xs text-end -mt-1.5 ${
             numCharacters.title.length ? "visible" : "invisible"
           }`}
         >
@@ -83,7 +110,7 @@ const Form = () => {
         />
 
         <p
-          className={`text-blue-400 text-xs text-end -mt-1.5 ${
+          className={`${contentColor} text-xs text-end -mt-1.5 ${
             numCharacters.content.length ? "visible" : "invisible"
           }`}
         >

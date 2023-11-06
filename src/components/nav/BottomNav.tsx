@@ -8,6 +8,8 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SearchIcon from "@mui/icons-material/Search";
+import { useDispatch } from "react-redux";
+import { setTitle } from "../../../lib/SubNavSlice";
 
 //////////////
 // Track the value of current selected one so that when user changes the theme, it should not go to theme one and be on the selected one
@@ -16,6 +18,7 @@ import SearchIcon from "@mui/icons-material/Search";
 const BottomNav = () => {
   const [value, setValue] = useState("/");
   const router = useRouter();
+  const dispatch = useDispatch();
 
   return (
     <div className="fixed bottom-0 inset-x-0 border-t border-gray-900">
@@ -27,6 +30,7 @@ const BottomNav = () => {
             }`}
             icon={<HomeRoundedIcon />}
             onClick={() => {
+              dispatch(setTitle("Home"));
               setValue("/");
               router.push("/");
             }}
@@ -46,6 +50,7 @@ const BottomNav = () => {
             }`}
             icon={<FavoriteIcon />}
             onClick={() => {
+              dispatch(setTitle("My liked Blogs "));
               setValue("/fav");
               router.push("/blogs/liked-blogs");
             }}
@@ -57,6 +62,7 @@ const BottomNav = () => {
             }`}
             icon={<AccountCircleIcon />}
             onClick={() => {
+              dispatch(setTitle("My-Profile"));
               router.push("/my-profile");
               setValue("/profile");
             }}

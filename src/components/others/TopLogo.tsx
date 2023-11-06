@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { AccountIcon, Logo } from "./TopLogoClientSide";
 
 function TopLogo({
   backLinkTo,
@@ -20,17 +20,9 @@ function TopLogo({
         </Link>
       )}
 
-      <div className="mx-auto">
-        <Link href="/">
-          <Image width={32} height={32} alt="logo" src="/nb-logo.png" />
-        </Link>
-      </div>
+      <Logo />
 
-      {showUserIcon && (
-        <Link href={`/users/blogs?userId=${userId}`}>
-          <AccountCircleIcon className="text-3xl text-gray-300" />
-        </Link>
-      )}
+      {showUserIcon && userId && <AccountIcon userId={userId} />}
     </div>
   );
 }
