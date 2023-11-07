@@ -11,10 +11,11 @@ import { Blog as BlogTemplate } from "./BlogClientSide";
 type BlogType = {
   blog: Blog;
   userName?: string;
+  userLikedBlogs?: string[];
 };
 
 // Seperate blog template
-const Blog = async ({ blog, userName }: BlogType) => {
+const Blog = async ({ blog, userName, userLikedBlogs }: BlogType) => {
   const { img: blogImg } = blog;
   const { name } = blog.user;
 
@@ -27,7 +28,11 @@ const Blog = async ({ blog, userName }: BlogType) => {
           <AccountCircleIcon className="text-gray-400 text-4xl" />
         )}
         <div className="flex flex-col gap-2">
-          <BlogContainer blog={blog} userName={userName} />
+          <BlogContainer
+            userLikedBlogs={userLikedBlogs}
+            blog={blog}
+            userName={userName}
+          />
         </div>
       </div>
     </BlogTemplate>
@@ -35,8 +40,16 @@ const Blog = async ({ blog, userName }: BlogType) => {
 };
 
 // Container of seperate blog (will render content, user and title)
-async function BlogContainer({ blog, userName }: BlogType) {
-  const { img: blogImg, title, content, createdAt, likes, comments } = blog;
+async function BlogContainer({ blog, userName, userLikedBlogs }: BlogType) {
+  const {
+    img: blogImg,
+    title,
+    content,
+    createdAt,
+    likes,
+    comments,
+    _id: blogId,
+  } = blog;
   const { name } = blog.user;
   const { day, month }: formattedDateType = formatDate(createdAt);
 
@@ -55,7 +68,11 @@ async function BlogContainer({ blog, userName }: BlogType) {
       </div>
 
       <div className="flex gap-5 text-sm">
-        <LikeButton likes={likes} />
+        <LikeButton
+          userLikedBlogs={userLikedBlogs}
+          blogId={blogId}
+          likes={likes}
+        />
         <CommentButton comments={comments} />
       </div>
     </>

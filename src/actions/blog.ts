@@ -47,3 +47,49 @@ export async function addBlog(e: FormData) {
     return handleClientError(err);
   }
 }
+
+// To like blog
+export async function likeBlog(blogId: string) {
+  const token = getTokenFromCookie();
+
+  const res = await fetch(`${serverApi}/api/likes/like`, {
+    method: "POST",
+    body: JSON.stringify({ blogId }),
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: `token=${token}`,
+    },
+  });
+
+  if (!res.ok) throw new Error("Something went wrong, please try again later");
+
+  const data = await res.json();
+  revalidateTag("liked-blogs");
+
+  return data;
+}
+
+// To dislike a blog
+export const dislikeBlog = async (blogId: string) => {
+  const token = getTokenFromCookie();
+
+  const res = await fetch(`${serverApi}/api/likes/dislike`, {
+    method: "POST",
+    body: JSON.stringify({ blogId }),
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: `token=${token}`,
+    },
+  });
+
+  if (!res.ok) throw new Error("Something went wrong, please try again later");
+
+  const data = await res.json();
+
+  // If any error found (operational)
+  if (data.isOperational || data.status === "fail")
+    throw new Error(data.message);
+
+  revalidateTag("liked-blogs");
+  return data;
+};

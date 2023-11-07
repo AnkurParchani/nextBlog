@@ -4,10 +4,12 @@ import Container from "@/components/others/Container";
 import Blog from "@/components/blogs/Blog";
 import TopLogo from "@/components/others/TopLogo";
 
-import { getBlogs } from "../../utils/blogs/apiBlogs";
+import { getBlogs, getLikedBlogs } from "../../utils/blogs/apiBlogs";
 
 export default async function Home() {
   const blogs = await getBlogs();
+  const fetchLikedBlogs = await getLikedBlogs();
+  const userLikedBlogs = fetchLikedBlogs.blogs.map((blog) => blog._id) || [];
 
   return (
     <main>
@@ -18,7 +20,7 @@ export default async function Home() {
       <Container>
         <div className="grid grid-cols-1 gap-3">
           {blogs.map((blog: Blog) => (
-            <Blog key={blog._id} blog={blog} />
+            <Blog key={blog._id} userLikedBlogs={userLikedBlogs} blog={blog} />
           ))}
         </div>
       </Container>

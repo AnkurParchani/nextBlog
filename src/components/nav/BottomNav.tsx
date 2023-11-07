@@ -8,6 +8,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SearchIcon from "@mui/icons-material/Search";
+
 import { useDispatch } from "react-redux";
 import { setTitle } from "../../../lib/SubNavSlice";
 
@@ -38,10 +39,13 @@ const BottomNav = () => {
 
           <BottomNavigationAction
             className={`hover:bg-gray-900  ${
-              value === "/change-theme" ? "text-[#66B2FF]" : "text-white"
+              value === "/search" ? "text-[#66B2FF]" : "text-white"
             }`}
             icon={<SearchIcon />}
-            onClick={() => setValue("/change-theme")}
+            onClick={() => {
+              dispatch(setTitle("Search for Users or Blogs"));
+              setValue("/search");
+            }}
           />
 
           <BottomNavigationAction

@@ -1,3 +1,4 @@
+import { revalidateTag } from "next/cache";
 import { serverApi } from "../../lib/globals";
 import { getTokenFromCookie } from "../auth/getCookie";
 
@@ -52,6 +53,7 @@ export const getLikedBlogs = async (): Promise<LikedBlogsType> => {
     headers: {
       Cookie: `token=${token}`,
     },
+    next: { tags: ["liked-blogs"] },
   });
   if (!res.ok) throw new Error("Failed to fetch");
 
@@ -70,5 +72,6 @@ export const getMyBlogs = async (): Promise<Blog[]> => {
   if (!res.ok) throw new Error("Failed to fetch");
 
   const data = await res.json();
+
   return data.blogs;
 };
