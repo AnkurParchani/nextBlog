@@ -28,44 +28,48 @@ const page = async () => {
         <div className="flex flex-col gap-4 capitalize mt-8">
           <div className="bg-blue-800 h-0.5" />
           <ActionBox
-            icon={<AccountCircleIcon className="text-3xl text-blue-500" />}
-            action="edit my profile"
+            actionType="editProfile"
+            icon={<AccountCircleIcon className="text-3xl text-blue-400" />}
+            heading="edit my profile"
           />
 
           <div className="bg-pink-800 h-0.5" />
           <ActionBox
             icon={<BookIcon className="text-3xl text-pink-500" />}
-            action="see my blogs"
+            heading="see my blogs"
             linkHref="/blogs/my-blogs"
             subNavTitle="My-Blogs"
           />
           <ActionBox
             icon={<FavoriteIcon className="text-3xl text-pink-500" />}
-            action="see blogs i've liked"
+            heading="see blogs i've liked"
             linkHref="/blogs/liked-blogs"
             subNavTitle="My Liked Blogs"
           />
 
           <div className="bg-green-800 h-0.5" />
           <ActionBox
+            actionType="changeTheme"
             icon={<DarkModeIcon className="text-3xl text-green-500" />}
-            action="change theme"
+            heading="change theme"
           />
 
           <div className="bg-red-800 h-0.5" />
           <ActionBox
+            actionType="signout"
             icon={<LogoutIcon className="text-3xl text-red-500" />}
-            action="sign out"
+            heading="sign out"
           />
           <ActionBox
             icon={<LoginIcon className="text-3xl text-red-500" />}
-            action="login to different account"
+            heading="login to different account"
             linkHref="/login"
             subNavTitle="Login"
           />
           <ActionBox
+            actionType="deleteAccount"
             icon={<DeleteIcon className="text-3xl text-red-500" />}
-            action="delete my Account"
+            heading="delete my Account"
           />
         </div>
       </Container>

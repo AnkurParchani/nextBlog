@@ -2,19 +2,33 @@ type CheckboxType = {
   id: string;
   label: string;
   defaultChecked?: boolean;
+  textBlue?: boolean;
+  externalLabelClass?: string;
+  externalInputClass?: string;
 };
 
-const Checkbox = ({ id, label, defaultChecked }: CheckboxType) => {
+const Checkbox = ({
+  id,
+  label,
+  defaultChecked,
+  textBlue,
+  externalLabelClass,
+  externalInputClass,
+}: CheckboxType) => {
   return (
-    <label htmlFor={id} className="flex items-center">
+    <label htmlFor={id} className="flex gap-2 items-center">
       <input
         type="checkbox"
         id={id}
-        defaultChecked={defaultChecked}
-        className="mr-2 h-4 w-4"
         name={id}
+        defaultChecked={defaultChecked}
+        className={`h-4 w-4 rounded-full appearance-none checked:bg-green-600 bg-red-600 ${externalInputClass}`}
       />
-      <span className="px-0.5 font-semibold text-gray-100 tracking-wide">
+      <span
+        className={`${
+          textBlue ? "text-blue-300" : "text-gray-300"
+        } ${externalLabelClass}`}
+      >
         {label}
       </span>
     </label>

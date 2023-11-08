@@ -10,7 +10,7 @@ import Blog from "@/components/blogs/Blog";
 import { getLikedBlogs } from "../../../../utils/blogs/apiBlogs";
 
 const page = async () => {
-  const { blogs, user } = await getLikedBlogs();
+  const { blogs } = await getLikedBlogs();
   const userLikedBlogs = blogs.map((blog) => blog._id) || [];
   const hasBlogs = blogs.length > 0;
 
@@ -28,7 +28,6 @@ const page = async () => {
                 key={blog._id}
                 blog={blog}
                 userLikedBlogs={userLikedBlogs}
-                userName={user.name}
               />
             ))}
           </div>
@@ -37,7 +36,7 @@ const page = async () => {
             linkContent="Explore"
             linkTo="/"
             content="Blogs you've Liked will stay here.."
-            icon={<FavoriteIcon className="text-9xl text-blue-400" />}
+            icon={<FavoriteIcon className="text-8xl text-blue-400" />}
           />
         )}
       </Container>

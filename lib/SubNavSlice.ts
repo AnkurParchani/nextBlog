@@ -17,11 +17,11 @@ const subNavSlice = createSlice({
   },
 });
 
-// Main slice selector function
+// Exporting dispatch functions
 export const { setTitle } = subNavSlice.actions;
 
 // Exporting the reducer
 export default subNavSlice.reducer;
 
-// Getters
+// Selectors
 export const getTitle = (state: RootState) => state.subNav.title;

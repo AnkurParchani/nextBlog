@@ -18,9 +18,9 @@ export const GET = catchAsync(async (req: Request) => {
   // Getting all the likes blogs of user
   const blogs = await Like.find()
     .where({ user: user._id })
-    .populate({ path: "blog" });
+    .populate({ path: "blog", populate: { path: "user" } });
 
   const blogsToShow = blogs.map((blog) => blog.blog);
 
-  return NextResponse.json({ status: "success", blogs: blogsToShow, user });
+  return NextResponse.json({ status: "success", blogs: blogsToShow });
 });

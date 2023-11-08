@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
 import toast from "react-hot-toast";
 import getErrorMessage from "../../../utils/errors/getErrorMessage";
+import Checkbox from "@/components/others/Checkbox";
 
 import { addBlog } from "@/actions/blog";
 import { RingSpinner } from "../../../utils/others/Spinner";
@@ -117,16 +118,7 @@ const Form = () => {
           {numCharacters.content.length}/500
         </p>
 
-        <label htmlFor="global" className="flex gap-2 items-center">
-          <input
-            type="checkbox"
-            id="global"
-            name="global"
-            defaultChecked={true}
-            className="h-4 w-4 rounded-full appearance-none checked:bg-green-600 bg-red-600"
-          />
-          <span className="text-blue-200">Make your Blog Global</span>
-        </label>
+        <Checkbox defaultChecked id="global" label="Make your Blog Global" />
 
         <button
           className="bg-[#1d9bf0] hover:bg-[#51aeec] duration-200 self-end px-5 py-1 mt-2 rounded-md text-base outline-none"
