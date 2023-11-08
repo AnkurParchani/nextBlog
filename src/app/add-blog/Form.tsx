@@ -1,7 +1,8 @@
 "use client";
+import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
-import toast from "react-hot-toast";
+
 import getErrorMessage from "../../../utils/errors/getErrorMessage";
 import Checkbox from "@/components/others/Checkbox";
 

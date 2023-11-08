@@ -8,8 +8,11 @@ import { getBlogs, getLikedBlogs } from "../../utils/blogs/apiBlogs";
 
 export default async function Home() {
   const blogs = await getBlogs();
-  const fetchLikedBlogs = await getLikedBlogs();
-  const userLikedBlogs = fetchLikedBlogs.blogs.map((blog) => blog._id) || [];
+  const fetchUserLikedBlogs = (await getLikedBlogs()).blogs;
+  const userLikedBlogs =
+    fetchUserLikedBlogs[0] === null
+      ? []
+      : fetchUserLikedBlogs.map((blog) => blog._id);
 
   return (
     <main>

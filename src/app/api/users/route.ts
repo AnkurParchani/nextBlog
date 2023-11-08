@@ -9,6 +9,7 @@ import Comment from "../../../../models/commentModel";
 import Like from "../../../../models/likeModel";
 
 import { getUser } from "../../../../utils/auth/getUser";
+import checkCredentials from "../../../../utils/auth/checkCredentials";
 
 // Getting the current logged in user only
 export const GET = catchAsync(async (req: Request) => {
@@ -24,11 +25,16 @@ export const GET = catchAsync(async (req: Request) => {
 // Deleting a particular user
 export const DELETE = catchAsync(async (req: Request) => {
   connectMongoDB();
+  const { password } = await req.json();
 
   // Checking authentication
   const user = await getUser();
   if (!user || !user._id)
     return NextResponse.json(new AppError(401, "Please Login first"));
+
+  // Checking the credentials
+  const check = await checkCredentials(password, user.password);
+  if (!check) return NextResponse.json(new AppError(401, "Invalid password"));
 
   // Deleting the blogs of the user
   await Blog.deleteMany({ user: user._id });

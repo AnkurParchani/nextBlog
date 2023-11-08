@@ -22,7 +22,7 @@ export async function getUser() {
     } = decode;
 
     // Getting the user according to userId
-    const user = await User.findOne({ _id: userId });
+    const user = await User.findOne({ _id: userId }).select("+password");
 
     // Sending back the user
     return user;

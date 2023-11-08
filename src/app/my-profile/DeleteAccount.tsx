@@ -1,17 +1,37 @@
 "use client";
-import { SetStateAction, Dispatch } from "react";
+import toast from "react-hot-toast";
+import CloseIcon from "@mui/icons-material/Close";
+import { useRouter } from "next/navigation";
+import { SetStateAction, Dispatch, useState } from "react";
+
 import Button from "@/components/others/Button";
 import Input from "@/components/others/Input";
 import Checkbox from "@/components/others/Checkbox";
-import CloseIcon from "@mui/icons-material/Close";
+import getErrorMessage from "../../../utils/errors/getErrorMessage";
+
+import { deleteAccount } from "@/actions/user";
+import { RingSpinner } from "../../../utils/others/Spinner";
 
 type DeleteAccountProps = {
   setAction: Dispatch<SetStateAction<string>>;
 };
 
 const DeleteAccount = ({ setAction }: DeleteAccountProps) => {
-  function handleDeleteAccount() {
-    console.log("Account deleted");
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter();
+
+  async function handleDeleteAccount(event: FormData) {
+    setIsLoading(true);
+    const data = await deleteAccount(event);
+
+    setIsLoading(false);
+    if (data?.error) {
+      return toast.error(getErrorMessage(data));
+    }
+
+    toast.success("Account deleted successfully");
+    setAction("");
+    router.push("/");
   }
 
   return (
@@ -28,8 +48,12 @@ const DeleteAccount = ({ setAction }: DeleteAccountProps) => {
           </h1>
           <CloseIcon className="text-red-500" onClick={() => setAction("")} />
         </div>
+
         <form
-          action={handleDeleteAccount}
+          action={(e) => {
+            setIsLoading(true);
+            handleDeleteAccount(e);
+          }}
           className="flex flex-col gap-5 mt-2"
           autoComplete="off"
         >
@@ -47,11 +71,10 @@ const DeleteAccount = ({ setAction }: DeleteAccountProps) => {
             inputId="password"
             type="password"
           />
-          <div className="flex justify-end gap-3">
-            <Button externalClass="px-4 bg-red-500 py-1 text-sm font-medium">
-              Delete
-            </Button>
-          </div>
+
+          <Button externalClass="px-4 bg-red-500 py-1 text-sm font-medium">
+            {isLoading ? "Deleting..." : "Delete"}
+          </Button>
         </form>
       </div>
     </>
