@@ -1,12 +1,18 @@
 "use client";
 import { ColorRing, Oval } from "react-loader-spinner";
 
-export const RingSpinner = () => {
+export const RingSpinner = ({
+  height,
+  width,
+}: {
+  height?: string;
+  width?: string;
+}) => {
   return (
     <ColorRing
       visible={true}
-      height="23"
-      width="33"
+      height={height || "23"}
+      width={width || "23"}
       ariaLabel="blocks-loading"
       wrapperStyle={{}}
       wrapperClass="blocks-wrapper"

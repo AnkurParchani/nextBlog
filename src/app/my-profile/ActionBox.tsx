@@ -7,6 +7,7 @@ import { setTitle } from "../../../lib/SubNavSlice";
 import Link from "next/link";
 import EditProfile from "./EditProfile";
 import DeleteAccount from "./DeleteAccount";
+import Signout from "./Signout";
 
 type ActionBoxType = {
   heading: string;
@@ -54,6 +55,8 @@ function ActionBox({
       {action === "editProfile" && (
         <EditProfile user={user as User} setAction={setAction} />
       )}
+
+      {action === "signout" && <Signout setAction={setAction} />}
     </>
   );
 }

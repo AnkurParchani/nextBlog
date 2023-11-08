@@ -4,6 +4,7 @@ import { revalidateTag } from "next/cache";
 import { serverApi } from "../../lib/globals";
 import { getTokenFromCookie } from "../../utils/auth/getCookie";
 import handleClientError from "../../utils/errors/handleClientError";
+import { cookies } from "next/headers";
 
 // Request to edit a profile
 export const editProfile = async (e: FormData) => {
@@ -42,6 +43,13 @@ export const editProfile = async (e: FormData) => {
   } catch (err) {
     return handleClientError(err);
   }
+};
+
+// To logout
+export const logout = async () => {
+  const cookieStore = cookies();
+  cookieStore.delete("token");
+  return true;
 };
 
 // To delete an account

@@ -9,6 +9,7 @@ import BookIcon from "@mui/icons-material/Book";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LogoutIcon from "@mui/icons-material/Logout";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
+import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LoginIcon from "@mui/icons-material/Login";
 
@@ -48,10 +49,10 @@ const page = async () => {
             subNavTitle="My Liked Blogs"
           />
 
-          <div className="bg-green-800 h-0.5" />
+          <div className="bg-white h-0.5" />
           <ActionBox
             actionType="changeTheme"
-            icon={<DarkModeIcon className="text-3xl text-green-500" />}
+            icon={<WbSunnyIcon className="text-3xl text-white" />}
             heading="change theme"
           />
 
