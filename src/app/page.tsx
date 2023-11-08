@@ -7,12 +7,17 @@ import TopLogo from "@/components/others/TopLogo";
 import { getBlogs, getLikedBlogs } from "../../utils/blogs/apiBlogs";
 
 export default async function Home() {
+  // Getting all the blogs
   const blogs = await getBlogs();
+
+  // Fetching and setting all liked blogs of user
   const fetchUserLikedBlogs = (await getLikedBlogs()).blogs;
-  const userLikedBlogs =
-    fetchUserLikedBlogs[0] === null
-      ? []
-      : fetchUserLikedBlogs.map((blog) => blog._id);
+  let userLikedBlogs: string[];
+  if (!fetchUserLikedBlogs || fetchUserLikedBlogs[0] === null) {
+    userLikedBlogs = [];
+  } else {
+    userLikedBlogs = fetchUserLikedBlogs.map((blog) => blog._id);
+  }
 
   return (
     <main>

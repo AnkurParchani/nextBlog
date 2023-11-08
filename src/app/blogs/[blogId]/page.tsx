@@ -10,8 +10,15 @@ import { Blog, Comment, InterSection } from "./SeperateBlogLayout";
 
 const page = async ({ params }: { params: { blogId: string } }) => {
   const blog = await getBlog(params.blogId);
-  const userLikedBlogs =
-    (await getLikedBlogs()).blogs.map((blog) => blog._id) || [];
+
+  // Fetching and setting all liked blogs of user
+  const fetchUserLikedBlogs = (await getLikedBlogs()).blogs;
+  let userLikedBlogs: string[];
+  if (!fetchUserLikedBlogs || fetchUserLikedBlogs[0] === null) {
+    userLikedBlogs = [];
+  } else {
+    userLikedBlogs = fetchUserLikedBlogs.map((blog) => blog._id);
+  }
 
   // Extracting all the details from the response
   const {

@@ -61,7 +61,6 @@ export const getLikedBlogs = async (): Promise<LikedBlogsType> => {
   if (!res.ok) throw new Error("Failed to fetch");
 
   const data = await res.json();
-
   return data;
 };
 

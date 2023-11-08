@@ -11,8 +11,19 @@ import { getLikedBlogs } from "../../../../utils/blogs/apiBlogs";
 
 const page = async () => {
   const { blogs } = await getLikedBlogs();
-  const userLikedBlogs = blogs.map((blog) => blog._id) || [];
   const hasBlogs = blogs.length > 0;
+
+  console.log("hasBlogs value", hasBlogs);
+  console.log(blogs);
+
+  // Getting all the liked blogs of the user
+  const fetchUserLikedBlogs = (await getLikedBlogs()).blogs;
+  let userLikedBlogs: string[];
+  if (fetchUserLikedBlogs && fetchUserLikedBlogs[0] !== null) {
+    userLikedBlogs = fetchUserLikedBlogs.map((blog) => blog._id);
+  } else {
+    userLikedBlogs = [];
+  }
 
   return (
     <div>

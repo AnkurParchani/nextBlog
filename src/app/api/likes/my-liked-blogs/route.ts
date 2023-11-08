@@ -20,7 +20,9 @@ export const GET = catchAsync(async (req: Request) => {
     .where({ user: user._id })
     .populate({ path: "blog", populate: { path: "user" } });
 
-  const blogsToShow = blogs.map((blog) => blog.blog);
+  const blogsToShow = blogs
+    .map((blog) => blog.blog)
+    .filter((blog) => blog !== null);
 
   return NextResponse.json({ status: "success", blogs: blogsToShow });
 });

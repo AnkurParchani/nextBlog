@@ -11,9 +11,16 @@ import { BlogWithoutLink } from "@/app/users/blogs/BlogWithoutLink";
 
 const page = async () => {
   const blogs = await getMyBlogs();
-  const fetchLikedBlogs = await getLikedBlogs();
-  const userLikedBlogs = fetchLikedBlogs.blogs.map((blog) => blog._id) || [];
   const hasBlogs = blogs.length > 0;
+
+  // Fetching and setting all liked blogs of user
+  const fetchUserLikedBlogs = (await getLikedBlogs()).blogs;
+  let userLikedBlogs: string[];
+  if (!fetchUserLikedBlogs || fetchUserLikedBlogs[0] === null) {
+    userLikedBlogs = [];
+  } else {
+    userLikedBlogs = fetchUserLikedBlogs.map((blog) => blog._id);
+  }
 
   return (
     <div>

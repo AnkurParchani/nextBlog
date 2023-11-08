@@ -8,6 +8,7 @@ import handleClientError from "../../utils/errors/handleClientError";
 // To delete an account
 export async function deleteAccount(e: FormData) {
   try {
+    console.log("Reqest started");
     // Getting the token from the cookies
     const token = getTokenFromCookie();
 

@@ -17,9 +17,16 @@ const page = async ({
   searchParams: { userId: string };
 }) => {
   const blogs = await getBlogsOfSingleUser(userId);
-  const userLikedBlogs =
-    (await getLikedBlogs()).blogs.map((blog) => blog._id) || [];
   const { name: userName, email: userEmail } = blogs[0].user;
+
+  // Fetching and setting all liked blogs of user
+  const fetchUserLikedBlogs = (await getLikedBlogs()).blogs;
+  let userLikedBlogs: string[];
+  if (!fetchUserLikedBlogs || fetchUserLikedBlogs[0] === null) {
+    userLikedBlogs = [];
+  } else {
+    userLikedBlogs = fetchUserLikedBlogs.map((blog) => blog._id);
+  }
 
   // Render blogs of particular user
   return (
