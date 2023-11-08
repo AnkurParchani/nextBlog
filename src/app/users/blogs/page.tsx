@@ -5,7 +5,10 @@ import Container from "@/components/others/Container";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import ProfileIntro from "@/components/others/ProfileIntro";
 
-import { getBlogsOfSingleUser } from "../../../../utils/blogs/apiBlogs";
+import {
+  getBlogsOfSingleUser,
+  getLikedBlogs,
+} from "../../../../utils/blogs/apiBlogs";
 import { BlogWithoutLink } from "./BlogWithoutLink";
 
 const page = async ({
@@ -14,6 +17,8 @@ const page = async ({
   searchParams: { userId: string };
 }) => {
   const blogs = await getBlogsOfSingleUser(userId);
+  const userLikedBlogs =
+    (await getLikedBlogs()).blogs.map((blog) => blog._id) || [];
   const { name: userName, email: userEmail } = blogs[0].user;
 
   // Render blogs of particular user
@@ -36,7 +41,7 @@ const page = async ({
                 <AccountCircleIcon className="text-4xl text-gray-400" />
               )}
 
-              <BlogWithoutLink blog={blog} />
+              <BlogWithoutLink userLikedBlogs={userLikedBlogs} blog={blog} />
             </div>
           ))}
         </div>

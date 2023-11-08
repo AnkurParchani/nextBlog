@@ -17,6 +17,7 @@ const Likes = ({
   userLikedBlogs?: string[];
 }) => {
   const [isLiked, setIsLiked] = useState<boolean>(false);
+  // const [isLoading, setIsLoading] = useState<boolean>(false);
   const [numLikes, setNumLikes] = useState<number>(likes);
 
   // Checking if the blogid is in user liked blogs
@@ -32,22 +33,35 @@ const Likes = ({
   ) {
     e.preventDefault();
     if (!blogId) return;
+    // if (!blogId || isLoading) return;
 
     if (!userLikedBlogs?.includes(blogId)) {
       setNumLikes(numLikes + 1);
       setIsLiked(true);
+      // setIsLoading(true);
 
       const data = await likeBlog(blogId);
-      // Figure out what to do about this data
+      // setIsLoading(false);
+
+      // console.log(data);
+      // if (data?.error) {
+      //   return toast.error(data.error);
+      // }
     } else {
       setNumLikes(numLikes - 1);
       setIsLiked(false);
+      // setIsLoading(true);
 
       const data = await dislikeBlog(blogId);
-      // Figure out what to do about this data
+      // setIsLoading(false);
+
+      // if (data?.error) {
+      //   return toast.error(data.error);
+      // }
     }
   }
 
+  // The JSX
   return (
     <span className={`${isLiked ? "text-pink-500" : "text-gray-500"}`}>
       {numLikes}

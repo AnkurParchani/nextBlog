@@ -11,6 +11,7 @@ import { getLikedBlogs } from "../../../../utils/blogs/apiBlogs";
 
 const page = async () => {
   const { blogs, user } = await getLikedBlogs();
+  const userLikedBlogs = blogs.map((blog) => blog._id) || [];
   const hasBlogs = blogs.length > 0;
 
   return (
@@ -23,7 +24,12 @@ const page = async () => {
         {hasBlogs ? (
           <div className="grid grid-cols-1 gap-3">
             {blogs.map((blog: Blog) => (
-              <Blog key={blog._id} blog={blog} userName={user.name} />
+              <Blog
+                key={blog._id}
+                blog={blog}
+                userLikedBlogs={userLikedBlogs}
+                userName={user.name}
+              />
             ))}
           </div>
         ) : (

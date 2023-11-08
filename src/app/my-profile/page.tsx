@@ -13,7 +13,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import LoginIcon from "@mui/icons-material/Login";
 
 import { getLoggedInUser } from "../../../utils/users/apiUsers";
-import AddBlogIcon from "@/components/others/AddBlogIcon";
 
 const page = async () => {
   const { name, email, _id } = await getLoggedInUser();
@@ -38,11 +37,13 @@ const page = async () => {
             icon={<BookIcon className="text-3xl text-pink-500" />}
             action="see my blogs"
             linkHref="/blogs/my-blogs"
+            subNavTitle="My-Blogs"
           />
           <ActionBox
             icon={<FavoriteIcon className="text-3xl text-pink-500" />}
             action="see blogs i've liked"
             linkHref="/blogs/liked-blogs"
+            subNavTitle="My Liked Blogs"
           />
 
           <div className="bg-green-800 h-0.5" />
@@ -60,6 +61,7 @@ const page = async () => {
             icon={<LoginIcon className="text-3xl text-red-500" />}
             action="login to different account"
             linkHref="/login"
+            subNavTitle="Login"
           />
           <ActionBox
             icon={<DeleteIcon className="text-3xl text-red-500" />}

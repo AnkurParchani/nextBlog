@@ -6,11 +6,13 @@ import TopLogo from "@/components/others/TopLogo";
 import BookIcon from "@mui/icons-material/Book";
 import EmptyBlogList from "@/components/blogs/EmptyBlogList";
 
-import { getMyBlogs } from "../../../../utils/blogs/apiBlogs";
+import { getLikedBlogs, getMyBlogs } from "../../../../utils/blogs/apiBlogs";
 import { BlogWithoutLink } from "@/app/users/blogs/BlogWithoutLink";
 
 const page = async () => {
   const blogs = await getMyBlogs();
+  const fetchLikedBlogs = await getLikedBlogs();
+  const userLikedBlogs = fetchLikedBlogs.blogs.map((blog) => blog._id) || [];
   const hasBlogs = blogs.length > 0;
 
   return (
@@ -31,7 +33,7 @@ const page = async () => {
                   <AccountCircleIcon className="text-4xl text-gray-400" />
                 )}
 
-                <BlogWithoutLink blog={blog} />
+                <BlogWithoutLink userLikedBlogs={userLikedBlogs} blog={blog} />
               </div>
             ))}
           </div>

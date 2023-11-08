@@ -1,12 +1,15 @@
 - State for back button
-- State for loading text to see what page we're going
+- State for loading text to see what page we're going ---- ✅
 - Check bottom nav text
-- Add comment section in a particular blog
-- particular blog page is under construction
+- Add comment section in a particular blog ---- ✅
+- particular blog page is under construction ---- ✅
 - The ERROR Handling
 
-- Create a seperate user page where people can go and visit their blogs (non-global)
-- Create a page to show your blogs both global and non global
-- liked blogs will throw error if there is no token found, it will work only after logging in
+- Create a seperate user page where people can go and visit their blogs (global) ---- ✅ 
+- Create a page to show your blogs both global and non global ---- ✅
+- liked blogs will throw error if there is no token found, it will work only after logging in ---- ✅
 
 - Add a search functionality instead of theme change mode
+- Do error handling of like and dislike blog
+
+- Error handling for "No token found" (main blogs page must not throw this error)

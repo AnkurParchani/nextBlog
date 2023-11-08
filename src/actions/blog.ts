@@ -2,8 +2,9 @@
 
 import { revalidateTag } from "next/cache";
 import { serverApi } from "../../lib/globals";
-import handleClientError from "../../utils/errors/handleClientError";
 import { getTokenFromCookie } from "../../utils/auth/getCookie";
+
+import handleClientError from "../../utils/errors/handleClientError";
 
 export async function addBlog(e: FormData) {
   try {
@@ -64,7 +65,15 @@ export async function likeBlog(blogId: string) {
   if (!res.ok) throw new Error("Something went wrong, please try again later");
 
   const data = await res.json();
+
+  // If any error found (operational)
+  if (data.isOperational || data.status === "fail")
+    throw new Error(data.message);
+
   revalidateTag("liked-blogs");
+  revalidateTag("blogs");
+  revalidateTag("blog");
+  revalidateTag("single-user-blogs");
 
   return data;
 }
@@ -91,5 +100,9 @@ export const dislikeBlog = async (blogId: string) => {
     throw new Error(data.message);
 
   revalidateTag("liked-blogs");
+  revalidateTag("blogs");
+  revalidateTag("blog");
+  revalidateTag("single-user-blogs");
+
   return data;
 };

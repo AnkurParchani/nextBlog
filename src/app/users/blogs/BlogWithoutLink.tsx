@@ -8,7 +8,13 @@ import LikeButton from "@/components/others/LikeButton";
 import formatDate from "../../../../lib/formatDate";
 
 // Template for the Blog (container which will render whole info about a particular blog)
-export function BlogWithoutLink({ blog }: { blog: Blog }) {
+export function BlogWithoutLink({
+  blog,
+  userLikedBlogs,
+}: {
+  blog: Blog;
+  userLikedBlogs?: string[];
+}) {
   const {
     title,
     likes,
@@ -29,7 +35,12 @@ export function BlogWithoutLink({ blog }: { blog: Blog }) {
       <BlogText content={content} />
 
       <div className="flex text-sm gap-4 mt-3">
-        <LikeButton likes={likes} />
+        <LikeButton
+          blogId={blogId}
+          userLikedBlogs={userLikedBlogs}
+          likes={likes}
+        />
+
         <Link href={`/blogs/${blogId}`}>
           <CommentButton comments={comments} />
         </Link>

@@ -10,19 +10,27 @@ export function Blog({
   content,
   likes,
   name,
+  blogId,
   comments,
+  userLikedBlogs,
 }: {
   content: string;
   likes: number;
   comments: number;
+  blogId: string;
   name: string;
+  userLikedBlogs: string[];
 }) {
   return (
     <div className="pb-12 pt-2 px-2.5 bg-slate-900 rounded-md">
       <p className="font-normal leading-relaxed tracking-wide">{content}</p>
       <div className="mt-5 flex justify-between px-1">
         <div className="flex gap-3">
-          <LikeButton likes={likes} />
+          <LikeButton
+            blogId={blogId}
+            userLikedBlogs={userLikedBlogs}
+            likes={likes}
+          />
           <CommentButton comments={comments} />
         </div>
         <p className="text-blue-400 font-semibold uppercase text-sm tracking-wide">

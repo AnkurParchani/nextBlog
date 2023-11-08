@@ -5,11 +5,13 @@ import TopLogo from "@/components/others/TopLogo";
 
 import formatDate from "../../../../lib/formatDate";
 
-import { getBlog } from "../../../../utils/blogs/apiBlogs";
+import { getBlog, getLikedBlogs } from "../../../../utils/blogs/apiBlogs";
 import { Blog, Comment, InterSection } from "./SeperateBlogLayout";
 
 const page = async ({ params }: { params: { blogId: string } }) => {
   const blog = await getBlog(params.blogId);
+  const userLikedBlogs =
+    (await getLikedBlogs()).blogs.map((blog) => blog._id) || [];
 
   // Extracting all the details from the response
   const {
@@ -19,6 +21,7 @@ const page = async ({ params }: { params: { blogId: string } }) => {
       createdAt: blogCreatedAt,
       img,
       title,
+      _id: blogId,
       user: { email, name, _id: userId },
     },
     comments,
@@ -37,10 +40,12 @@ const page = async ({ params }: { params: { blogId: string } }) => {
       <Container>
         <div className="flex flex-col">
           <Blog
+            userLikedBlogs={userLikedBlogs}
             content={content}
             comments={comments.length}
             likes={numLikes}
             name={name}
+            blogId={blogId}
           />
 
           {hasComments ? (

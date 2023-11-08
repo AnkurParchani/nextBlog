@@ -1,4 +1,3 @@
-import { revalidateTag } from "next/cache";
 import { serverApi } from "../../lib/globals";
 import { getTokenFromCookie } from "../auth/getCookie";
 
@@ -28,7 +27,9 @@ export const getBlogs = async (): Promise<Blog[]> => {
 
 // Get all blogs (of a particular user - global ones)
 export const getBlogsOfSingleUser = async (userId: string): Promise<Blog[]> => {
-  const res = await fetch(`${serverApi}/api/users/blogs?userId=${userId}`);
+  const res = await fetch(`${serverApi}/api/users/blogs?userId=${userId}`, {
+    next: { tags: ["single-user-blogs"] },
+  });
   if (!res.ok) throw new Error("Failed to fetch");
 
   const data = await res.json();
@@ -38,7 +39,9 @@ export const getBlogsOfSingleUser = async (userId: string): Promise<Blog[]> => {
 
 // Get a single blog
 export const getBlog = async (blogId: string): Promise<SingleBlog> => {
-  const res = await fetch(`${serverApi}/api/blogs/${blogId}`);
+  const res = await fetch(`${serverApi}/api/blogs/${blogId}`, {
+    next: { tags: ["blog"] },
+  });
   if (!res.ok) throw new Error("Failed to fetch");
 
   const blog = await res.json();
