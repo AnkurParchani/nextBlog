@@ -22,6 +22,24 @@ export const GET = catchAsync(async (req: Request) => {
   return NextResponse.json({ status: "success", user });
 });
 
+// Updating a particular user
+export const PATCH = catchAsync(async (req: Request) => {
+  connectMongoDB();
+  const { name, email, img } = await req.json();
+
+  const user = await getUser();
+  if (!user || !user._id)
+    return NextResponse.json(new AppError(401, "Please login first"));
+
+  const updatedUser = await User.findByIdAndUpdate(
+    user._id,
+    { name, email },
+    { new: true, runValidators: true }
+  );
+
+  return NextResponse.json({ status: "success", updatedUser });
+});
+
 // Deleting a particular user
 export const DELETE = catchAsync(async (req: Request) => {
   connectMongoDB();

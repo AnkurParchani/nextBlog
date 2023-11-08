@@ -15,7 +15,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import { getLoggedInUser } from "../../../utils/users/apiUsers";
 
 const page = async () => {
-  const { name, email, _id } = await getLoggedInUser();
+  const user = await getLoggedInUser();
 
   return (
     <div>
@@ -23,11 +23,12 @@ const page = async () => {
       <SubNav heading="My-Profile" />
 
       <Container>
-        <ProfileIntro userName={name} userEmail={email} />
+        <ProfileIntro userName={user.name} userEmail={user.email} />
 
         <div className="flex flex-col gap-4 capitalize mt-8">
           <div className="bg-blue-800 h-0.5" />
           <ActionBox
+            user={user}
             actionType="editProfile"
             icon={<AccountCircleIcon className="text-3xl text-blue-400" />}
             heading="edit my profile"

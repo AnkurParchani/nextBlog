@@ -28,15 +28,15 @@ const ModalFormTemplate = ({
       <div className="fixed z-40 inset-x-0 inset-y-0 w-full bg-black opacity-80" />
 
       {/* The form */}
-      <div className="fixed z-50 bottom-0 px-4 py-5 max-h-96 overflow-y-auto inset-x-0 rounded-t-2xl bg-[#222]">
+      <div className="fixed z-50 bottom-0 px-4 max-h-[400px] overflow-y-auto py-5 inset-x-0 rounded-t-2xl bg-[#222]">
         <div className="flex items-center font-medium mb-6 justify-between">
           <h1 className="flex-1 text-center">
-            <span className={`${headingColor} font-semibol`}>
+            <span className={`${headingColor} font-semibold`}>
               {colorSubheading}
             </span>{" "}
             {mainHeading}
           </h1>
-          <CloseIcon onClick={() => setAction("")} />
+          <CloseIcon className="cursor-pointer" onClick={() => setAction("")} />
         </div>
 
         <form

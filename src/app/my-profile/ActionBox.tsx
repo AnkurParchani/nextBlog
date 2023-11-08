@@ -1,24 +1,30 @@
 "use client";
-import Link from "next/link";
+
+import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { setTitle } from "../../../lib/SubNavSlice";
+
+import Link from "next/link";
 import EditProfile from "./EditProfile";
 import DeleteAccount from "./DeleteAccount";
-import { setTitle } from "../../../lib/SubNavSlice";
-import { useState } from "react";
+
+type ActionBoxType = {
+  heading: string;
+  actionType?: string;
+  subNavTitle?: string;
+  user?: User;
+  linkHref?: string;
+  icon: React.ReactNode;
+};
 
 function ActionBox({
   heading,
+  user,
   icon,
   subNavTitle,
   actionType,
   linkHref,
-}: {
-  heading: string;
-  actionType?: string;
-  subNavTitle?: string;
-  linkHref?: string;
-  icon: React.ReactNode;
-}) {
+}: ActionBoxType) {
   const dispatch = useDispatch();
   const [action, setAction] = useState<string>("");
 
@@ -28,7 +34,7 @@ function ActionBox({
         <Link
           onClick={() => dispatch(setTitle(subNavTitle))}
           href={linkHref}
-          className="bg-[#111] flex gap-3 items-center text-white rounded-md px-4 py-4"
+          className="bg-[#111] cursor-pointer flex gap-3 items-center text-white rounded-md px-4 py-4"
         >
           {icon}
           <p>{heading}</p>
@@ -36,7 +42,7 @@ function ActionBox({
       ) : (
         <div
           onClick={() => setAction(actionType || "")}
-          className="bg-[#111] flex gap-3 items-center text-white rounded-md px-4 py-4"
+          className="bg-[#111] cursor-pointer flex gap-3 items-center text-white rounded-md px-4 py-4"
         >
           {icon}
           <p>{heading}</p>
@@ -44,7 +50,10 @@ function ActionBox({
       )}
 
       {action === "deleteAccount" && <DeleteAccount setAction={setAction} />}
-      {action === "editProfile" && <EditProfile />}
+
+      {action === "editProfile" && (
+        <EditProfile user={user as User} setAction={setAction} />
+      )}
     </>
   );
 }

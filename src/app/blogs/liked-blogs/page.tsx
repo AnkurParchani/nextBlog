@@ -13,9 +13,6 @@ const page = async () => {
   const { blogs } = await getLikedBlogs();
   const hasBlogs = blogs.length > 0;
 
-  console.log("hasBlogs value", hasBlogs);
-  console.log(blogs);
-
   // Getting all the liked blogs of the user
   const fetchUserLikedBlogs = (await getLikedBlogs()).blogs;
   let userLikedBlogs: string[];
