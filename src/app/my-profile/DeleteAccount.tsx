@@ -1,6 +1,5 @@
 "use client";
 import toast from "react-hot-toast";
-import CloseIcon from "@mui/icons-material/Close";
 import { useRouter } from "next/navigation";
 import { SetStateAction, Dispatch, useState } from "react";
 

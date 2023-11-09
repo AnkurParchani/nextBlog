@@ -5,16 +5,17 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteBlog from "@/app/blogs/my-blogs/DeleteBlog";
 
 const options = [
-  { title: "Edit", icon: <PriorityHighIcon fontSize="small" /> },
-  { title: "Delete", icon: <PriorityHighIcon fontSize="small" /> },
+  { title: "Edit", icon: <EditIcon fontSize="small" /> },
+  { title: "Delete", icon: <DeleteIcon fontSize="small" /> },
 ];
 
-const ITEM_HEIGHT = 48;
-
-export default function EditMenuButton() {
+export default function EditMenuButton({ blog }: { blog: Blog }) {
+  const [action, setAction] = React.useState<string>("");
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -25,6 +26,12 @@ export default function EditMenuButton() {
 
   const handleClose = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
+
+    if (event.target instanceof HTMLElement) {
+      const action = event.target.dataset.action;
+      setAction(action as string);
+    }
+
     setAnchorEl(null);
   };
 
@@ -50,20 +57,25 @@ export default function EditMenuButton() {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        // PaperProps={{
-        //   style: {
-        //     maxHeight: ITEM_HEIGHT * 4.5,
-        //     width: "20ch",
-        //   },
-        // }}
       >
         {options.map((option) => (
-          <MenuItem key={option.title} onClick={handleClose}>
-            {option.icon}
-            {option.title}
+          <MenuItem
+            key={option.title}
+            onClick={handleClose}
+            className="text-gray-800"
+          >
+            <div className="flex gap-2 items-center" data-action={option.title}>
+              {" "}
+              {option.icon}
+              {option.title}
+            </div>
           </MenuItem>
         ))}
       </Menu>
+
+      {/* Models according to different action types */}
+      {action === "Edit" && <p>Edit is clicked</p>}
+      {action === "Delete" && <DeleteBlog blog={blog} setAction={setAction} />}
     </div>
   );
 }

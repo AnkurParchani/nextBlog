@@ -70,10 +70,12 @@ export async function likeBlog(blogId: string) {
   if (data.isOperational || data.status === "fail")
     throw new Error(data.message);
 
-  revalidateTag("liked-blogs");
   revalidateTag("blogs");
-  revalidateTag("blog");
-  revalidateTag("single-user-blogs");
+
+  // Check if it works without all these
+  // revalidateTag("liked-blogs");
+  // revalidateTag("blog");
+  // revalidateTag("single-user-blogs");
 
   return data;
 }
@@ -99,10 +101,36 @@ export const dislikeBlog = async (blogId: string) => {
   if (data.isOperational || data.status === "fail")
     throw new Error(data.message);
 
-  revalidateTag("liked-blogs");
   revalidateTag("blogs");
-  revalidateTag("blog");
-  revalidateTag("single-user-blogs");
+
+  // Check if it works without all these
+  // revalidateTag("liked-blogs");
+  // revalidateTag("blog");
+  // revalidateTag("single-user-blogs");
+
+  return data;
+};
+
+export const deleteBlog = async (blogId: string) => {
+  const token = getTokenFromCookie();
+
+  const res = await fetch(`${serverApi}/api/blogs/${blogId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: `token=${token}`,
+    },
+  });
+
+  if (!res.ok) throw new Error("Something went wrong, please try again later");
+
+  const data = await res.json();
+
+  // If any error found (operational)
+  if (data.isOperational || data.status === "fail")
+    throw new Error(data.message);
+
+  revalidateTag("blogs");
 
   return data;
 };

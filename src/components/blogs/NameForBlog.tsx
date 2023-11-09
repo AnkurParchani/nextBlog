@@ -1,22 +1,12 @@
-import EditMenuButton from "../others/EditMenuButton";
-
 type PropType = {
   name: string;
   month: string;
   day: string;
   year?: string;
   blueTitle?: boolean;
-  editMenuButton?: boolean;
 };
 
-const NameForBlog = ({
-  name,
-  month,
-  day,
-  year,
-  blueTitle,
-  editMenuButton,
-}: PropType) => {
+const NameForBlog = ({ name, month, day, year, blueTitle }: PropType) => {
   return (
     <div className="flex justify-between items-center">
       <div className="flex items-center gap-1">
@@ -33,7 +23,6 @@ const NameForBlog = ({
           {year && `, ${year}`}
         </p>
       </div>
-      {editMenuButton && <EditMenuButton />}
     </div>
   );
 };

@@ -6,6 +6,7 @@ import CommentButton from "@/components/others/CommentButton";
 import LikeButton from "@/components/others/LikeButton";
 
 import formatDate from "../../../../lib/formatDate";
+import EditMenuButton from "@/components/others/EditMenuButton";
 
 // Template for the Blog (container which will render whole info about a particular blog)
 export function BlogWithoutLink({
@@ -30,17 +31,19 @@ export function BlogWithoutLink({
   const { day, month }: formattedDateType = formatDate(createdAt);
 
   return (
-    <div className="flex flex-col gap-1">
-      <NameForBlog
-        name={title}
-        blueTitle
-        month={month}
-        day={day}
-        editMenuButton={String(blogUserId) === String(userId)}
-      />
+    <div className="flex flex-col gap-1 relative">
+      <NameForBlog name={title} blueTitle month={month} day={day} />
+
+      {String(blogUserId) === String(userId) && (
+        <div className="absolute -right-2 -top-2">
+          <EditMenuButton blog={blog} />
+        </div>
+      )}
+
       {!isGlobal && (
         <p className="text-slate-500 font-semibold text-xs -mt-1">(Private)</p>
       )}
+
       <BlogText content={content} />
 
       <div className="flex text-sm gap-4 mt-3">

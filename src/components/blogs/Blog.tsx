@@ -13,7 +13,7 @@ type BlogType = {
   userName?: string;
   userLikedBlogs?: string[];
   userId?: string;
-  editMenuButton?: boolean;
+  userBlog?: boolean;
 };
 
 // Seperate blog template
@@ -34,7 +34,7 @@ const Blog = async ({ blog, userName, userLikedBlogs, userId }: BlogType) => {
             userLikedBlogs={userLikedBlogs}
             blog={blog}
             userName={userName}
-            editMenuButton={blogUserId === String(userId)}
+            userBlog={String(blogUserId) === String(userId)}
           />
         </div>
       </div>
@@ -47,7 +47,7 @@ async function BlogContainer({
   blog,
   userName,
   userLikedBlogs,
-  editMenuButton,
+  userBlog,
 }: BlogType) {
   const {
     img: blogImg,
@@ -67,8 +67,11 @@ async function BlogContainer({
         name={name || (userName as string)}
         day={day}
         month={month}
-        editMenuButton={editMenuButton}
       />
+
+      {userBlog && (
+        <p className="text-slate-500 font-semibold text-xs -mt-2">(You)</p>
+      )}
 
       <div className="flex flex-col gap-0.5 font-medium">
         <p className="text-blue-300">{title}</p>

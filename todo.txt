@@ -17,3 +17,6 @@
 
 - The CACHING
 - Signout functionality ---- ✅
+
+- full text out of page problem
+- Check that revalidateOne - src->action->blog.ts->like function and dislike function
