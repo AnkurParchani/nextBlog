@@ -8,9 +8,11 @@ import EmptyBlogList from "@/components/blogs/EmptyBlogList";
 
 import { getLikedBlogs, getMyBlogs } from "../../../../utils/blogs/apiBlogs";
 import { BlogWithoutLink } from "@/app/users/blogs/BlogWithoutLink";
+import { getUser } from "../../../../utils/auth/getUser";
 
 const page = async () => {
   const blogs = await getMyBlogs();
+  const { _id: userId } = await getUser();
   const hasBlogs = blogs.length > 0;
 
   // Fetching and setting all liked blogs of user
@@ -40,7 +42,13 @@ const page = async () => {
                   <AccountCircleIcon className="text-4xl text-gray-400" />
                 )}
 
-                <BlogWithoutLink userLikedBlogs={userLikedBlogs} blog={blog} />
+                <div className="flex-grow">
+                  <BlogWithoutLink
+                    userId={userId}
+                    userLikedBlogs={userLikedBlogs}
+                    blog={blog}
+                  />
+                </div>
               </div>
             ))}
           </div>

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { AccountIcon, Logo } from "./TopLogoClientSide";
 
 function TopLogo({
@@ -13,7 +12,7 @@ function TopLogo({
   userId?: string;
 }) {
   return (
-    <div className="fixed top-0 left-0 w-full bg-black flex items-center px-4 py-1.5">
+    <div className="fixed top-0 left-0 w-full bg-black flex items-center z-30 px-4 py-1.5">
       {backLinkTo && (
         <Link href={backLinkTo}>
           <ArrowBackIcon className="text-2xl text-gray-300" />

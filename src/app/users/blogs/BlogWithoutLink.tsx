@@ -11,9 +11,11 @@ import formatDate from "../../../../lib/formatDate";
 export function BlogWithoutLink({
   blog,
   userLikedBlogs,
+  userId,
 }: {
   blog: Blog;
   userLikedBlogs?: string[];
+  userId?: string;
 }) {
   const {
     title,
@@ -22,13 +24,20 @@ export function BlogWithoutLink({
     createdAt,
     isGlobal,
     comments,
+    user: blogUserId,
     _id: blogId,
   } = blog;
   const { day, month }: formattedDateType = formatDate(createdAt);
 
   return (
     <div className="flex flex-col gap-1">
-      <NameForBlog name={title} blueTitle month={month} day={day} />
+      <NameForBlog
+        name={title}
+        blueTitle
+        month={month}
+        day={day}
+        editMenuButton={String(blogUserId) === String(userId)}
+      />
       {!isGlobal && (
         <p className="text-slate-500 font-semibold text-xs -mt-1">(Private)</p>
       )}

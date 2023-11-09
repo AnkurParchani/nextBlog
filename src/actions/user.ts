@@ -1,10 +1,11 @@
 "use server";
 
 import { revalidateTag } from "next/cache";
+import { cookies } from "next/headers";
 import { serverApi } from "../../lib/globals";
 import { getTokenFromCookie } from "../../utils/auth/getCookie";
+
 import handleClientError from "../../utils/errors/handleClientError";
-import { cookies } from "next/headers";
 
 // Request to edit a profile
 export const editProfile = async (e: FormData) => {
@@ -56,6 +57,7 @@ export const logout = async () => {
 export async function deleteAccount(e: FormData) {
   try {
     // Getting the token from the cookies
+    const cookieStore = cookies();
     const token = getTokenFromCookie();
 
     // Getting Password and confirmation
@@ -87,6 +89,10 @@ export async function deleteAccount(e: FormData) {
     revalidateTag("blogs");
     revalidateTag("blog");
     revalidateTag("single-user-blogs");
+
+    // Deleting the cookie
+    cookieStore.delete("token");
+
     // Returning the data
     return data;
   } catch (err: unknown) {

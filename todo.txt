@@ -16,3 +16,4 @@
 - Remember that wherever you're getting that please login first error then return and send the user to the login page
 
 - The CACHING
+- Signout functionality ---- ✅
