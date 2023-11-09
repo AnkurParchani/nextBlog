@@ -1,4 +1,5 @@
 "use client";
+
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useState } from "react";
@@ -8,6 +9,8 @@ import Checkbox from "@/components/others/Checkbox";
 
 import { addBlog } from "@/actions/blog";
 import { RingSpinner } from "../../../utils/others/Spinner";
+import TextArea from "@/components/others/TextArea";
+import Input from "@/components/others/Input";
 
 type NumCharType = {
   title: string;
@@ -84,13 +87,13 @@ const Form = () => {
         className="flex flex-col gap-4"
         autoComplete="off"
       >
-        <input
+        <Input
           type="text"
           value={numCharacters.title}
           placeholder="Title"
-          name="title"
+          inputId="title"
           onChange={handleTitleChange}
-          className="bg-gray-900 border-b py-1 duration-100 focus:border-blue-400 outline-none font-semibold flex-1 text-white"
+          className="bg-gray-900 border-b py-1 duration-100 focus:border-blue-400 outline-none font-semibold flex-1 text-white w-full"
         />
 
         <p
@@ -101,14 +104,14 @@ const Form = () => {
           {numCharacters.title.length}/20
         </p>
 
-        <textarea
+        <TextArea
           cols={5}
-          value={numCharacters.content}
-          onChange={handleContentChange}
           rows={5}
-          name="content"
           placeholder="Content"
-          className="bg-gray-900 font-medium text-white focus:outline-none"
+          id="content"
+          className="bg-gray-900 font-medium w-full text-white focus:outline-none"
+          onChange={handleContentChange}
+          value={numCharacters.content}
         />
 
         <p

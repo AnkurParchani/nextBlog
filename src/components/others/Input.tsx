@@ -1,7 +1,13 @@
+import { ChangeEventHandler } from "react";
+
 type InputType = {
-  label: string;
+  label?: string;
   inputId: string;
   type: string;
+  className?: string;
+  placeholder?: string;
+  value?: string;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
   required?: boolean;
   bgColor?: string;
   defaultValue?: string;
@@ -11,11 +17,18 @@ function Input({
   label,
   inputId,
   type,
+  className,
+  onChange,
+  placeholder,
+  value,
   required,
   bgColor,
   defaultValue,
 }: InputType) {
   const requiredClass = "after:content-['*'] after:ml-0.5 after:text-red-500";
+  const universalClass = `${
+    bgColor ? bgColor : "bg-black"
+  } border-b p-1 w-full outline-none focus:border-[#1d9bf0] duration-200`;
 
   return (
     <label htmlFor={inputId}>
@@ -27,12 +40,13 @@ function Input({
         {label}
       </span>
       <input
-        className={`${
-          bgColor ? bgColor : "bg-black"
-        } border-b p-1 w-full outline-none focus:border-[#1d9bf0] duration-200`}
+        className={className || universalClass}
         type={type}
         name={inputId}
         defaultValue={defaultValue}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
         required
         id={inputId}
       />

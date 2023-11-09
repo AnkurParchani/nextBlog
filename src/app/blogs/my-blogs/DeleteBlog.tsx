@@ -1,10 +1,13 @@
 import { Dispatch, SetStateAction, useState } from "react";
+
 import Button from "@/components/others/Button";
 import ModalFormTemplate from "@/components/others/ModalFormTemplate";
 import formatDate from "../../../../lib/formatDate";
 import toast from "react-hot-toast";
 import getErrorMessage from "../../../../utils/errors/getErrorMessage";
+
 import { deleteBlog } from "@/actions/blog";
+import ModalInfoCard from "@/components/others/ModalInfoCard";
 
 type DeleteBlogType = {
   setAction: Dispatch<SetStateAction<string>>;
@@ -21,7 +24,9 @@ const DeleteBlog = ({ setAction, blog }: DeleteBlogType) => {
   async function handleDeleteBlog(): Promise<string | undefined> {
     setIsLoading(true);
     const data = await deleteBlog(blogId);
+
     setIsLoading(false);
+    console.log(data);
 
     if (data?.error) {
       return toast.error(getErrorMessage(data));
@@ -40,17 +45,12 @@ const DeleteBlog = ({ setAction, blog }: DeleteBlogType) => {
       setIsLoading={setIsLoading}
       headingColor="text-red-500"
     >
-      <div className="px-4 flex flex-col gap-3 bg-[#333] rounded-md py-3 ">
-        <div className="flex gap-3 justify-between">
-          <h1 className="capitalize font-medium text-red-300">{title}</h1>
-          <p className="text-xs font-semibold">
-            {month} {day}{" "}
-          </p>
-        </div>
-        <h1 className="leading-normal text-sm tracking-wide">
-          {contentToShow}
-        </h1>
-      </div>
+      <ModalInfoCard
+        day={day}
+        month={month}
+        contentToShow={contentToShow}
+        title={title}
+      />
 
       <div className="self-end">
         <Button externalClass="px-4 bg-red-500 py-1 text-sm font-medium">

@@ -111,6 +111,35 @@ export const dislikeBlog = async (blogId: string) => {
   return data;
 };
 
+export const updateBlog = async (e: FormData, blogId: string) => {
+  const token = getTokenFromCookie();
+
+  const title = e.get("title");
+  const content = e.get("content");
+  const isGlobal = e.get("global") === "on";
+
+  const res = await fetch(`${serverApi}/api/blogs/${blogId}`, {
+    method: "PATCH",
+    body: JSON.stringify({ title, content, isGlobal }),
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: `token=${token}`,
+    },
+  });
+
+  if (!res.ok) throw new Error("Something went wrong, please try again later");
+
+  const data = await res.json();
+
+  // If any error found (operational)
+  if (data.isOperational || data.status === "fail")
+    throw new Error(data.message);
+
+  revalidateTag("blogs");
+
+  return data;
+};
+
 export const deleteBlog = async (blogId: string) => {
   const token = getTokenFromCookie();
 

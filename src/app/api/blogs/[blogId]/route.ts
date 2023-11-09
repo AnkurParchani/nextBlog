@@ -44,6 +44,16 @@ export async function PATCH(req: Request, { params: { blogId } }: BlogParams) {
   // The data from the frontend
   const { title, content, likes, isGlobal } = await req.json();
 
+  // Checking the length of the data
+  if (title.length > 20)
+    return NextResponse.json(
+      new AppError(400, "Title cannot exceed more than 20 characters")
+    );
+  if (content.length > 500)
+    return NextResponse.json(
+      new AppError(400, "Content cannot exceed more than 500 characters")
+    );
+
   // Updating the blog if the blog belongs to the user
   const blog = await Blog.findByIdAndUpdate(blogId, {
     title,

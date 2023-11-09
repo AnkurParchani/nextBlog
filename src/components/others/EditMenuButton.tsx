@@ -8,6 +8,7 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteBlog from "@/app/blogs/my-blogs/DeleteBlog";
+import EditBlog from "@/app/blogs/my-blogs/EditBlog";
 
 const options = [
   { title: "Edit", icon: <EditIcon fontSize="small" /> },
@@ -74,7 +75,7 @@ export default function EditMenuButton({ blog }: { blog: Blog }) {
       </Menu>
 
       {/* Models according to different action types */}
-      {action === "Edit" && <p>Edit is clicked</p>}
+      {action === "Edit" && <EditBlog blog={blog} setAction={setAction} />}
       {action === "Delete" && <DeleteBlog blog={blog} setAction={setAction} />}
     </div>
   );
