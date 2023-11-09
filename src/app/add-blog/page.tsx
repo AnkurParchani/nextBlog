@@ -6,7 +6,7 @@ import TopLogo from "@/components/others/TopLogo";
 const page = () => {
   return (
     <>
-      <TopLogo backLinkTo="/" />
+      <TopLogo showBackButton />
       <SubNav heading="Add a new Blog" />
 
       <Container>

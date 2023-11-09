@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setTitle } from "../../../lib/SubNavSlice";
+import { setTitle } from "../../../lib/slices/SubNavSlice";
 
 import Link from "next/link";
 import EditProfile from "./EditProfile";

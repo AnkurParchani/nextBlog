@@ -9,25 +9,28 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SearchIcon from "@mui/icons-material/Search";
 
-import { useDispatch } from "react-redux";
-import { setTitle } from "../../../lib/SubNavSlice";
-
-//////////////
-// Track the value of current selected one so that when user changes the theme, it should not go to theme one and be on the selected one
-//////////////
+import { useDispatch, useSelector } from "react-redux";
+import { setTitle } from "../../../lib/slices/SubNavSlice";
+import { getTheme } from "../../../lib/slices/UiSlice";
 
 const BottomNav = () => {
   const [value, setValue] = useState("/");
   const router = useRouter();
   const dispatch = useDispatch();
+  const theme = useSelector(getTheme);
+
+  const iconColor = theme === "dark" ? "text-white" : "text-black";
 
   return (
     <div className="fixed bottom-0 inset-x-0 border-t border-gray-900">
       <Box>
-        <BottomNavigation className="bg-[black]" showLabels>
+        <BottomNavigation
+          className={`${theme === "dark" ? "bg-[black]" : "bg-gray-200"}`}
+          showLabels
+        >
           <BottomNavigationAction
             className={`hover:bg-gray-900 ${
-              value === "/" ? "text-[#66B2FF]" : "text-white"
+              value === "/" ? "text-[#66B2FF]" : iconColor
             }`}
             icon={<HomeRoundedIcon />}
             onClick={() => {
@@ -39,7 +42,7 @@ const BottomNav = () => {
 
           <BottomNavigationAction
             className={`hover:bg-gray-900  ${
-              value === "/search" ? "text-[#66B2FF]" : "text-white"
+              value === "/search" ? "text-[#66B2FF]" : iconColor
             }`}
             icon={<SearchIcon />}
             onClick={() => {
@@ -50,7 +53,7 @@ const BottomNav = () => {
 
           <BottomNavigationAction
             className={`hover:bg-gray-900  ${
-              value === "/fav" ? "text-[#66B2FF]" : "text-white"
+              value === "/fav" ? "text-[#66B2FF]" : iconColor
             }`}
             icon={<FavoriteIcon />}
             onClick={() => {
@@ -62,7 +65,7 @@ const BottomNav = () => {
 
           <BottomNavigationAction
             className={`hover:bg-gray-900  ${
-              value === "/profile" ? "text-[#66B2FF]" : "text-white"
+              value === "/profile" ? "text-[#66B2FF]" : iconColor
             }`}
             icon={<AccountCircleIcon />}
             onClick={() => {

@@ -7,7 +7,7 @@
 
 - Create a seperate user page where people can go and visit their blogs (global) ---- ✅ 
 - Create a page to show your blogs both global and non global ---- ✅
-- liked blogs will throw error if there is no token found, it will work only after logging in ---- ✅
+- liked blogs will throw error if there is no token found, it will work only after  logging in ---- ✅
 
 - Add a search functionality 
 - Do error handling of like and dislike blog

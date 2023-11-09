@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import subNavReducer from "../../../lib/SubNavSlice";
+import subNavReducer from "../../../lib/slices/SubNavSlice";
+import uiSliceReducer from "../../../lib/slices/UiSlice";
 
 export const store = configureStore({
   reducer: {
     subNav: subNavReducer,
+    interface: uiSliceReducer,
   },
 });
 

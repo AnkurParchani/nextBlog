@@ -39,7 +39,7 @@ const page = async ({ params }: { params: { blogId: string } }) => {
 
   return (
     <>
-      <TopLogo backLinkTo="/" showUserIcon userId={userId} />
+      <TopLogo showBackButton showUserIcon userId={userId} />
       <AddBlogIcon />
 
       <SubNav heading={title} showDate={blogCreatedAtDate} />

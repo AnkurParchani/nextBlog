@@ -6,14 +6,14 @@ import SubNav from "@/components/nav/SubNav";
 import TopLogo from "@/components/others/TopLogo";
 
 import { OvalSpinner } from "../../utils/others/Spinner";
-import { getTitle } from "../../lib/SubNavSlice";
+import { getTitle } from "../../lib/slices/SubNavSlice";
 
 const Loading = () => {
   const title = useSelector(getTitle);
 
   return (
     <>
-      <TopLogo backLinkTo="/" />
+      <TopLogo showBackButton />
 
       <SubNav heading={title || "Loading"} />
       <div className="absolute left-1/2 -translate-x-1/2 top-1/3">

@@ -31,7 +31,7 @@ const page = async ({
   // Render blogs of particular user
   return (
     <div>
-      <TopLogo backLinkTo="/" />
+      <TopLogo showBackButton />
       <AddBlogIcon />
       <SubNav heading="Blogs" />
 

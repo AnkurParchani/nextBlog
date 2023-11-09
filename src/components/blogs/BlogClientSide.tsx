@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { setTitle } from "../../../lib/SubNavSlice";
+import { setTitle } from "../../../lib/slices/SubNavSlice";
 
 export const Blog = ({
   children,

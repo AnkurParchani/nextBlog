@@ -26,7 +26,7 @@ const page = async () => {
 
   return (
     <div>
-      <TopLogo backLinkTo="/" />
+      <TopLogo showBackButton/>
       <AddBlogIcon />
       <SubNav heading="My-Blogs" />
 
