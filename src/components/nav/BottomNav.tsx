@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { BottomNavigation, BottomNavigationAction, Box } from "@mui/material";
 
@@ -11,12 +10,16 @@ import SearchIcon from "@mui/icons-material/Search";
 
 import { useDispatch, useSelector } from "react-redux";
 import { setTitle } from "../../../lib/slices/SubNavSlice";
-import { getTheme } from "../../../lib/slices/UiSlice";
+import {
+  getBottomNavLink,
+  getTheme,
+  setBottomNavLink,
+} from "../../../lib/slices/UiSlice";
 
 const BottomNav = () => {
-  const [value, setValue] = useState("/");
   const router = useRouter();
   const dispatch = useDispatch();
+  const value = useSelector(getBottomNavLink);
   const theme = useSelector(getTheme);
 
   const iconColor = theme === "dark" ? "text-white" : "text-black";
@@ -35,7 +38,7 @@ const BottomNav = () => {
             icon={<HomeRoundedIcon />}
             onClick={() => {
               dispatch(setTitle("Home"));
-              setValue("/");
+              dispatch(setBottomNavLink("/"));
               router.push("/");
             }}
           />
@@ -47,7 +50,7 @@ const BottomNav = () => {
             icon={<SearchIcon />}
             onClick={() => {
               dispatch(setTitle("Search for Users or Blogs"));
-              setValue("/search");
+              dispatch(setBottomNavLink("/search"));
             }}
           />
 
@@ -58,7 +61,7 @@ const BottomNav = () => {
             icon={<FavoriteIcon />}
             onClick={() => {
               dispatch(setTitle("My liked Blogs "));
-              setValue("/fav");
+              dispatch(setBottomNavLink("/fav"));
               router.push("/blogs/liked-blogs");
             }}
           />
@@ -70,8 +73,8 @@ const BottomNav = () => {
             icon={<AccountCircleIcon />}
             onClick={() => {
               dispatch(setTitle("My-Profile"));
+              dispatch(setBottomNavLink("/profile"));
               router.push("/my-profile");
-              setValue("/profile");
             }}
           />
         </BottomNavigation>

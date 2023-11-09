@@ -33,6 +33,7 @@ const page = async () => {
             actionType="editProfile"
             icon={<AccountCircleIcon className="text-3xl text-blue-400" />}
             heading="edit my profile"
+            bottomNavValue="/profile"
           />
 
           <div className="bg-pink-800 h-0.5" />
@@ -41,12 +42,14 @@ const page = async () => {
             heading="see my blogs"
             linkHref="/blogs/my-blogs"
             subNavTitle="My-Blogs"
+            bottomNavValue=""
           />
           <ActionBox
             icon={<FavoriteIcon className="text-3xl text-pink-500" />}
             heading="see blogs i've liked"
             linkHref="/blogs/liked-blogs"
             subNavTitle="My Liked Blogs"
+            bottomNavValue="/fav"
           />
 
           <ThemeActionBox />
@@ -56,17 +59,20 @@ const page = async () => {
             actionType="signout"
             icon={<LogoutIcon className="text-3xl text-red-500" />}
             heading="sign out"
+            bottomNavValue="/"
           />
           <ActionBox
             icon={<LoginIcon className="text-3xl text-red-500" />}
             heading="login to different account"
             linkHref="/login"
             subNavTitle="Login"
+            bottomNavValue=""
           />
           <ActionBox
             actionType="deleteAccount"
             icon={<DeleteIcon className="text-3xl text-red-500" />}
             heading="delete my Account"
+            bottomNavValue="/"
           />
         </div>
       </Container>

@@ -4,12 +4,14 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import { setTitle } from "../../../lib/slices/SubNavSlice";
+import { setBottomNavLink } from "../../../lib/slices/UiSlice";
 
 // The Plus button
 const AddBlogIcon = () => {
   const dispatch = useDispatch();
 
   function handleClick() {
+    dispatch(setBottomNavLink(""));
     dispatch(setTitle("Add A New Blog"));
   }
 

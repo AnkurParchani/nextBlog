@@ -1,13 +1,4 @@
-- State for back button
-- State for loading text to see what page we're going ---- ✅
-- Check bottom nav text
-- Add comment section in a particular blog ---- ✅
-- particular blog page is under construction ---- ✅
-- The ERROR Handling
-
-- Create a seperate user page where people can go and visit their blogs (global) ---- ✅ 
-- Create a page to show your blogs both global and non global ---- ✅
-- liked blogs will throw error if there is no token found, it will work only after  logging in ---- ✅
+- The ERROR handling
 
 - Add a search functionality 
 - Do error handling of like and dislike blog
@@ -16,10 +7,8 @@
 - Remember that wherever you're getting that please login first error then return and send the user to the login page
 
 - The CACHING
-- Signout functionality ---- ✅
 
 - full text out of page problem
 - Check that revalidateOne - src->action->blog.ts->like function and dislike function
 - Imgs to blogs 
 - Imgs to profile
-- Add private / public functionality in update blog

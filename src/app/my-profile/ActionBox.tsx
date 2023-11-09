@@ -8,6 +8,7 @@ import Link from "next/link";
 import EditProfile from "./EditProfile";
 import DeleteAccount from "./DeleteAccount";
 import Signout from "./Signout";
+import { setBottomNavLink } from "../../../lib/slices/UiSlice";
 
 type ActionBoxType = {
   heading: string;
@@ -16,6 +17,7 @@ type ActionBoxType = {
   user?: User;
   linkHref?: string;
   icon: React.ReactNode;
+  bottomNavValue?: string;
 };
 
 function ActionBox({
@@ -23,6 +25,7 @@ function ActionBox({
   user,
   icon,
   subNavTitle,
+  bottomNavValue,
   actionType,
   linkHref,
 }: ActionBoxType) {
@@ -33,7 +36,10 @@ function ActionBox({
     <>
       {linkHref ? (
         <Link
-          onClick={() => dispatch(setTitle(subNavTitle))}
+          onClick={() => {
+            dispatch(setBottomNavLink(bottomNavValue));
+            dispatch(setTitle(subNavTitle));
+          }}
           href={linkHref}
           className="bg-[#111] cursor-pointer flex gap-3 items-center text-white rounded-md px-4 py-4"
         >
@@ -42,7 +48,10 @@ function ActionBox({
         </Link>
       ) : (
         <div
-          onClick={() => setAction(actionType || "")}
+          onClick={() => {
+            dispatch(setBottomNavLink(bottomNavValue));
+            setAction(actionType || "");
+          }}
           className="bg-[#111] cursor-pointer flex gap-3 items-center text-white rounded-md px-4 py-4"
         >
           {icon}

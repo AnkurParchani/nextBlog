@@ -24,6 +24,7 @@ const ThemeActionBox = () => {
       <div onClick={handleClick}>
         <ActionBox
           actionType="changeTheme"
+          bottomNavValue="/profile"
           icon={
             currentTheme === "dark" ? (
               <WbSunnyIcon className="text-3xl text-white" />

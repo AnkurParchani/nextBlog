@@ -6,14 +6,20 @@ import { useDispatch } from "react-redux";
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { setTitle } from "../../../lib/slices/SubNavSlice";
+import { setBottomNavLink } from "../../../lib/slices/UiSlice";
 
 // The Main Website's logo button
 export const Logo = () => {
   const dispatch = useDispatch();
 
+  function handleLogoClick() {
+    dispatch(setTitle("Home"));
+    dispatch(setBottomNavLink("/"));
+  }
+
   return (
     <div className="mx-auto">
-      <Link href="/" onClick={() => dispatch(setTitle("Home"))}>
+      <Link href="/" onClick={handleLogoClick}>
         <Image width={32} height={32} alt="logo" src="/nb-logo.png" />
       </Link>
     </div>
@@ -24,11 +30,13 @@ export const Logo = () => {
 export const AccountIcon = ({ userId }: { userId: string }) => {
   const dispatch = useDispatch();
 
+  function handleAccountClick() {
+    dispatch(setBottomNavLink(""));
+    dispatch(setTitle("Blogs"));
+  }
+
   return (
-    <Link
-      onClick={() => dispatch(setTitle("Blogs"))}
-      href={`/users/blogs?userId=${userId}`}
-    >
+    <Link onClick={handleAccountClick} href={`/users/blogs?userId=${userId}`}>
       <AccountCircleIcon className="text-3xl text-gray-300" />
     </Link>
   );

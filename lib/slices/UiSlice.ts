@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 // The Initial state
 const initialState = {
   theme: "dark",
+  bottomNavLink: "/",
 };
 
 // Dispatch functions
@@ -14,14 +15,19 @@ const uiSlice = createSlice({
     setTheme(state, action) {
       state.theme = action.payload;
     },
+    setBottomNavLink(state, action) {
+      state.bottomNavLink = action.payload;
+    },
   },
 });
 
 // Exporting dispatch functions
-export const { setTheme } = uiSlice.actions;
+export const { setTheme, setBottomNavLink } = uiSlice.actions;
 
 // Exporting the reducer
 export default uiSlice.reducer;
 
 // Selectors
 export const getTheme = (state: RootState) => state.interface.theme;
+export const getBottomNavLink = (state: RootState) =>
+  state.interface.bottomNavLink;
