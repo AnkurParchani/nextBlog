@@ -5,6 +5,7 @@ import { serverApi } from "../../lib/globals";
 import { getTokenFromCookie } from "../../utils/auth/getCookie";
 
 import handleClientError from "../../utils/errors/handleClientError";
+import { headers } from "next/headers";
 
 export async function addBlog(e: FormData) {
   try {
@@ -70,12 +71,11 @@ export async function likeBlog(blogId: string) {
   if (data.isOperational || data.status === "fail")
     throw new Error(data.message);
 
+  // Revalidating necessary tags
   revalidateTag("blogs");
-
-  // Check if it works without all these
-  // revalidateTag("liked-blogs");
-  // revalidateTag("blog");
-  // revalidateTag("single-user-blogs");
+  revalidateTag("blog");
+  revalidateTag("liked-blogs");
+  revalidateTag("single-user-blogs");
 
   return data;
 }
@@ -101,16 +101,16 @@ export const dislikeBlog = async (blogId: string) => {
   if (data.isOperational || data.status === "fail")
     throw new Error(data.message);
 
+  // Revalidating necessary tags
   revalidateTag("blogs");
-
-  // Check if it works without all these
-  // revalidateTag("liked-blogs");
-  // revalidateTag("blog");
-  // revalidateTag("single-user-blogs");
+  revalidateTag("liked-blogs");
+  revalidateTag("blog");
+  revalidateTag("single-user-blogs");
 
   return data;
 };
 
+// Updating a particular blog
 export const updateBlog = async (e: FormData, blogId: string) => {
   const token = getTokenFromCookie();
 
@@ -160,6 +160,41 @@ export const deleteBlog = async (blogId: string) => {
     throw new Error(data.message);
 
   revalidateTag("blogs");
+
+  return data;
+};
+
+// Adding a comment on the blog
+export const addComment = async (event: FormData) => {
+  const token = getTokenFromCookie();
+
+  const content = event.get("content");
+  const blogId = event.get("blogId");
+
+  if (!blogId || !content) throw new Error("Please provide all the details");
+
+  const res = await fetch(`${serverApi}/api/comments`, {
+    method: "POST",
+    body: JSON.stringify({ content, blogId }),
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: `token=${token}`,
+    },
+  });
+
+  if (!res.ok) throw new Error("failed to do the request");
+
+  const data = await res.json();
+
+  // If any error found (operational)
+  if (data.isOperational || data.status === "fail")
+    throw new Error(data.message);
+
+  // Revalidating necessary tags
+  revalidateTag("blogs");
+  revalidateTag("liked-blogs");
+  revalidateTag("blog");
+  revalidateTag("single-user-blogs");
 
   return data;
 };

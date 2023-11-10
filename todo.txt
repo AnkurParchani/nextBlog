@@ -1,6 +1,5 @@
 - The ERROR handling
 
-- Add a search functionality 
 - Do error handling of like and dislike blog
 
 - Error handling for "No token found" (main blogs page must not throw this error)
@@ -9,7 +8,6 @@
 - The CACHING
 
 - full text out of page problem
-- Check that revalidateOne - src->action->blog.ts->like function and dislike function
 - Imgs to blogs 
 - Imgs to profile
 - check ts ignore of that searchInput which does not render user img

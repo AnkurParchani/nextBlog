@@ -40,12 +40,12 @@ const SearchInput = ({ blogs, users }: SearchInputType) => {
     );
   });
 
+  const hasBlogs = foundBlogs.length > 0;
+  const hasUsers = foundUsers.length > 0;
+
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     setInput(event.target.value);
   }
-
-  const hasBlogs = foundBlogs.length > 0;
-  const hasUsers = foundUsers.length > 0;
 
   return (
     <>
@@ -82,19 +82,25 @@ const SearchInput = ({ blogs, users }: SearchInputType) => {
 
       {/* If none of them found */}
       {!hasBlogs && !hasUsers && input.length > 2 && (
-        <div className="flex flex-col items-center mt-14">
-          <SearchOffIcon className="text-8xl text-gray-700" />
-          <p className="text-gray-500 text-center">
-            Sorry, no results were found for the search query:{" "}
-            <span className="text-blue-500">
-              &quot;{input}
-              &quot;
-            </span>
-          </p>
-        </div>
+        <EmptyResults input={input} />
       )}
     </>
   );
 };
+
+function EmptyResults({ input }: { input: string }) {
+  return (
+    <div className="flex flex-col items-center mt-14">
+      <SearchOffIcon className="text-8xl text-gray-700" />
+      <p className="text-gray-500 text-center px-2 text-sm">
+        Sorry, no results were found for the search query:{" "}
+        <span className="text-blue-500">
+          &quot;{input}
+          &quot;
+        </span>
+      </p>
+    </div>
+  );
+}
 
 export default SearchInput;

@@ -26,7 +26,6 @@ const DeleteBlog = ({ setAction, blog }: DeleteBlogType) => {
     const data = await deleteBlog(blogId);
 
     setIsLoading(false);
-    console.log(data);
 
     if (data?.error) {
       return toast.error(getErrorMessage(data));

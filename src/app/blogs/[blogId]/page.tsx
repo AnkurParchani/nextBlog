@@ -47,6 +47,7 @@ const page = async ({ params }: { params: { blogId: string } }) => {
       <Container>
         <div className="flex flex-col">
           <Blog
+            hasCommentFunctionality
             userLikedBlogs={userLikedBlogs}
             content={content}
             comments={comments.length}

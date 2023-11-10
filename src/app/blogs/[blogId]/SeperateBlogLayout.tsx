@@ -10,12 +10,14 @@ export function Blog({
   content,
   likes,
   name,
+  hasCommentFunctionality,
   blogId,
   comments,
   userLikedBlogs,
 }: {
   content: string;
   likes: number;
+  hasCommentFunctionality?: boolean;
   comments: number;
   blogId: string;
   name: string;
@@ -31,7 +33,11 @@ export function Blog({
             userLikedBlogs={userLikedBlogs}
             likes={likes}
           />
-          <CommentButton comments={comments} />
+          <CommentButton
+            blogId={blogId}
+            hasCommentFunctionality
+            comments={comments}
+          />
         </div>
         <p className="text-blue-400 font-semibold uppercase text-sm tracking-wide">
           - {name}
