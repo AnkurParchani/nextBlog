@@ -13,10 +13,12 @@ export function BlogWithoutLink({
   blog,
   userLikedBlogs,
   userId,
+  hideLikeCommentSection,
 }: {
   blog: Blog;
   userLikedBlogs?: string[];
   userId?: string;
+  hideLikeCommentSection?: boolean;
 }) {
   const {
     title,
@@ -46,17 +48,19 @@ export function BlogWithoutLink({
 
       <BlogText content={content} />
 
-      <div className="flex text-sm gap-4 mt-3">
-        <LikeButton
-          blogId={blogId}
-          userLikedBlogs={userLikedBlogs}
-          likes={likes}
-        />
+      {!hideLikeCommentSection && (
+        <div className="flex text-sm gap-4 mt-3">
+          <LikeButton
+            blogId={blogId}
+            userLikedBlogs={userLikedBlogs}
+            likes={likes}
+          />
 
-        <Link href={`/blogs/${blogId}`}>
-          <CommentButton comments={comments} />
-        </Link>
-      </div>
+          <Link href={`/blogs/${blogId}`}>
+            <CommentButton comments={comments} />
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

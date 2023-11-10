@@ -49,8 +49,9 @@ const BottomNav = () => {
             }`}
             icon={<SearchIcon />}
             onClick={() => {
-              dispatch(setTitle("Search for Users or Blogs"));
+              dispatch(setTitle("Search"));
               dispatch(setBottomNavLink("/search"));
+              router.push("/search");
             }}
           />
 
