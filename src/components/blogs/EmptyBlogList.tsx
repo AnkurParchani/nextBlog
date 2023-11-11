@@ -12,7 +12,7 @@ const EmptyBlogList = ({
   linkTo?: string;
 }) => {
   return (
-    <div className="flex flex-col gap-2 items-center">
+    <div className="flex flex-col mt-10 gap-2 items-center">
       {icon}
       <p className="font-semibold  text-center text-gray-500">{content}</p>
       {linkTo && (

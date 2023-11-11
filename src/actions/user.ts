@@ -1,12 +1,26 @@
 "use server";
-import { ChangeEvent } from "react";
+
+import supabase, { supabaseUrl } from "../../lib/supabase";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { serverApi } from "../../lib/globals";
 import { getTokenFromCookie } from "../../utils/auth/getCookie";
 
 import handleClientError from "../../utils/errors/handleClientError";
-import supabase from "../../lib/supabase";
+
+// Getting the current logged in user
+export const getLoggedInUser = async () => {
+  const token = getTokenFromCookie();
+  const res = await fetch(`${serverApi}/api/users`, {
+    headers: { Cookie: `token=${token}` },
+    next: { tags: ["user"] },
+  });
+
+  if (!res.ok) throw new Error("Failed to fetch");
+  const data = await res.json();
+
+  return data.user;
+};
 
 // Request to edit a profile
 export const editProfile = async (e: FormData) => {
@@ -17,8 +31,6 @@ export const editProfile = async (e: FormData) => {
     // Getting name and email and photo of the user
     const name = e.get("name");
     const email = e.get("email");
-    // For later purposes
-    // const img = e.get("img");
 
     // Checking if all the details are provided
     if (!name || !email) throw new Error("Please provide all the details");
@@ -47,29 +59,34 @@ export const editProfile = async (e: FormData) => {
   }
 };
 
-// To logout
-export const logout = async () => {
-  const cookieStore = cookies();
-  cookieStore.delete("token");
-  return true;
-};
-
 // Uploading an image
 export const uploadUserImg = async (e: FormData) => {
+  // Getting the img
   const img = e.get("img");
-  console.log(img);
 
-  const { data, error } = await supabase.storage
-    .from("users")
-    .upload(img!.name, img!);
+  if (!(img instanceof File)) throw new Error("Image not provided");
 
+  // Setting name and path for the img
+  const imgName = `${Math.random()}-${img.name}`.replaceAll("/", "");
+  const imgPath = `${supabaseUrl}/storage/v1/object/public/users/${imgName}`;
+
+  // Uploading the img to the bucket
+  const { error } = await supabase.storage.from("users").upload(imgName, img);
+
+  // If any error found while uploading the img
   if (error) {
     console.log(error);
     throw new Error("Something went wrong while uploading the img");
   }
 
-  console.log(data);
-  return data;
+  return imgPath;
+};
+
+// To logout
+export const logout = () => {
+  const cookieStore = cookies();
+  cookieStore.delete("token");
+  return true;
 };
 
 // To delete an account

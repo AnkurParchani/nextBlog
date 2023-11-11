@@ -10,7 +10,7 @@ import { sign } from "../../../../../utils/auth/jwt_verify_sign";
 // Creating the user (login)
 export const POST = catchAsync(async (req: Request) => {
   connectMongoDB();
-  const { name, email, password, passwordConfirm } = await req.json();
+  const { name, email, password, passwordConfirm, img } = await req.json();
 
   // If both passwords don't match
   if (password !== passwordConfirm)
@@ -19,7 +19,13 @@ export const POST = catchAsync(async (req: Request) => {
     );
 
   // Creating the user
-  const user = await User.create({ name, email, password, passwordConfirm });
+  const user = await User.create({
+    name,
+    email,
+    password,
+    passwordConfirm,
+    img,
+  });
 
   // Creating the token using jose
   const token = await sign(

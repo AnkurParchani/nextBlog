@@ -26,7 +26,7 @@ export const Blog = ({
   return (
     <Link
       href={`/blogs/${blogId}`}
-      className="bg-[#111] px-3 py-4 rounded-xl overflow-x-scroll"
+      className="bg-[#111] px-3 py-4 rounded-xl overflow-x-hidden"
       onClick={handleClick}
     >
       {children}

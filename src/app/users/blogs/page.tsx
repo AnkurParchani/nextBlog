@@ -10,6 +10,7 @@ import {
   getLikedBlogs,
 } from "../../../../utils/blogs/apiBlogs";
 import { BlogWithoutLink } from "./BlogWithoutLink";
+import Image from "next/image";
 
 const page = async ({
   searchParams: { userId },
@@ -17,7 +18,7 @@ const page = async ({
   searchParams: { userId: string };
 }) => {
   const blogs = await getBlogsOfSingleUser(userId);
-  const { name: userName, email: userEmail } = blogs[0].user;
+  const { name: userName, email: userEmail, img: userImg } = blogs[0].user;
 
   // Fetching and setting all liked blogs of user
   const fetchUserLikedBlogs = (await getLikedBlogs()).blogs;
@@ -36,7 +37,11 @@ const page = async ({
       <SubNav heading="Blogs" />
 
       <Container>
-        <ProfileIntro userName={userName} userEmail={userEmail} />
+        <ProfileIntro
+          userPhoto={userImg}
+          userName={userName}
+          userEmail={userEmail}
+        />
 
         <div className="grid grid-cols-1 gap-3 mt-5">
           {blogs.map((blog) => (
@@ -44,7 +49,15 @@ const page = async ({
               key={blog._id}
               className="bg-[#111] px-3 py-4 rounded-xl flex gap-2 items-start"
             >
-              {!blog.img && (
+              {userImg ? (
+                <Image
+                  src={userImg}
+                  alt="user-img"
+                  className="rounded-full w-8 h-8"
+                  height={30}
+                  width={30}
+                />
+              ) : (
                 <AccountCircleIcon className="text-4xl text-gray-400" />
               )}
 

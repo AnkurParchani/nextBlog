@@ -14,7 +14,8 @@ const Signout = ({ setAction }: SignoutType) => {
 
   useEffect(() => {
     async function signout() {
-      const data = await logout();
+      const data = logout();
+
       if (data) {
         setAction("");
         toast.success("Logged out successfully");

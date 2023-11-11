@@ -36,6 +36,7 @@ export async function login(e: FormData) {
     // Revalidating tags
     revalidateTag("users");
     revalidateTag("blogs");
+    revalidateTag("user");
 
     // Returning back to the preious page
     return data;

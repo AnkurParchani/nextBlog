@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { setBottomNavLink } from "../../../utils/slices/UiSlice";
 import { useRouter } from "next/navigation";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Image from "next/image";
 
 const UserCard = ({ foundUsers }: { foundUsers: User[] }) => {
   const dispatch = useDispatch();
@@ -21,7 +22,15 @@ const UserCard = ({ foundUsers }: { foundUsers: User[] }) => {
           className="bg-[#111] px-3 py-4 rounded-xl mt-3 flex gap-2 items-start"
         >
           {/* @ts-ignore */}
-          {!user.img && (
+          {user.img ? (
+            <Image
+              src={user.img}
+              alt="user-img"
+              height={30}
+              width={30}
+              className="rounded-full h-8 w-8"
+            />
+          ) : (
             <AccountCircleIcon className="text-4xl text-gray-400" />
           )}
 

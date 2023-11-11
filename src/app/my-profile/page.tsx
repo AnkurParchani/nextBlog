@@ -12,7 +12,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LoginIcon from "@mui/icons-material/Login";
 
-import { getLoggedInUser } from "../../../utils/users/apiUsers";
+import { getLoggedInUser } from "@/actions/user";
 import ThemeActionBox from "@/components/others/ThemeActionBox";
 
 const page = async () => {
@@ -24,7 +24,11 @@ const page = async () => {
       <SubNav heading="My-Profile" />
 
       <Container>
-        <ProfileIntro userName={user.name} userEmail={user.email} />
+        <ProfileIntro
+          userPhoto={user.img}
+          userName={user.name}
+          userEmail={user.email}
+        />
 
         <div className="flex flex-col gap-4 capitalize mt-8">
           <div className="bg-blue-800 h-0.5" />

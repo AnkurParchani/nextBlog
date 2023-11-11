@@ -9,10 +9,11 @@ import EmptyBlogList from "@/components/blogs/EmptyBlogList";
 import { getLikedBlogs, getMyBlogs } from "../../../../utils/blogs/apiBlogs";
 import { BlogWithoutLink } from "@/app/users/blogs/BlogWithoutLink";
 import { getUser } from "../../../../utils/auth/getUser";
+import Image from "next/image";
 
 const page = async () => {
   const blogs = await getMyBlogs();
-  const { _id: userId } = await getUser();
+  const { _id: userId, img: userImg } = await getUser();
   const hasBlogs = blogs.length > 0;
 
   // Fetching and setting all liked blogs of user
@@ -38,7 +39,15 @@ const page = async () => {
                 key={blog._id}
                 className="bg-[#111] px-3 py-4 rounded-xl flex gap-2 items-start overflow-x-scroll"
               >
-                {!blog.img && (
+                {userImg ? (
+                  <Image
+                    src={userImg}
+                    alt="user-img"
+                    height={30}
+                    width={30}
+                    className="h-8 w-8 rounded-full"
+                  />
+                ) : (
                   <AccountCircleIcon className="text-4xl text-gray-400" />
                 )}
 

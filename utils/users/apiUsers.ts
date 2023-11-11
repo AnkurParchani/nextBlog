@@ -1,5 +1,4 @@
 import { serverApi } from "../../lib/globals";
-import { getTokenFromCookie } from "../auth/getCookie";
 import handleClientError from "../errors/handleClientError";
 
 // Get all users
@@ -23,19 +22,6 @@ export const getUser = async (userId: string) => {
 
   if (!res.ok) throw new Error("Failed to fetch");
 
-  const data = await res.json();
-
-  return data.user;
-};
-
-// Getting the current logged in user
-export const getLoggedInUser = async () => {
-  const token = getTokenFromCookie();
-  const res = await fetch(`${serverApi}/api/users`, {
-    headers: { Cookie: `token=${token}` },
-  });
-
-  if (!res.ok) throw new Error("Failed to fetch");
   const data = await res.json();
 
   return data.user;

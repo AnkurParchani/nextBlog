@@ -9,6 +9,7 @@
 - Imgs to blogs 
 - Imgs to profile
 - check ts ignore of that searchInput which does not render user img
+- Bottomnav image of user
 
 // The END
 - Check all consolelogs of the website

@@ -7,6 +7,7 @@ import NameForBlog from "./NameForBlog";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 import { Blog as BlogTemplate } from "./BlogClientSide";
+import Image from "next/image";
 
 type BlogType = {
   blog: Blog;
@@ -19,13 +20,19 @@ type BlogType = {
 // Seperate blog template
 const Blog = async ({ blog, userName, userLikedBlogs, userId }: BlogType) => {
   const { img: blogImg } = blog;
-  const { name, _id: blogUserId } = blog.user;
+  const { name, _id: blogUserId, img: userImg } = blog.user;
 
   return (
     <BlogTemplate blogId={blog._id} name={name} userName={userName as string}>
       <div className="flex gap-2">
-        {blogImg ? (
-          <h1>Blog Img</h1>
+        {userImg ? (
+          <Image
+            src={userImg}
+            alt="user-img"
+            height={30}
+            width={30}
+            className="rounded-full h-8 w-8"
+          />
         ) : (
           <AccountCircleIcon className="text-gray-400 text-4xl" />
         )}

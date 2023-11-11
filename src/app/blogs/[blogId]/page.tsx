@@ -29,7 +29,7 @@ const page = async ({ params }: { params: { blogId: string } }) => {
       img,
       title,
       _id: blogId,
-      user: { email, name, _id: userId },
+      user: { name, _id: userId, img: userImg },
     },
     comments,
   } = blog;
@@ -39,7 +39,7 @@ const page = async ({ params }: { params: { blogId: string } }) => {
 
   return (
     <>
-      <TopLogo showBackButton showUserIcon userId={userId} />
+      <TopLogo showBackButton showUserIcon userImg={userImg} userId={userId} />
       <AddBlogIcon />
 
       <SubNav heading={title} showDate={blogCreatedAtDate} />

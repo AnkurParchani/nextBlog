@@ -22,6 +22,7 @@ type Comment = {
 type User = {
   _id: string;
   name: string;
+  img?: string;
   email: string;
   password?: string;
 };

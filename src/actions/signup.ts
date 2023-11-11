@@ -5,8 +5,10 @@ import { revalidateTag } from "next/cache";
 import { serverApi } from "../../lib/globals";
 import handleClientError from "../../utils/errors/handleClientError";
 
-export async function signup(e: FormData) {
+export async function signup(e: FormData, imgPath?: string) {
   try {
+    let userDetails;
+
     // Getting email and password
     const name = e.get("name");
     const email = e.get("email");
@@ -15,7 +17,9 @@ export async function signup(e: FormData) {
 
     if (!email || !password || !name || !passwordConfirm) return;
 
-    const userDetails = { email, password, name, passwordConfirm };
+    if (imgPath)
+      userDetails = { email, password, name, passwordConfirm, img: imgPath };
+    else userDetails = { email, password, name, passwordConfirm };
 
     // Sending the request
     const res = await fetch(`${serverApi}/api/users/signup`, {

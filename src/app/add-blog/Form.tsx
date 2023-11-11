@@ -54,6 +54,7 @@ const Form = () => {
 
   // Main function to add Blog
   async function handleAddBlog(event: FormData) {
+    setIsLoading(true);
     const data = await addBlog(event);
     setIsLoading(false);
 
@@ -128,10 +129,7 @@ const Form = () => {
 
         <Checkbox defaultChecked id="global" label="Make your Blog Global" />
 
-        <button
-          className="bg-[#1d9bf0] hover:bg-[#51aeec] duration-200 self-end px-5 py-1 mt-2 rounded-md text-base outline-none"
-          onClick={() => setIsLoading(true)}
-        >
+        <button className="bg-[#1d9bf0] hover:bg-[#51aeec] duration-200 self-end px-5 py-1 mt-2 rounded-md text-base outline-none">
           {isLoading ? <RingSpinner /> : "Post"}
         </button>
       </form>

@@ -27,7 +27,13 @@ export const Logo = () => {
 };
 
 // To show the top right user icon link to go and see seperate user's blogs
-export const AccountIcon = ({ userId }: { userId: string }) => {
+export const AccountIcon = ({
+  userId,
+  userImg,
+}: {
+  userId: string;
+  userImg?: string;
+}) => {
   const dispatch = useDispatch();
 
   function handleAccountClick() {
@@ -37,7 +43,17 @@ export const AccountIcon = ({ userId }: { userId: string }) => {
 
   return (
     <Link onClick={handleAccountClick} href={`/users/blogs?userId=${userId}`}>
-      <AccountCircleIcon className="text-3xl text-gray-300" />
+      {userImg ? (
+        <Image
+          src={userImg}
+          alt="user-img"
+          height={30}
+          width={30}
+          className="rounded-full h-6 w-6"
+        />
+      ) : (
+        <AccountCircleIcon className="text-3xl text-gray-300" />
+      )}
     </Link>
   );
 };

@@ -3,19 +3,19 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { AccountIcon, Logo } from "./TopLogoClientSide";
 import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
 
 function TopLogo({
   showBackButton,
   showUserIcon,
+  userImg,
   userId,
 }: {
   showBackButton?: boolean;
   showUserIcon?: boolean;
+  userImg?: string;
   userId?: string;
 }) {
   const router = useRouter();
-  const dispatch = useDispatch();
 
   function handleClick() {
     router.back();
@@ -31,7 +31,9 @@ function TopLogo({
 
       <Logo />
 
-      {showUserIcon && userId && <AccountIcon userId={userId} />}
+      {showUserIcon && userId && (
+        <AccountIcon userImg={userImg} userId={userId} />
+      )}
     </div>
   );
 }
