@@ -5,10 +5,10 @@
 - Error handling for "No token found" (main blogs page must not throw this error)
 - Remember that wherever you're getting that please login first error then return and send the user to the login page
 
-- The CACHING
-
-- full text out of page problem
+// Img section
 - Imgs to blogs 
 - Imgs to profile
 - check ts ignore of that searchInput which does not render user img
+
+// The END
 - Check all consolelogs of the website

@@ -6,7 +6,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import ActionBox from "@/app/my-profile/ActionBox";
 
-import { getTheme, setTheme } from "../../../lib/slices/UiSlice";
+import { getTheme, setTheme } from "../../../utils/slices/UiSlice";
 
 const ThemeActionBox = () => {
   const dispatch = useDispatch();

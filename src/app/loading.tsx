@@ -6,7 +6,7 @@ import SubNav from "@/components/nav/SubNav";
 import TopLogo from "@/components/others/TopLogo";
 
 import { OvalSpinner } from "../../utils/others/Spinner";
-import { getTitle } from "../../lib/slices/SubNavSlice";
+import { getTitle } from "../../utils/slices/SubNavSlice";
 
 const Loading = () => {
   const title = useSelector(getTitle);

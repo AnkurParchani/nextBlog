@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-import { setBottomNavLink } from "../../../lib/slices/UiSlice";
+import { setBottomNavLink } from "../../../utils/slices/UiSlice";
 import { BlogWithoutLink } from "../users/blogs/BlogWithoutLink";
 
 const FoundBlogs = ({ foundBlogs }: { foundBlogs: Blog[] }) => {

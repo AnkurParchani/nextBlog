@@ -3,8 +3,8 @@
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import AddRoundedIcon from "@mui/icons-material/AddRounded";
-import { setTitle } from "../../../lib/slices/SubNavSlice";
-import { setBottomNavLink } from "../../../lib/slices/UiSlice";
+import { setTitle } from "../../../utils/slices/SubNavSlice";
+import { setBottomNavLink } from "../../../utils/slices/UiSlice";
 
 // The Plus button
 const AddBlogIcon = () => {

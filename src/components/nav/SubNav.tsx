@@ -1,7 +1,7 @@
 "use client";
 
 import { useSelector } from "react-redux";
-import { getTheme } from "../../../lib/slices/UiSlice";
+import { getTheme } from "../../../utils/slices/UiSlice";
 
 type DateType = {
   day: string;

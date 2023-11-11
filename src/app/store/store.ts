@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
-import subNavReducer from "../../../lib/slices/SubNavSlice";
-import uiSliceReducer from "../../../lib/slices/UiSlice";
+import subNavReducer from "../../../utils/slices/SubNavSlice";
+import uiSliceReducer from "../../../utils/slices/UiSlice";
 
 export const store = configureStore({
   reducer: {

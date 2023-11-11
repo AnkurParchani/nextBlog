@@ -8,9 +8,11 @@ import getErrorMessage from "../../../utils/errors/getErrorMessage";
 import Checkbox from "@/components/others/Checkbox";
 
 import { addBlog } from "@/actions/blog";
+import { useDispatch } from "react-redux";
 import { RingSpinner } from "../../../utils/others/Spinner";
 import TextArea from "@/components/others/TextArea";
 import Input from "@/components/others/Input";
+import { setBottomNavLink } from "../../../utils/slices/UiSlice";
 
 type NumCharType = {
   title: string;
@@ -19,6 +21,7 @@ type NumCharType = {
 
 const Form = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [numCharacters, setNumCharacters] = useState<NumCharType>({
     title: "",
@@ -57,6 +60,7 @@ const Form = () => {
     // If data found OR error in data;
     if (!data?.error) {
       toast.success(`Added new Blog`);
+      dispatch(setBottomNavLink("/"));
       router.push("/");
     } else {
       return toast.error(getErrorMessage(data));

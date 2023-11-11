@@ -1,6 +1,7 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { revalidateTag } from "next/cache";
 import { serverApi } from "../../lib/globals";
 import handleClientError from "../../utils/errors/handleClientError";
 
@@ -33,6 +34,9 @@ export async function signup(e: FormData) {
 
     // Setting the cookie
     cookies().set("token", data.token);
+
+    // Revalidating tags
+    revalidateTag("users");
 
     // Returning back to the preious page
     return data;

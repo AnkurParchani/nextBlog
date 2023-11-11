@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { setBottomNavLink } from "../../../lib/slices/UiSlice";
+import { setBottomNavLink } from "../../../utils/slices/UiSlice";
 import { useRouter } from "next/navigation";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 

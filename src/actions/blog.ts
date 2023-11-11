@@ -5,7 +5,6 @@ import { serverApi } from "../../lib/globals";
 import { getTokenFromCookie } from "../../utils/auth/getCookie";
 
 import handleClientError from "../../utils/errors/handleClientError";
-import { headers } from "next/headers";
 
 export async function addBlog(e: FormData) {
   try {

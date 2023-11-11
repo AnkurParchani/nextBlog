@@ -29,9 +29,9 @@ const DeleteAccount = ({ setAction }: DeleteAccountProps) => {
       return toast.error(getErrorMessage(data));
     }
 
+    router.push("/");
     toast.success("Account deleted successfully");
     setAction("");
-    router.push("/");
   }
 
   return (

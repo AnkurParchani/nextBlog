@@ -26,7 +26,7 @@ const page = async () => {
 
   return (
     <div>
-      <TopLogo showBackButton/>
+      <TopLogo showBackButton />
       <AddBlogIcon />
       <SubNav heading="My-Blogs" />
 
@@ -36,7 +36,7 @@ const page = async () => {
             {blogs.map((blog) => (
               <div
                 key={blog._id}
-                className="bg-[#111] px-3 py-4 rounded-xl flex gap-2 items-start"
+                className="bg-[#111] px-3 py-4 rounded-xl flex gap-2 items-start overflow-x-scroll"
               >
                 {!blog.img && (
                   <AccountCircleIcon className="text-4xl text-gray-400" />

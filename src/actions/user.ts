@@ -1,11 +1,12 @@
 "use server";
-
+import { ChangeEvent } from "react";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
 import { serverApi } from "../../lib/globals";
 import { getTokenFromCookie } from "../../utils/auth/getCookie";
 
 import handleClientError from "../../utils/errors/handleClientError";
+import supabase from "../../lib/supabase";
 
 // Request to edit a profile
 export const editProfile = async (e: FormData) => {
@@ -53,6 +54,24 @@ export const logout = async () => {
   return true;
 };
 
+// Uploading an image
+export const uploadUserImg = async (e: FormData) => {
+  const img = e.get("img");
+  console.log(img);
+
+  const { data, error } = await supabase.storage
+    .from("users")
+    .upload(img!.name, img!);
+
+  if (error) {
+    console.log(error);
+    throw new Error("Something went wrong while uploading the img");
+  }
+
+  console.log(data);
+  return data;
+};
+
 // To delete an account
 export async function deleteAccount(e: FormData) {
   try {
@@ -84,14 +103,14 @@ export async function deleteAccount(e: FormData) {
     if (data.isOperational || data.status === "fail")
       throw new Error(data.message);
 
+    // Deleting the cookie
+    cookieStore.delete("token");
+
     // Revalidating the tags
     revalidateTag("liked-blogs");
     revalidateTag("blogs");
     revalidateTag("blog");
     revalidateTag("single-user-blogs");
-
-    // Deleting the cookie
-    cookieStore.delete("token");
 
     // Returning the data
     return data;

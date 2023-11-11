@@ -1,7 +1,7 @@
 "use client";
 import { Inter } from "next/font/google";
 import { useSelector } from "react-redux";
-import { getTheme } from "../../lib/slices/UiSlice";
+import { getTheme } from "../../utils/slices/UiSlice";
 
 type AppBodyType = { children: React.ReactNode };
 

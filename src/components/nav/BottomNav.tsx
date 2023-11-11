@@ -9,12 +9,12 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import SearchIcon from "@mui/icons-material/Search";
 
 import { useDispatch, useSelector } from "react-redux";
-import { setTitle } from "../../../lib/slices/SubNavSlice";
+import { setTitle } from "../../../utils/slices/SubNavSlice";
 import {
   getBottomNavLink,
   getTheme,
   setBottomNavLink,
-} from "../../../lib/slices/UiSlice";
+} from "../../../utils/slices/UiSlice";
 
 const BottomNav = () => {
   const router = useRouter();

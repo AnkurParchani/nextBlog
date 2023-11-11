@@ -5,7 +5,9 @@ import handleClientError from "../errors/handleClientError";
 // Get all users
 export const getAllUsers = async () => {
   try {
-    const res = await fetch(`${serverApi}/api/users/all-users`);
+    const res = await fetch(`${serverApi}/api/users/all-users`, {
+      next: { tags: ["users"] },
+    });
     if (!res.ok) throw new Error("failed to fetch");
 
     const data = await res.json();

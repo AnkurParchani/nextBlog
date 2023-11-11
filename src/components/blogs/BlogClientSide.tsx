@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useDispatch } from "react-redux";
-import { setTitle } from "../../../lib/slices/SubNavSlice";
-import { setBottomNavLink } from "../../../lib/slices/UiSlice";
+import { setTitle } from "../../../utils/slices/SubNavSlice";
+import { setBottomNavLink } from "../../../utils/slices/UiSlice";
 
 export const Blog = ({
   children,
@@ -26,7 +26,7 @@ export const Blog = ({
   return (
     <Link
       href={`/blogs/${blogId}`}
-      className="bg-[#111] px-3 py-4 rounded-xl"
+      className="bg-[#111] px-3 py-4 rounded-xl overflow-x-scroll"
       onClick={handleClick}
     >
       {children}

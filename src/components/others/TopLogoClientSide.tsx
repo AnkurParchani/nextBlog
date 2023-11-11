@@ -5,8 +5,8 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { setTitle } from "../../../lib/slices/SubNavSlice";
-import { setBottomNavLink } from "../../../lib/slices/UiSlice";
+import { setTitle } from "../../../utils/slices/SubNavSlice";
+import { setBottomNavLink } from "../../../utils/slices/UiSlice";
 
 // The Main Website's logo button
 export const Logo = () => {

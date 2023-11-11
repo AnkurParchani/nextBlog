@@ -2,13 +2,13 @@
 
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { setTitle } from "../../../lib/slices/SubNavSlice";
+import { setTitle } from "../../../utils/slices/SubNavSlice";
 
 import Link from "next/link";
 import EditProfile from "./EditProfile";
 import DeleteAccount from "./DeleteAccount";
 import Signout from "./Signout";
-import { setBottomNavLink } from "../../../lib/slices/UiSlice";
+import { setBottomNavLink } from "../../../utils/slices/UiSlice";
 
 type ActionBoxType = {
   heading: string;
