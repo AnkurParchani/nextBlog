@@ -33,7 +33,7 @@ export const PATCH = catchAsync(async (req: Request) => {
 
   const updatedUser = await User.findByIdAndUpdate(
     user._id,
-    { name, email },
+    { name, email, img },
     { new: true, runValidators: true }
   );
 

@@ -5,6 +5,12 @@
 - Error handling for "No token found" (main blogs page must not throw this error)
 - Remember that wherever you're getting that please login first error then return and send the user to the login page
 
+- Account deletion and comment error (comment does not decrease after account deletion) and same of like one
+- chaching after editing user (the image section)
+
+- use auto search params, that cache one
+
+
 // Img section
 - Imgs to blogs 
 - Imgs to profile

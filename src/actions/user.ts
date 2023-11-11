@@ -23,7 +23,7 @@ export const getLoggedInUser = async () => {
 };
 
 // Request to edit a profile
-export const editProfile = async (e: FormData) => {
+export const editProfile = async (e: FormData, userImg?: string) => {
   try {
     // Getting the token from the cookie
     const token = getTokenFromCookie();
@@ -35,10 +35,14 @@ export const editProfile = async (e: FormData) => {
     // Checking if all the details are provided
     if (!name || !email) throw new Error("Please provide all the details");
 
+    let newUserDetails;
+    if (userImg) newUserDetails = { name, email, img: userImg };
+    else newUserDetails = { name, email };
+
     // Sending the request
     const res = await fetch(`${serverApi}/api/users`, {
       method: "PATCH",
-      body: JSON.stringify({ name, email }),
+      body: JSON.stringify(newUserDetails),
       headers: {
         "Content-Type": "application/json",
         Cookie: `token=${token}`,

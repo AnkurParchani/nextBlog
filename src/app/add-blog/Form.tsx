@@ -1,18 +1,20 @@
 "use client";
 
-import toast from "react-hot-toast";
+import { ChangeEvent, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+import toast from "react-hot-toast";
 
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import getErrorMessage from "../../../utils/errors/getErrorMessage";
 import Checkbox from "@/components/others/Checkbox";
-
-import { addBlog } from "@/actions/blog";
-import { useDispatch } from "react-redux";
-import { RingSpinner } from "../../../utils/others/Spinner";
 import TextArea from "@/components/others/TextArea";
 import Input from "@/components/others/Input";
+
+import { addBlog, uploadBlogImg } from "@/actions/blog";
+import { RingSpinner } from "../../../utils/others/Spinner";
 import { setBottomNavLink } from "../../../utils/slices/UiSlice";
+import Image from "next/image";
 
 type NumCharType = {
   title: string;
@@ -23,10 +25,12 @@ const Form = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [blogImg, setBlogImg] = useState<string | undefined>(undefined);
   const [numCharacters, setNumCharacters] = useState<NumCharType>({
     title: "",
     content: "",
   });
+  const blogImgRef = useRef<HTMLInputElement | null>(null);
 
   let titleColor = "text-blue-400",
     contentColor = "text-blue-400";
@@ -55,7 +59,7 @@ const Form = () => {
   // Main function to add Blog
   async function handleAddBlog(event: FormData) {
     setIsLoading(true);
-    const data = await addBlog(event);
+    const data = await addBlog(event, blogImg);
     setIsLoading(false);
 
     // If data found OR error in data;
@@ -82,6 +86,23 @@ const Form = () => {
     if (content.length > 500) return;
 
     setNumCharacters({ ...numCharacters, content });
+  }
+
+  // Handling click to add blog img
+  function handleFileClick() {
+    blogImgRef.current && blogImgRef.current.click();
+  }
+
+  // Uploading the img
+  async function handleFileInputChange(e: ChangeEvent<HTMLInputElement>) {
+    const formData = new FormData();
+
+    if (e.target.files) {
+      formData.append("img", e.target.files[0]);
+    }
+
+    const imgPath = await uploadBlogImg(formData);
+    setBlogImg(imgPath);
   }
 
   // The JSX
@@ -126,6 +147,42 @@ const Form = () => {
         >
           {numCharacters.content.length}/500
         </p>
+
+        <hr />
+
+        {/* Testing */}
+        {blogImg ? (
+          <div className="relative">
+            <Image
+              src={blogImg}
+              alt="blog-img"
+              height={100}
+              width={100}
+              className="rounded-md w-full h-auto"
+            />
+
+            <AddPhotoAlternateIcon
+              onClick={handleFileClick}
+              className="text-4xl text-white bg-blue-500 h-10 w-auto p-1 rounded-full absolute top-0 right-0"
+            />
+          </div>
+        ) : (
+          <div
+            onClick={handleFileClick}
+            className="bg-gray-800 flex justify-center py-8 rounded-md"
+          >
+            <AddPhotoAlternateIcon className="text-6xl text-gray-400" />
+          </div>
+        )}
+
+        <input
+          type="file"
+          name="img"
+          className="hidden"
+          onChange={handleFileInputChange}
+          ref={blogImgRef}
+        />
+        {/* //////////////////////// */}
 
         <Checkbox defaultChecked id="global" label="Make your Blog Global" />
 

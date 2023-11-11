@@ -5,8 +5,10 @@ import { serverApi } from "../../lib/globals";
 import { getTokenFromCookie } from "../../utils/auth/getCookie";
 
 import handleClientError from "../../utils/errors/handleClientError";
+import supabase, { supabaseUrl } from "../../lib/supabase";
 
-export async function addBlog(e: FormData) {
+// Adding a blog
+export async function addBlog(e: FormData, blogImg?: string) {
   try {
     // Getting the token from the cookies
     const token = getTokenFromCookie();
@@ -21,7 +23,16 @@ export async function addBlog(e: FormData) {
     if ((title as string).length > 20 || (content as string).length > 500)
       throw new Error("Unexpected Content length");
 
-    const blogDetails = { title, content, isGlobal: isGlobal === "on" };
+    // Setting up the data
+    let blogDetails;
+    if (blogImg)
+      blogDetails = {
+        title,
+        content,
+        isGlobal: isGlobal === "on",
+        img: blogImg,
+      };
+    else blogDetails = { title, content, isGlobal: isGlobal === "on" };
 
     // Sending the request
     const res = await fetch(`${serverApi}/api/blogs`, {
@@ -48,6 +59,28 @@ export async function addBlog(e: FormData) {
     return handleClientError(err);
   }
 }
+
+// Adding image to the blog
+export const uploadBlogImg = async (e: FormData) => {
+  const img = e.get("img");
+
+  if (!(img instanceof File)) throw new Error("Image not provided");
+
+  // Setting name and path for the img
+  const imgName = `${Math.random()}-${img.name}`.replaceAll("/", "");
+  const imgPath = `${supabaseUrl}/storage/v1/object/public/blogs/${imgName}`;
+
+  // Uploading the img to the bucket
+  const { error } = await supabase.storage.from("blogs").upload(imgName, img);
+
+  // If any error found while uploading the img
+  if (error) {
+    console.log(error);
+    throw new Error("Something went wrong while uploading the img");
+  }
+
+  return imgPath;
+};
 
 // To like blog
 export async function likeBlog(blogId: string) {
@@ -139,30 +172,6 @@ export const updateBlog = async (e: FormData, blogId: string) => {
   return data;
 };
 
-export const deleteBlog = async (blogId: string) => {
-  const token = getTokenFromCookie();
-
-  const res = await fetch(`${serverApi}/api/blogs/${blogId}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Cookie: `token=${token}`,
-    },
-  });
-
-  if (!res.ok) throw new Error("Something went wrong, please try again later");
-
-  const data = await res.json();
-
-  // If any error found (operational)
-  if (data.isOperational || data.status === "fail")
-    throw new Error(data.message);
-
-  revalidateTag("blogs");
-
-  return data;
-};
-
 // Adding a comment on the blog
 export const addComment = async (event: FormData) => {
   const token = getTokenFromCookie();
@@ -194,6 +203,31 @@ export const addComment = async (event: FormData) => {
   revalidateTag("liked-blogs");
   revalidateTag("blog");
   revalidateTag("single-user-blogs");
+
+  return data;
+};
+
+// Deleting a blog
+export const deleteBlog = async (blogId: string) => {
+  const token = getTokenFromCookie();
+
+  const res = await fetch(`${serverApi}/api/blogs/${blogId}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: `token=${token}`,
+    },
+  });
+
+  if (!res.ok) throw new Error("Something went wrong, please try again later");
+
+  const data = await res.json();
+
+  // If any error found (operational)
+  if (data.isOperational || data.status === "fail")
+    throw new Error(data.message);
+
+  revalidateTag("blogs");
 
   return data;
 };

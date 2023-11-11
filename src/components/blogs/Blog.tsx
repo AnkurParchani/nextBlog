@@ -19,7 +19,6 @@ type BlogType = {
 
 // Seperate blog template
 const Blog = async ({ blog, userName, userLikedBlogs, userId }: BlogType) => {
-  const { img: blogImg } = blog;
   const { name, _id: blogUserId, img: userImg } = blog.user;
 
   return (
@@ -83,7 +82,15 @@ async function BlogContainer({
       <div className="flex flex-col gap-0.5 font-medium">
         <p className="text-blue-300">{title}</p>
         <BlogText content={content} />
-        {blogImg && <p>Blog Img</p>}
+        {blogImg && (
+          <Image
+            src={blogImg}
+            alt="blog-img"
+            width={100}
+            height={100}
+            className="w-full h-auto mt-5"
+          />
+        )}
       </div>
 
       <div className="flex gap-5 text-sm">
