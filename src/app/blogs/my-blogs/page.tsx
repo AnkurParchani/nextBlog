@@ -22,7 +22,7 @@ const page = async () => {
   if (!fetchUserLikedBlogs || fetchUserLikedBlogs[0] === null) {
     userLikedBlogs = [];
   } else {
-    userLikedBlogs = fetchUserLikedBlogs.map((blog) => blog._id);
+    userLikedBlogs = fetchUserLikedBlogs.map((blog: Blog) => blog._id);
   }
 
   return (
