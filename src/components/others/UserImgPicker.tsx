@@ -3,7 +3,7 @@
 import { ChangeEventHandler, useRef } from "react";
 import AddIcon from "@mui/icons-material/Add";
 
-const ImgPicker = ({
+const UserImgPicker = ({
   handleFileInputChange,
 }: {
   handleFileInputChange: ChangeEventHandler<HTMLInputElement>;
@@ -34,4 +34,4 @@ const ImgPicker = ({
   );
 };
 
-export default ImgPicker;
+export default UserImgPicker;

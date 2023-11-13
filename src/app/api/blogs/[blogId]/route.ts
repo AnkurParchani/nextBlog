@@ -42,7 +42,7 @@ export async function PATCH(req: Request, { params: { blogId } }: BlogParams) {
   if (!user) return NextResponse.json(new AppError(401, "Please login first"));
 
   // The data from the frontend
-  const { title, content, likes, isGlobal } = await req.json();
+  const { title, content, likes, isGlobal, img } = await req.json();
 
   // Checking the length of the data
   if (title.length > 20)
@@ -59,6 +59,7 @@ export async function PATCH(req: Request, { params: { blogId } }: BlogParams) {
     title,
     content,
     likes,
+    img,
     isGlobal,
   }).where({ user: user._id });
 

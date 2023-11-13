@@ -12,7 +12,7 @@ import getErrorMessage from "../../../utils/errors/getErrorMessage";
 
 import { signup } from "@/actions/signup";
 import { uploadUserImg } from "@/actions/user";
-import ImgPicker from "@/components/others/ImgPicker";
+import ImgPicker from "@/components/others/UserImgPicker";
 
 function Form() {
   const router = useRouter();

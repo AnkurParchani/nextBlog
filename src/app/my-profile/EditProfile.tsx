@@ -9,7 +9,7 @@ import getErrorMessage from "../../../utils/errors/getErrorMessage";
 
 import { editProfile, uploadUserImg } from "@/actions/user";
 import Image from "next/image";
-import ImgPicker from "@/components/others/ImgPicker";
+import ImgPicker from "@/components/others/UserImgPicker";
 
 type EditProfileType = {
   setAction: Dispatch<SetStateAction<string>>;

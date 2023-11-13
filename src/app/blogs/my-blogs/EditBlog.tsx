@@ -1,5 +1,6 @@
+"use client";
 import toast from "react-hot-toast";
-import { Dispatch, SetStateAction, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 
 import Button from "@/components/others/Button";
 import ModalFormTemplate from "@/components/others/ModalFormTemplate";
@@ -8,22 +9,35 @@ import TextArea from "@/components/others/TextArea";
 import getErrorMessage from "../../../../utils/errors/getErrorMessage";
 import Checkbox from "@/components/others/Checkbox";
 
-import { updateBlog } from "@/actions/blog";
+import { updateBlog, uploadBlogImg } from "@/actions/blog";
+import BlogImgPicker from "@/components/others/BlogImgPicker";
+import Image from "next/image";
 
 type EditBlogType = {
   blog: Blog;
   setAction: Dispatch<SetStateAction<string>>;
 };
 
+// Editing the blog (doing the request)
 const EditBlog = ({ blog, setAction }: EditBlogType) => {
-  console.log(blog);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const { content, title, _id: blogId, isGlobal } = blog;
+  const {
+    content,
+    title,
+    _id: blogId,
+    isGlobal,
+    img: blogImgFromDatabase,
+  } = blog;
+  const [blogImg, setBlogImg] = useState<string | undefined>(
+    blogImgFromDatabase
+  );
+
+  console.log("Logging blog img", blogImg);
 
   async function handleUpdateBlog(event: FormData) {
     try {
       setIsLoading(true);
-      await updateBlog(event, blogId);
+      await updateBlog(event, blogId, blogImg);
 
       setIsLoading(false);
 
@@ -33,6 +47,18 @@ const EditBlog = ({ blog, setAction }: EditBlogType) => {
       setIsLoading(false);
       return toast.error(getErrorMessage(err));
     }
+  }
+
+  // Uploading the img
+  async function handleFileInputChange(e: ChangeEvent<HTMLInputElement>) {
+    const formData = new FormData();
+
+    if (e.target.files) {
+      formData.append("img", e.target.files[0]);
+    }
+
+    const imgPath = await uploadBlogImg(formData);
+    setBlogImg(imgPath);
   }
 
   return (
@@ -45,6 +71,25 @@ const EditBlog = ({ blog, setAction }: EditBlogType) => {
       headingColor="text-blue-500"
     >
       <div className="flex flex-col gap-5">
+        {blogImg ? (
+          <div className="relative">
+            <Image
+              src={blogImg}
+              alt="blog-img"
+              height={100}
+              width={100}
+              className="rounded-md w-1/2 mx-auto h-auto"
+            />
+
+            <BlogImgPicker
+              handleFileInputChange={handleFileInputChange}
+              insidePic
+            />
+          </div>
+        ) : (
+          <BlogImgPicker handleFileInputChange={handleFileInputChange} />
+        )}
+
         <Input
           label="Title"
           inputId="title"

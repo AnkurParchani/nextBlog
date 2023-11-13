@@ -30,15 +30,15 @@ export function Blog({
     <div className="pb-12 pt-2 px-2.5 bg-slate-900 rounded-md">
       <p className="font-normal leading-relaxed tracking-wide">{content}</p>
 
-      <div className="w-full flex justify-center">
+      {blogImg && (
         <Image
           src={blogImg}
           alt="blog-img"
           height={100}
           width={100}
-          className="w-5/6 mt-5 h-auto rounded-sm "
+          className="w-5/6 mx-auto mt-5 h-auto rounded-sm "
         />
-      </div>
+      )}
 
       <div className="mt-5 flex justify-between px-1">
         <div className="flex gap-3">

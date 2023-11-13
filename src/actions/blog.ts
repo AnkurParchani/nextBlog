@@ -143,7 +143,11 @@ export const dislikeBlog = async (blogId: string) => {
 };
 
 // Updating a particular blog
-export const updateBlog = async (e: FormData, blogId: string) => {
+export const updateBlog = async (
+  e: FormData,
+  blogId: string,
+  blogImg: string | undefined
+) => {
   const token = getTokenFromCookie();
 
   const title = e.get("title");
@@ -152,7 +156,7 @@ export const updateBlog = async (e: FormData, blogId: string) => {
 
   const res = await fetch(`${serverApi}/api/blogs/${blogId}`, {
     method: "PATCH",
-    body: JSON.stringify({ title, content, isGlobal }),
+    body: JSON.stringify({ title, content, isGlobal, img: blogImg }),
     headers: {
       "Content-Type": "application/json",
       Cookie: `token=${token}`,

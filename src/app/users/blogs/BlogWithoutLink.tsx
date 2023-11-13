@@ -7,6 +7,7 @@ import LikeButton from "@/components/others/LikeButton";
 
 import formatDate from "../../../../lib/formatDate";
 import EditMenuButton from "@/components/others/EditMenuButton";
+import Image from "next/image";
 
 // Template for the Blog (container which will render whole info about a particular blog)
 export function BlogWithoutLink({
@@ -25,6 +26,7 @@ export function BlogWithoutLink({
     likes,
     content,
     createdAt,
+    img: blogImg,
     isGlobal,
     comments,
     user: blogUserId,
@@ -47,6 +49,16 @@ export function BlogWithoutLink({
       )}
 
       <BlogText content={content} />
+
+      {blogImg && (
+        <Image
+          src={blogImg}
+          alt="blog-img"
+          height={100}
+          width={100}
+          className="w-5/6 mx-auto rounded-sm mt-5"
+        />
+      )}
 
       {!hideLikeCommentSection && (
         <div className="flex text-sm gap-4 mt-3">

@@ -1,20 +1,20 @@
 "use client";
 
-import { ChangeEvent, useRef, useState } from "react";
+import toast from "react-hot-toast";
+import Image from "next/image";
+import { ChangeEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import toast from "react-hot-toast";
 
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import getErrorMessage from "../../../utils/errors/getErrorMessage";
 import Checkbox from "@/components/others/Checkbox";
 import TextArea from "@/components/others/TextArea";
 import Input from "@/components/others/Input";
+import BlogImgPicker from "@/components/others/BlogImgPicker";
 
 import { addBlog, uploadBlogImg } from "@/actions/blog";
 import { RingSpinner } from "../../../utils/others/Spinner";
 import { setBottomNavLink } from "../../../utils/slices/UiSlice";
-import Image from "next/image";
 
 type NumCharType = {
   title: string;
@@ -30,7 +30,6 @@ const Form = () => {
     title: "",
     content: "",
   });
-  const blogImgRef = useRef<HTMLInputElement | null>(null);
 
   let titleColor = "text-blue-400",
     contentColor = "text-blue-400";
@@ -86,11 +85,6 @@ const Form = () => {
     if (content.length > 500) return;
 
     setNumCharacters({ ...numCharacters, content });
-  }
-
-  // Handling click to add blog img
-  function handleFileClick() {
-    blogImgRef.current && blogImgRef.current.click();
   }
 
   // Uploading the img
@@ -161,28 +155,14 @@ const Form = () => {
               className="rounded-md w-full h-auto"
             />
 
-            <AddPhotoAlternateIcon
-              onClick={handleFileClick}
-              className="text-4xl text-white bg-blue-500 h-10 w-auto p-1 rounded-full absolute top-0 right-0"
+            <BlogImgPicker
+              insidePic
+              handleFileInputChange={handleFileInputChange}
             />
           </div>
         ) : (
-          <div
-            onClick={handleFileClick}
-            className="bg-gray-800 flex justify-center py-8 rounded-md"
-          >
-            <AddPhotoAlternateIcon className="text-6xl text-gray-400" />
-          </div>
+          <BlogImgPicker handleFileInputChange={handleFileInputChange} />
         )}
-
-        <input
-          type="file"
-          name="img"
-          className="hidden"
-          onChange={handleFileInputChange}
-          ref={blogImgRef}
-        />
-        {/* //////////////////////// */}
 
         <Checkbox defaultChecked id="global" label="Make your Blog Global" />
 
