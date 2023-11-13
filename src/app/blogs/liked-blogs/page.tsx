@@ -9,17 +9,20 @@ import Blog from "@/components/blogs/Blog";
 
 import { getLikedBlogs } from "../../../../utils/blogs/apiBlogs";
 import { getUser } from "../../../../utils/auth/getUser";
+import ReturnToLogin from "@/components/others/ReturnToLogin";
 
 const page = async () => {
   const { blogs } = await getLikedBlogs();
   const { _id: userId } = await getUser();
+  if (!userId) return <ReturnToLogin />;
+
   const hasBlogs = blogs.length > 0;
 
   // Getting all the liked blogs of the user
   let userLikedBlogs: string[];
   const fetchUserLikedBlogs = (await getLikedBlogs()).blogs;
   if (fetchUserLikedBlogs && fetchUserLikedBlogs[0] !== null) {
-    userLikedBlogs = fetchUserLikedBlogs.map((blog) => blog._id);
+    userLikedBlogs = fetchUserLikedBlogs.map((blog: Blog) => blog._id);
   } else {
     userLikedBlogs = [];
   }

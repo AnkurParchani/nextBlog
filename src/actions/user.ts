@@ -10,16 +10,20 @@ import handleClientError from "../../utils/errors/handleClientError";
 
 // Getting the current logged in user
 export const getLoggedInUser = async () => {
-  const token = getTokenFromCookie();
-  const res = await fetch(`${serverApi}/api/users`, {
-    headers: { Cookie: `token=${token}` },
-    next: { tags: ["user"] },
-  });
+  try {
+    const token = getTokenFromCookie();
+    const res = await fetch(`${serverApi}/api/users`, {
+      headers: { Cookie: `token=${token}` },
+      next: { tags: ["user"] },
+    });
 
-  if (!res.ok) throw new Error("Failed to fetch");
-  const data = await res.json();
+    if (!res.ok) throw new Error("Failed to fetch");
+    const data = await res.json();
 
-  return data.user;
+    return data.user;
+  } catch (err) {
+    return handleClientError(err);
+  }
 };
 
 // Request to edit a profile

@@ -1,5 +1,6 @@
 import { serverApi } from "../../lib/globals";
 import { getTokenFromCookie } from "../auth/getCookie";
+import handleClientError from "../errors/handleClientError";
 
 type SingleBlog = {
   status: string;
@@ -50,18 +51,23 @@ export const getBlog = async (blogId: string): Promise<SingleBlog> => {
 };
 
 // Get my liked blogs
-export const getLikedBlogs = async (): Promise<LikedBlogsType> => {
-  const token = getTokenFromCookie();
-  const res = await fetch(`${serverApi}/api/likes/my-liked-blogs`, {
-    headers: {
-      Cookie: `token=${token}`,
-    },
-    next: { tags: ["liked-blogs"] },
-  });
-  if (!res.ok) throw new Error("Failed to fetch");
+export const getLikedBlogs = async () => {
+  try {
+    const token = getTokenFromCookie();
 
-  const data = await res.json();
-  return data;
+    const res = await fetch(`${serverApi}/api/likes/my-liked-blogs`, {
+      headers: {
+        Cookie: `token=${token}`,
+      },
+      next: { tags: ["liked-blogs"] },
+    });
+    if (!res.ok) throw new Error("Failed to fetch");
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    return handleClientError(error);
+  }
 };
 
 // Get my blogs (of current logged in one)

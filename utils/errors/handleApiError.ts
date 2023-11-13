@@ -8,6 +8,10 @@ export default function handleApiError(err: unknown) {
     if (typeof err === "object" && "code" in err && err.code === 11000) {
       return NextResponse.json(new AppError(400, "Email already exists"));
     }
+
+    if ((err as Error).message) {
+      return NextResponse.json(new AppError(400, (err as Error).message));
+    }
   }
 
   console.log(err);

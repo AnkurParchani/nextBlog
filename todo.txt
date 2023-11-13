@@ -1,7 +1,5 @@
 - The ERROR handling
 
-- Do error handling of like and dislike blog
-
 - Error handling for "No token found" (main blogs page must not throw this error)
 - Remember that wherever you're getting that please login first error then return and send the user to the login page
 

@@ -10,6 +10,8 @@ import Button from "./Button";
 
 import { addComment } from "@/actions/blog";
 import getErrorMessage from "../../../utils/errors/getErrorMessage";
+import { useRouter } from "next/navigation";
+import { useCookies } from "react-cookie";
 
 const CommentButton = ({
   comments,
@@ -21,10 +23,14 @@ const CommentButton = ({
   hasCommentFunctionality?: boolean;
 }) => {
   const [action, setAction] = useState<string>("");
+  const router = useRouter();
+  const [cookie] = useCookies();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   function handleCommentClick() {
     if (!hasCommentFunctionality) return;
+    if (!cookie.token) return router.push("/login");
+
     setAction("comment");
   }
 
@@ -33,7 +39,7 @@ const CommentButton = ({
   ): Promise<string | undefined> {
     try {
       setIsLoading(true);
-      const data = await addComment(event);
+      await addComment(event);
       setIsLoading(false);
 
       toast.success("Comment added successfully");

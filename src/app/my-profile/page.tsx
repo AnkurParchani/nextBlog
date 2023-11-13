@@ -14,9 +14,11 @@ import LoginIcon from "@mui/icons-material/Login";
 
 import { getLoggedInUser } from "@/actions/user";
 import ThemeActionBox from "@/components/others/ThemeActionBox";
+import ReturnToLogin from "@/components/others/ReturnToLogin";
 
 const page = async () => {
   const user = await getLoggedInUser();
+  if (!user._id) return <ReturnToLogin />;
 
   return (
     <div>

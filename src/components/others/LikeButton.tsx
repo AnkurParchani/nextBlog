@@ -6,6 +6,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 import { dislikeBlog, likeBlog } from "@/actions/blog";
+import { useCookies } from "react-cookie";
+import { useRouter } from "next/navigation";
 
 const Likes = ({
   likes,
@@ -17,6 +19,8 @@ const Likes = ({
   userLikedBlogs?: string[];
 }) => {
   const [isLiked, setIsLiked] = useState<boolean>(false);
+  const [cookie] = useCookies();
+  const router = useRouter();
   // const [isLoading, setIsLoading] = useState<boolean>(false);
   const [numLikes, setNumLikes] = useState<number>(likes);
   const [userLikedBlogsArr, setUserLikedBlogsArr] = useState<
@@ -36,6 +40,7 @@ const Likes = ({
   ) {
     e.preventDefault();
     if (!blogId) return;
+    if (!cookie.token) return router.push("/login");
 
     if (!userLikedBlogsArr?.includes(blogId)) {
       // Doing all the UI updates

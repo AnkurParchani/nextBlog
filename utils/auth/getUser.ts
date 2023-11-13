@@ -4,6 +4,7 @@ import { JwtPayload } from "jsonwebtoken";
 import User from "../../models/userModel";
 
 import { verify } from "./jwt_verify_sign";
+import handleClientError from "../errors/handleClientError";
 
 export async function getUser() {
   try {
@@ -28,6 +29,6 @@ export async function getUser() {
     return user;
   } catch (err) {
     // If cookie was not found OR cookie is invalid OR cookie is expired
-    return undefined;
+    return handleClientError(err);
   }
 }
