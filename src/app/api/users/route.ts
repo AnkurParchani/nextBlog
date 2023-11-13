@@ -44,6 +44,8 @@ export const PATCH = catchAsync(async (req: Request) => {
 export const DELETE = catchAsync(async (req: Request) => {
   connectMongoDB();
   const { password } = await req.json();
+  if (!password)
+    return NextResponse.json(new AppError(401, "Password is required"));
 
   // Checking authentication
   const user = await getUser();
@@ -54,12 +56,30 @@ export const DELETE = catchAsync(async (req: Request) => {
   const check = await checkCredentials(password, user.password);
   if (!check) return NextResponse.json(new AppError(401, "Invalid password"));
 
+  // Removing all the likes and comments before deleting the user
+  const likes = await Like.find().where({ user: user._id });
+  if (likes.length > 0)
+    likes.map(
+      async (like) =>
+        await Blog.findByIdAndUpdate(like.blog, { $inc: { likes: -1 } })
+    );
+
+  const comments = await Like.find().where({ user: user._id });
+  if (comments.length > 0)
+    comments.map(
+      async (comment) =>
+        await Blog.findByIdAndUpdate(comment.blog, { $inc: { comments: -1 } })
+    );
+
   // Deleting the blogs of the user
   await Blog.deleteMany({ user: user._id });
+
   // Deleting the comments of the user
   await Comment.deleteMany({ user: user._id });
+
   // Deleting the Likes of the user
   await Like.deleteMany({ user: user._id });
+
   // Deleting the user
   await User.findByIdAndDelete(user._id);
 

@@ -32,8 +32,6 @@ const EditBlog = ({ blog, setAction }: EditBlogType) => {
     blogImgFromDatabase
   );
 
-  console.log("Logging blog img", blogImg);
-
   async function handleUpdateBlog(event: FormData) {
     try {
       setIsLoading(true);

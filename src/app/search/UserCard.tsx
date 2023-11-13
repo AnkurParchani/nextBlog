@@ -21,7 +21,6 @@ const UserCard = ({ foundUsers }: { foundUsers: User[] }) => {
           }}
           className="bg-[#111] px-3 py-4 rounded-xl mt-3 flex gap-2 items-start"
         >
-          {/* @ts-ignore */}
           {user.img ? (
             <Image
               src={user.img}

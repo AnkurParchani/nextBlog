@@ -8,13 +8,10 @@
 - Account deletion and comment error (comment does not decrease after account deletion) and same of like one
 - chaching after editing user (the image section)
 
-- use auto search params, that cache one
+- use auto search params, that cache one - SSG
 
 
 // Img section
-- Imgs to blogs 
-- Imgs to profile
-- check ts ignore of that searchInput which does not render user img
 - Bottomnav image of user
 
 // The END
