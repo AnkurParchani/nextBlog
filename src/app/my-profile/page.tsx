@@ -8,13 +8,12 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import BookIcon from "@mui/icons-material/Book";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import LogoutIcon from "@mui/icons-material/Logout";
-
+import ThemeActionBox from "@/components/others/ThemeActionBox";
+import ReturnToLogin from "@/components/others/ReturnToLogin";
 import DeleteIcon from "@mui/icons-material/Delete";
 import LoginIcon from "@mui/icons-material/Login";
 
 import { getLoggedInUser } from "@/actions/user";
-import ThemeActionBox from "@/components/others/ThemeActionBox";
-import ReturnToLogin from "@/components/others/ReturnToLogin";
 
 const page = async () => {
   const user = await getLoggedInUser();

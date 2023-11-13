@@ -5,6 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   theme: "dark",
   bottomNavLink: "/",
+  bottomNavUserImg: "",
 };
 
 // Dispatch functions
@@ -18,11 +19,15 @@ const uiSlice = createSlice({
     setBottomNavLink(state, action) {
       state.bottomNavLink = action.payload;
     },
+    setBottomNavUserImg(state, action) {
+      state.bottomNavUserImg = action.payload;
+    },
   },
 });
 
 // Exporting dispatch functions
-export const { setTheme, setBottomNavLink } = uiSlice.actions;
+export const { setTheme, setBottomNavLink, setBottomNavUserImg } =
+  uiSlice.actions;
 
 // Exporting the reducer
 export default uiSlice.reducer;
@@ -31,3 +36,5 @@ export default uiSlice.reducer;
 export const getTheme = (state: RootState) => state.interface.theme;
 export const getBottomNavLink = (state: RootState) =>
   state.interface.bottomNavLink;
+export const getBottomNavUserImg = (state: RootState) =>
+  state.interface.bottomNavUserImg;

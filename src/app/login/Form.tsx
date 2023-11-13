@@ -9,10 +9,13 @@ import Button from "@/components/others/Button";
 import getErrorMessage from "../../../utils/errors/getErrorMessage";
 
 import { login } from "@/actions/login";
+import { useDispatch } from "react-redux";
+import { setBottomNavUserImg } from "../../../utils/slices/UiSlice";
 
 const Form = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
+  const dispatch = useDispatch();
 
   async function userLogin(event: FormData) {
     const data = await login(event);
@@ -20,9 +23,10 @@ const Form = () => {
 
     // If data found OR error in data;
     if (!data?.error) {
-      const name = String(data.name).split(" ")[0];
+      const name = String(data.user.name).split(" ")[0];
       const nameToShow = name.charAt(0).toUpperCase() + name.slice(1);
 
+      dispatch(setBottomNavUserImg(data.user.img || undefined));
       toast.success(`Welcome back, ${nameToShow}`);
       router.push("/");
     } else {

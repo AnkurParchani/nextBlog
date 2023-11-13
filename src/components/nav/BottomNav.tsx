@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { BottomNavigation, BottomNavigationAction, Box } from "@mui/material";
@@ -13,27 +12,30 @@ import SearchIcon from "@mui/icons-material/Search";
 import { setTitle } from "../../../utils/slices/SubNavSlice";
 import {
   getBottomNavLink,
+  getBottomNavUserImg,
   getTheme,
   setBottomNavLink,
+  setBottomNavUserImg,
 } from "../../../utils/slices/UiSlice";
-import { getLoggedInUser } from "@/actions/user";
 import Image from "next/image";
+import { useEffect } from "react";
+import { getLoggedInUser } from "@/actions/user";
 
 const BottomNav = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const userImg = useSelector(getBottomNavUserImg);
   const value = useSelector(getBottomNavLink);
   const theme = useSelector(getTheme);
-  const [userImg, setUserImg] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     async function getUser() {
       const { img } = await getLoggedInUser();
-      setUserImg(img || undefined);
+      dispatch(setBottomNavUserImg(img || undefined));
     }
 
     getUser();
-  }, []);
+  }, [dispatch]);
 
   const iconColor = theme === "dark" ? "text-white" : "text-black";
 
