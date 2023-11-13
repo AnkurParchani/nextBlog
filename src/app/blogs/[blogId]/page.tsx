@@ -26,7 +26,7 @@ const page = async ({ params }: { params: { blogId: string } }) => {
       content,
       likes: numLikes,
       createdAt: blogCreatedAt,
-      img,
+      img: blogImg,
       title,
       _id: blogId,
       user: { name, _id: userId, img: userImg },
@@ -51,6 +51,7 @@ const page = async ({ params }: { params: { blogId: string } }) => {
             userLikedBlogs={userLikedBlogs}
             content={content}
             comments={comments.length}
+            img={blogImg}
             likes={numLikes}
             name={name}
             blogId={blogId}

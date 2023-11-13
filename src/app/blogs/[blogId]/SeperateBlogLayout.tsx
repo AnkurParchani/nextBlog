@@ -15,18 +15,31 @@ export function Blog({
   blogId,
   comments,
   userLikedBlogs,
+  img: blogImg,
 }: {
   content: string;
   likes: number;
   hasCommentFunctionality?: boolean;
   comments: number;
   blogId: string;
+  img: string;
   name: string;
   userLikedBlogs: string[];
 }) {
   return (
     <div className="pb-12 pt-2 px-2.5 bg-slate-900 rounded-md">
       <p className="font-normal leading-relaxed tracking-wide">{content}</p>
+
+      <div className="w-full flex justify-center">
+        <Image
+          src={blogImg}
+          alt="blog-img"
+          height={100}
+          width={100}
+          className="w-5/6 mt-5 h-auto rounded-sm "
+        />
+      </div>
+
       <div className="mt-5 flex justify-between px-1">
         <div className="flex gap-3">
           <LikeButton
