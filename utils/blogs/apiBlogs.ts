@@ -8,12 +8,6 @@ type SingleBlog = {
   comments: Comment[];
 };
 
-type LikedBlogsType = {
-  status: string;
-  blogs: Blog[];
-  user: User;
-};
-
 // Get all blogs (of every user)
 export const getBlogs = async (): Promise<Blog[]> => {
   const res = await fetch(`${serverApi}/api/blogs`, {

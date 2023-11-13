@@ -2,11 +2,23 @@ import SubNav from "@/components/nav/SubNav";
 import AddBlogIcon from "@/components/others/AddBlogIcon";
 import Container from "@/components/others/Container";
 import TopLogo from "@/components/others/TopLogo";
-
 import formatDate from "../../../../lib/formatDate";
 
-import { getBlog, getLikedBlogs } from "../../../../utils/blogs/apiBlogs";
+import {
+  getBlog,
+  getBlogs,
+  getLikedBlogs,
+} from "../../../../utils/blogs/apiBlogs";
 import { Blog, Comment, InterSection } from "./SeperateBlogLayout";
+
+// Geenrating static params for pre-rendering
+export async function generateStaticParams() {
+  const blogs = await getBlogs();
+
+  return blogs.map((blog) => ({
+    blogId: blog._id,
+  }));
+}
 
 const page = async ({ params }: { params: { blogId: string } }) => {
   const blog = await getBlog(params.blogId);
@@ -17,7 +29,7 @@ const page = async ({ params }: { params: { blogId: string } }) => {
   if (!fetchUserLikedBlogs || fetchUserLikedBlogs[0] === null) {
     userLikedBlogs = [];
   } else {
-    userLikedBlogs = fetchUserLikedBlogs.map((blog) => blog._id);
+    userLikedBlogs = fetchUserLikedBlogs.map((blog: Blog) => blog._id);
   }
 
   // Extracting all the details from the response
