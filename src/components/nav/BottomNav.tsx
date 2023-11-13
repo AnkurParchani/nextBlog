@@ -90,7 +90,7 @@ const BottomNav = () => {
                   src={userImg}
                   width={25}
                   height={25}
-                  className="rounded-full"
+                  className="rounded-full max-h-7 w-auto"
                   alt="user-img"
                 />
               ) : (

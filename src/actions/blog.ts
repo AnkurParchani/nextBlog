@@ -172,6 +172,10 @@ export const updateBlog = async (
     throw new Error(data.message);
 
   revalidateTag("blogs");
+  revalidateTag("liked-blogs");
+  revalidateTag("blog");
+  revalidateTag("user");
+  revalidateTag("single-user-blogs");
 
   return data;
 };

@@ -19,6 +19,9 @@ const Likes = ({
   const [isLiked, setIsLiked] = useState<boolean>(false);
   // const [isLoading, setIsLoading] = useState<boolean>(false);
   const [numLikes, setNumLikes] = useState<number>(likes);
+  const [userLikedBlogsArr, setUserLikedBlogsArr] = useState<
+    string[] | undefined
+  >(userLikedBlogs);
 
   // Checking if the blogid is in user liked blogs
   useEffect(() => {
@@ -33,31 +36,23 @@ const Likes = ({
   ) {
     e.preventDefault();
     if (!blogId) return;
-    // if (!blogId || isLoading) return;
 
-    if (!userLikedBlogs?.includes(blogId)) {
+    if (!userLikedBlogsArr?.includes(blogId)) {
+      // Doing all the UI updates
       setNumLikes(numLikes + 1);
+      setUserLikedBlogsArr([...(userLikedBlogs as string[]), blogId]);
       setIsLiked(true);
-      // setIsLoading(true);
 
-      const data = await likeBlog(blogId);
-      // setIsLoading(false);
-
-      // console.log(data);
-      // if (data?.error) {
-      //   return toast.error(data.error);
-      // }
+      // Doing the server request call
+      await likeBlog(blogId);
     } else {
+      // Doing all the UI updates
       setNumLikes(numLikes - 1);
       setIsLiked(false);
-      // setIsLoading(true);
+      setUserLikedBlogsArr(userLikedBlogs?.filter((id) => id !== blogId));
 
-      const data = await dislikeBlog(blogId);
-      // setIsLoading(false);
-
-      // if (data?.error) {
-      //   return toast.error(data.error);
-      // }
+      // Doing the server request call
+      await dislikeBlog(blogId);
     }
   }
 
