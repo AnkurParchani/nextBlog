@@ -1,4 +1,3 @@
-"use server";
 import { getTokenFromCookie } from "../auth/getCookie";
 import handleClientError from "../errors/handleClientError";
 
@@ -21,8 +20,7 @@ export const getBlogs = async () => {
 
     return data.blogs;
   } catch (err) {
-    console.log("Catching the error of get all blogs");
-    console.log("logging it", err);
+    return handleClientError(err);
   }
 };
 

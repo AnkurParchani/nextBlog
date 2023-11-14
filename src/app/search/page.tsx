@@ -8,6 +8,7 @@ import SearchInput from "./SearchInput";
 
 const page = async () => {
   const blogs = await getBlogs();
+  if (blogs.error) return <p>Failed to get blogs... </p>;
   const users = await getAllUsers();
 
   return (

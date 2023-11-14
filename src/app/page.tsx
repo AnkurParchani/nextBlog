@@ -9,6 +9,7 @@ import { getBlogs, getLikedBlogs } from "../../utils/blogs/apiBlogs";
 export default async function Home() {
   // Getting all the blogs
   const blogs = await getBlogs();
+  if (blogs.error) return <p>Failed to get blogs... </p>;
 
   // Fetching and setting all liked blogs of user
   const fetchUserLikedBlogs = (await getLikedBlogs()).blogs;
