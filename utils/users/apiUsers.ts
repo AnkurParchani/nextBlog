@@ -1,3 +1,4 @@
+"use server";
 import handleClientError from "../errors/handleClientError";
 
 // Get all users

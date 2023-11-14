@@ -1,3 +1,4 @@
+"use server";
 import { getTokenFromCookie } from "../auth/getCookie";
 import handleClientError from "../errors/handleClientError";
 
