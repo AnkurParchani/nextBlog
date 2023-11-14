@@ -9,15 +9,21 @@ type SingleBlog = {
 };
 
 // Get all blogs (of every user)
-export const getBlogs = async (): Promise<Blog[]> => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs`, {
-    next: { tags: ["blogs"] },
-  });
-  if (!res.ok) throw new Error("Failed to fetch");
+export const getBlogs = async () => {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs`, {
+      next: { tags: ["blogs"] },
+    });
 
-  const data = await res.json();
+    if (!res.ok) throw new Error("Failed to fetch");
 
-  return data.blogs;
+    const data = await res.json();
+
+    return data.blogs;
+  } catch (err) {
+    console.log("Catching the error of get all blogs");
+    console.log("logging it", err);
+  }
 };
 
 // Get all blogs (of a particular user - global ones)
