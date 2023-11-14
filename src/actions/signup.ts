@@ -2,7 +2,6 @@
 
 import { cookies } from "next/headers";
 import { revalidateTag } from "next/cache";
-import { serverApi } from "../../lib/globals";
 import handleClientError from "../../utils/errors/handleClientError";
 
 export async function signup(e: FormData, imgPath?: string) {
@@ -22,14 +21,17 @@ export async function signup(e: FormData, imgPath?: string) {
     else userDetails = { email, password, name, passwordConfirm };
 
     // Sending the request
-    const res = await fetch(`${serverApi}/api/users/signup`, {
-      method: "POST",
-      body: JSON.stringify(userDetails),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      cache: "no-cache",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/users/signup`,
+      {
+        method: "POST",
+        body: JSON.stringify(userDetails),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-cache",
+      }
+    );
     const data = await res.json();
 
     // If any error found (operational)

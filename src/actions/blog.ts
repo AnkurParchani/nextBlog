@@ -1,7 +1,6 @@
 "use server";
 
 import { revalidateTag } from "next/cache";
-import { serverApi } from "../../lib/globals";
 import { getTokenFromCookie } from "../../utils/auth/getCookie";
 
 import handleClientError from "../../utils/errors/handleClientError";
@@ -35,7 +34,7 @@ export async function addBlog(e: FormData, blogImg?: string) {
     else blogDetails = { title, content, isGlobal: isGlobal === "on" };
 
     // Sending the request
-    const res = await fetch(`${serverApi}/api/blogs`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs`, {
       cache: "no-cache",
       method: "POST",
       body: JSON.stringify(blogDetails),
@@ -86,7 +85,7 @@ export const uploadBlogImg = async (e: FormData) => {
 export async function likeBlog(blogId: string) {
   const token = getTokenFromCookie();
 
-  const res = await fetch(`${serverApi}/api/likes/like`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/likes/like`, {
     method: "POST",
     body: JSON.stringify({ blogId }),
     headers: {
@@ -116,14 +115,17 @@ export async function likeBlog(blogId: string) {
 export const dislikeBlog = async (blogId: string) => {
   const token = getTokenFromCookie();
 
-  const res = await fetch(`${serverApi}/api/likes/dislike`, {
-    method: "POST",
-    body: JSON.stringify({ blogId }),
-    headers: {
-      "Content-Type": "application/json",
-      Cookie: `token=${token}`,
-    },
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/likes/dislike`,
+    {
+      method: "POST",
+      body: JSON.stringify({ blogId }),
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `token=${token}`,
+      },
+    }
+  );
 
   if (!res.ok) throw new Error("Something went wrong, please try again later");
 
@@ -154,14 +156,17 @@ export const updateBlog = async (
   const content = e.get("content");
   const isGlobal = e.get("global") === "on";
 
-  const res = await fetch(`${serverApi}/api/blogs/${blogId}`, {
-    method: "PATCH",
-    body: JSON.stringify({ title, content, isGlobal, img: blogImg }),
-    headers: {
-      "Content-Type": "application/json",
-      Cookie: `token=${token}`,
-    },
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${blogId}`,
+    {
+      method: "PATCH",
+      body: JSON.stringify({ title, content, isGlobal, img: blogImg }),
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `token=${token}`,
+      },
+    }
+  );
 
   if (!res.ok) throw new Error("Something went wrong, please try again later");
 
@@ -189,7 +194,7 @@ export const addComment = async (event: FormData) => {
 
   if (!blogId || !content) throw new Error("Please provide all the details");
 
-  const res = await fetch(`${serverApi}/api/comments`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments`, {
     method: "POST",
     body: JSON.stringify({ content, blogId }),
     headers: {
@@ -219,13 +224,16 @@ export const addComment = async (event: FormData) => {
 export const deleteBlog = async (blogId: string) => {
   const token = getTokenFromCookie();
 
-  const res = await fetch(`${serverApi}/api/blogs/${blogId}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      Cookie: `token=${token}`,
-    },
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${blogId}`,
+    {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Cookie: `token=${token}`,
+      },
+    }
+  );
 
   if (!res.ok) throw new Error("Something went wrong, please try again later");
 

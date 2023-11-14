@@ -3,7 +3,6 @@
 import supabase, { supabaseUrl } from "../../lib/supabase";
 import { revalidateTag } from "next/cache";
 import { cookies } from "next/headers";
-import { serverApi } from "../../lib/globals";
 import { getTokenFromCookie } from "../../utils/auth/getCookie";
 
 import handleClientError from "../../utils/errors/handleClientError";
@@ -12,7 +11,7 @@ import handleClientError from "../../utils/errors/handleClientError";
 export const getLoggedInUser = async () => {
   try {
     const token = getTokenFromCookie();
-    const res = await fetch(`${serverApi}/api/users`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
       headers: { Cookie: `token=${token}` },
       next: { tags: ["user"] },
     });
@@ -44,7 +43,7 @@ export const editProfile = async (e: FormData, userImg?: string) => {
     else newUserDetails = { name, email };
 
     // Sending the request
-    const res = await fetch(`${serverApi}/api/users`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
       method: "PATCH",
       body: JSON.stringify(newUserDetails),
       headers: {
@@ -113,7 +112,7 @@ export async function deleteAccount(e: FormData) {
     if (!confirmation) throw new Error("Please check the terms and conditions");
 
     // Sending the request
-    const res = await fetch(`${serverApi}/api/users`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
       cache: "no-cache",
       method: "DELETE",
       body: JSON.stringify({ password }),

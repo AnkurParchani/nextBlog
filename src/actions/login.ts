@@ -1,7 +1,6 @@
 "use server";
 
 import { cookies } from "next/headers";
-import { serverApi } from "../../lib/globals";
 import handleClientError from "../../utils/errors/handleClientError";
 import { revalidateTag } from "next/cache";
 
@@ -16,14 +15,17 @@ export async function login(e: FormData) {
     const userDetails = { email, password };
 
     // Sending the request
-    const res = await fetch(`${serverApi}/api/users/login`, {
-      method: "POST",
-      body: JSON.stringify(userDetails),
-      headers: {
-        "Content-Type": "application/json",
-      },
-      cache: "no-cache",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/users/login`,
+      {
+        method: "POST",
+        body: JSON.stringify(userDetails),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        cache: "no-cache",
+      }
+    );
     const data = await res.json();
 
     // If any error found (operational)

@@ -18,6 +18,7 @@ const page = async ({
   searchParams: { userId: string };
 }) => {
   const blogs = await getBlogsOfSingleUser(userId);
+
   const { name: userName, email: userEmail, img: userImg } = blogs[0].user;
 
   // Fetching and setting all liked blogs of user
