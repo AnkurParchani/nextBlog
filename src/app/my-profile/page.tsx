@@ -3,7 +3,6 @@ import Container from "@/components/others/Container";
 import ProfileIntro from "@/components/others/ProfileIntro";
 import TopLogo from "@/components/others/TopLogo";
 import ActionBox from "./ActionBox";
-
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import BookIcon from "@mui/icons-material/Book";
 import FavoriteIcon from "@mui/icons-material/Favorite";

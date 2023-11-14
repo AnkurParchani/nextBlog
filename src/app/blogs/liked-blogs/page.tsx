@@ -6,10 +6,10 @@ import TopLogo from "@/components/others/TopLogo";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import EmptyBlogList from "@/components/blogs/EmptyBlogList";
 import Blog from "@/components/blogs/Blog";
+import ReturnToLogin from "@/components/others/ReturnToLogin";
 
 import { getLikedBlogs } from "../../../../utils/blogs/apiBlogs";
 import { getUser } from "../../../../utils/auth/getUser";
-import ReturnToLogin from "@/components/others/ReturnToLogin";
 
 const page = async () => {
   const { blogs } = await getLikedBlogs();

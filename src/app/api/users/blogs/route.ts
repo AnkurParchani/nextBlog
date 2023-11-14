@@ -18,6 +18,6 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ status: "success", blogs });
   } catch (err) {
-    handleApiError(err);
+    return handleApiError(err);
   }
 }

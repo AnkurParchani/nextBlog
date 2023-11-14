@@ -1,10 +1,14 @@
 "use client";
-
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 const ReturnToLogin = () => {
   const router = useRouter();
-  router.push("/login");
+
+  useEffect(() => {
+    router.push("/login");
+  }, [router]);
+
   return null;
 };
 
