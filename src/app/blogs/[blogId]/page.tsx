@@ -12,13 +12,13 @@ import {
 import { Blog, Comment, InterSection } from "./SeperateBlogLayout";
 
 // Geenrating static params for pre-rendering
-export async function generateStaticParams() {
-  const blogs = await getBlogs();
+// export async function generateStaticParams() {
+//   const blogs = await getBlogs();
 
-  return blogs.map((blog) => ({
-    blogId: blog._id,
-  }));
-}
+//   return blogs.map((blog) => ({
+//     blogId: blog._id,
+//   }));
+// }
 
 const page = async ({ params }: { params: { blogId: string } }) => {
   const blog = await getBlog(params.blogId);
