@@ -10,8 +10,10 @@ import { sign } from "../../../../../utils/auth/jwt_verify_sign";
 // Creating the user (login)
 export const POST = catchAsync(async (req: Request) => {
   connectMongoDB();
+  console.log('inside the signup funciotn of server side');
+  console.log('got details');
   const { name, email, password, passwordConfirm, img } = await req.json();
-
+console.log(name, email, password, passwordConfirm);
   // If both passwords don't match
   if (password !== passwordConfirm)
     return NextResponse.json(

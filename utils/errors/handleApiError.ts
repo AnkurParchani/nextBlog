@@ -3,6 +3,8 @@ import AppError from "./appError";
 
 // The global api Error
 export default function handleApiError(err: unknown) {
+  console.log("inside the catch block of handleapierror");
+  console.log("logging the error of this catch block", err);
   if (err !== null && err !== undefined) {
     // Handling duplicate email error
     if (typeof err === "object" && "code" in err && err.code === 11000) {

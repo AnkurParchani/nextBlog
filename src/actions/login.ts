@@ -7,8 +7,11 @@ import { revalidateTag } from "next/cache";
 export async function login(e: FormData) {
   try {
     // Getting email and password
+    console.log("Inside the login function of client side");
+    console.log("Got email and password");
     const email = e.get("email");
     const password = e.get("password");
+    console.log(email, password);
 
     if (!email || !password) return;
 
@@ -26,7 +29,9 @@ export async function login(e: FormData) {
         cache: "no-cache",
       }
     );
+    console.log("logging res", res);
     const data = await res.json();
+    console.log("logging data", data);
 
     // If any error found (operational)
     if (data.isOperational || data.status === "fail")
@@ -43,6 +48,7 @@ export async function login(e: FormData) {
     // Returning back to the preious page
     return data;
   } catch (err: unknown) {
+    console.log("inside the catch block of login and logging the error", err);
     return handleClientError(err);
   }
 }
