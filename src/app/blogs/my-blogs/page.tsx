@@ -6,10 +6,11 @@ import TopLogo from "@/components/others/TopLogo";
 import BookIcon from "@mui/icons-material/Book";
 import EmptyBlogList from "@/components/blogs/EmptyBlogList";
 
-import { getLikedBlogs, getMyBlogs } from "../../../../utils/blogs/apiBlogs";
+import { getLikedBlogs } from "../../../../utils/blogs/apiBlogs";
 import { BlogWithoutLink } from "@/app/users/blogs/BlogWithoutLink";
 import { getUser } from "../../../../utils/auth/getUser";
 import Image from "next/image";
+import { getMyBlogs } from "@/actions/blog";
 
 const page = async () => {
   const blogs = await getMyBlogs();

@@ -78,20 +78,3 @@ export const getLikedBlogs = async () => {
     return handleClientError(error);
   }
 };
-
-// Get my blogs (of current logged in one)
-export const getMyBlogs = async (): Promise<Blog[]> => {
-  const token: string = getTokenFromCookie();
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/blogs/my-blogs`,
-    {
-      headers: { Cookie: `token=${token}` },
-    }
-  );
-
-  if (!res.ok) throw new Error("Failed to fetch");
-
-  const data = await res.json();
-
-  return data.blogs;
-};
