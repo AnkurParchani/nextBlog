@@ -9,7 +9,7 @@ import Blog from "@/components/blogs/Blog";
 import ReturnToLogin from "@/components/others/ReturnToLogin";
 
 import { getLikedBlogs } from "../../../../utils/blogs/apiBlogs";
-import { getUser } from "../../../../utils/auth/getUser";
+import { getUser } from "../../../../utils/users/apiUsers";
 
 const page = async () => {
   const { blogs } = await getLikedBlogs();

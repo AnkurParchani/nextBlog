@@ -7,15 +7,12 @@ import handleClientError from "../../utils/errors/handleClientError";
 export async function signup(e: FormData, imgPath?: string) {
   try {
     let userDetails;
-    console.log("inside the signup funciton of client side");
-    console.log("got name email password");
 
     // Getting email and password
     const name = e.get("name");
     const email = e.get("email");
     const password = e.get("password");
     const passwordConfirm = e.get("passwordConfirm");
-    console.log(name, email, password, passwordConfirm);
 
     if (!email || !password || !name || !passwordConfirm) return;
 
@@ -35,9 +32,7 @@ export async function signup(e: FormData, imgPath?: string) {
         cache: "no-cache",
       }
     );
-    console.log("logging res", res);
     const data = await res.json();
-    console.log("logging data", data);
 
     // If any error found (operational)
     if (data.isOperational || data.status === "fail")

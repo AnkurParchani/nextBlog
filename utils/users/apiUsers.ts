@@ -1,3 +1,4 @@
+import { getTokenFromCookie } from "../auth/getCookie";
 import handleClientError from "../errors/handleClientError";
 
 // Get all users
@@ -18,15 +19,19 @@ export const getAllUsers = async () => {
   }
 };
 
-// Getting a particular user (through userID)
-export const getUser = async (userId: string) => {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/users/${userId}`
-  );
+// Getting a particular user
+export const getUser = async () => {
+  try {
+    const token = getTokenFromCookie();
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
+      headers: { Cookie: `token=${token}` },
+    });
 
-  if (!res.ok) throw new Error("Failed to fetch");
+    if (!res.ok) throw new Error("Failed to fetch");
+    const data = await res.json();
 
-  const data = await res.json();
-
-  return data.user;
+    return data.user;
+  } catch (err) {
+    return handleClientError(err);
+  }
 };

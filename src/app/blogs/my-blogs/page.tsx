@@ -1,3 +1,4 @@
+import Image from "next/image";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SubNav from "@/components/nav/SubNav";
 import AddBlogIcon from "@/components/others/AddBlogIcon";
@@ -6,15 +7,16 @@ import TopLogo from "@/components/others/TopLogo";
 import BookIcon from "@mui/icons-material/Book";
 import EmptyBlogList from "@/components/blogs/EmptyBlogList";
 
-import { getLikedBlogs } from "../../../../utils/blogs/apiBlogs";
+import { getLikedBlogs, getMyBlogs } from "../../../../utils/blogs/apiBlogs";
 import { BlogWithoutLink } from "@/app/users/blogs/BlogWithoutLink";
-import { getUser } from "../../../../utils/auth/getUser";
-import Image from "next/image";
-import { getMyBlogs } from "@/actions/blog";
+import { getUser } from "../../../../utils/users/apiUsers";
+import ReturnToLogin from "@/components/others/ReturnToLogin";
 
 const page = async () => {
   const blogs = await getMyBlogs();
   const { _id: userId, img: userImg } = await getUser();
+  if (!userId) return <ReturnToLogin />;
+
   const hasBlogs = blogs.length > 0;
 
   // Fetching and setting all liked blogs of user
