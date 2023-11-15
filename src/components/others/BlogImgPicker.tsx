@@ -49,7 +49,7 @@ const BlogImgPicker = ({
       )}
 
       <input
-        type="file"
+        type="image"
         name="img"
         className="hidden"
         onChange={handleFileInputChange}
