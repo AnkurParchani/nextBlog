@@ -58,13 +58,13 @@ function Form() {
         {userImg ? (
           <Image
             className="rounded-full"
-            width={80}
-            height={80}
+            width={90}
+            height={90}
             src={userImg}
             alt="user-img"
           />
         ) : (
-          <AccountCircleIcon className="text-8xl text-gray-400" />
+          <AccountCircleIcon style={{ fontSize: "90px", color: "#9CA3AF" }} />
         )}
 
         <ImgPicker handleFileInputChange={handleFileInputChange} />

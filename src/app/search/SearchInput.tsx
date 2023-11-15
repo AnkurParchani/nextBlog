@@ -69,7 +69,7 @@ const SearchInput = ({ blogs, users }: SearchInputType) => {
 
       {input.length < 3 && (
         <div className="flex items-center mt-14 flex-col ">
-          <SearchIcon className="text-8xl text-gray-700" />
+          <SearchIcon style={{ fontSize: "90px", color: "#374151" }} />
           <p className="text-gray-500">Search for It...</p>
         </div>
       )}
@@ -91,7 +91,8 @@ const SearchInput = ({ blogs, users }: SearchInputType) => {
 function EmptyResults({ input }: { input: string }) {
   return (
     <div className="flex flex-col items-center mt-14">
-      <SearchOffIcon className="text-8xl text-gray-700" />
+      <SearchOffIcon style={{ fontSize: "90px", color: "#374151" }} />
+
       <p className="text-gray-500 text-center px-2 text-sm">
         Sorry, no results were found for the search query:{" "}
         <span className="text-blue-500">

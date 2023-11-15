@@ -22,7 +22,18 @@ const BlogImgPicker = ({
       {insidePic && (
         <AddPhotoAlternateIcon
           onClick={handleFileClick}
-          className="text-4xl text-white bg-blue-500 h-10 w-auto p-1 rounded-full absolute top-0 right-0"
+          style={{
+            fontSize: "40px",
+            color: "white",
+            backgroundColor: "#3B82F6",
+            height: "2.5rem",
+            width: "auto",
+            padding: "0.25rem",
+            borderRadius: "9999px",
+            position: "absolute",
+            top: "0px",
+            right: "0px",
+          }}
         />
       )}
 
@@ -31,7 +42,9 @@ const BlogImgPicker = ({
           onClick={handleFileClick}
           className="bg-gray-800 flex justify-center py-8 rounded-md"
         >
-          <AddPhotoAlternateIcon className="text-6xl text-gray-400" />
+          <AddPhotoAlternateIcon
+            style={{ fontSize: "60px", color: "#9CA3AF" }}
+          />
         </div>
       )}
 

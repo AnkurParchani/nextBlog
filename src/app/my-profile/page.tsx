@@ -14,6 +14,8 @@ import LoginIcon from "@mui/icons-material/Login";
 
 import { getLoggedInUser } from "@/actions/user";
 
+export const dynamic = "force-dynamic";
+
 const page = async () => {
   const user = await getLoggedInUser();
   if (!user || !user._id) return <ReturnToLogin />;
@@ -35,21 +37,45 @@ const page = async () => {
           <ActionBox
             user={user}
             actionType="editProfile"
-            icon={<AccountCircleIcon className="text-3xl text-blue-400" />}
+            icon={
+              <AccountCircleIcon
+                style={{
+                  fontSize: "35px",
+                  lineHeight: "36px",
+                  color: "#60A5FA",
+                }}
+              />
+            }
             heading="edit my profile"
             bottomNavValue="/profile"
           />
 
           <div className="bg-pink-800 h-0.5" />
           <ActionBox
-            icon={<BookIcon className="text-3xl text-pink-500" />}
+            icon={
+              <BookIcon
+                style={{
+                  fontSize: "30px",
+                  lineHeight: "36px",
+                  color: "#EC4899",
+                }}
+              />
+            }
             heading="see my blogs"
             linkHref="/blogs/my-blogs"
             subNavTitle="My-Blogs"
             bottomNavValue=""
           />
           <ActionBox
-            icon={<FavoriteIcon className="text-3xl text-pink-500" />}
+            icon={
+              <FavoriteIcon
+                style={{
+                  fontSize: "30px",
+                  lineHeight: "36px",
+                  color: "#EC4899",
+                }}
+              />
+            }
             heading="see blogs i've liked"
             linkHref="/blogs/liked-blogs"
             subNavTitle="My Liked Blogs"
@@ -61,12 +87,28 @@ const page = async () => {
           <div className="bg-red-800 h-0.5" />
           <ActionBox
             actionType="signout"
-            icon={<LogoutIcon className="text-3xl text-red-500" />}
+            icon={
+              <LogoutIcon
+                style={{
+                  fontSize: "30px",
+                  lineHeight: "36px",
+                  color: "#EF4444",
+                }}
+              />
+            }
             heading="sign out"
             bottomNavValue="/"
           />
           <ActionBox
-            icon={<LoginIcon className="text-3xl text-red-500" />}
+            icon={
+              <LoginIcon
+                style={{
+                  fontSize: "30px",
+                  lineHeight: "36px",
+                  color: "#EF4444",
+                }}
+              />
+            }
             heading="login to different account"
             linkHref="/login"
             subNavTitle="Login"
@@ -74,7 +116,15 @@ const page = async () => {
           />
           <ActionBox
             actionType="deleteAccount"
-            icon={<DeleteIcon className="text-3xl text-red-500" />}
+            icon={
+              <DeleteIcon
+                style={{
+                  fontSize: "30px",
+                  lineHeight: "36px",
+                  color: "#EF4444",
+                }}
+              />
+            }
             heading="delete my Account"
             bottomNavValue="/"
           />

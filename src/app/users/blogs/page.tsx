@@ -59,7 +59,9 @@ const page = async ({
                   width={30}
                 />
               ) : (
-                <AccountCircleIcon className="text-4xl text-gray-400" />
+                <AccountCircleIcon
+                  style={{ fontSize: "40px", color: "#9CA3AF" }}
+                />
               )}
 
               <BlogWithoutLink userLikedBlogs={userLikedBlogs} blog={blog} />

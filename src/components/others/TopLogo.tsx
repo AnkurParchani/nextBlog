@@ -24,7 +24,7 @@ function TopLogo({
   return (
     <div className="fixed top-0 left-0 w-full bg-black flex items-center z-30 px-4 py-1.5">
       {showBackButton && (
-        <div onClick={handleClick}>
+        <div onClick={handleClick} className="cursor-pointer">
           <ArrowBackIcon className="text-2xl text-gray-300" />
         </div>
       )}

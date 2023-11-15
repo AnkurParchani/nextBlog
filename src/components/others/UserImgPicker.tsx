@@ -28,7 +28,17 @@ const UserImgPicker = ({
 
       <AddIcon
         onClick={handleFileClick}
-        className="bg-blue-500 w-8 cursor-pointer p-1 relative right-9 bottom-1 h-8 rounded-full"
+        style={{
+          width: "1.5rem",
+          cursor: "pointer",
+          padding: "0.25rem",
+          position: "relative",
+          bottom: "0.25rem",
+          height: "1.5rem",
+          borderRadius: "9999px",
+          right: "2rem",
+          backgroundColor: "#3B82F6",
+        }}
       />
     </>
   );

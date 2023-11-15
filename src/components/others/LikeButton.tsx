@@ -64,16 +64,13 @@ const Likes = ({
   // The JSX
   return (
     <span className={`${isLiked ? "text-pink-500" : "text-gray-500"}`}>
-      {numLikes}
+      <span className="mr-0.5">{numLikes}</span>
       {isLiked ? (
-        <FavoriteIcon
-          onClick={handleBlogLike}
-          className="text-base ml-0.5 cursor-pointer text-pink-500"
-        />
+        <FavoriteIcon onClick={handleBlogLike} style={{ fontSize: "18px" }} />
       ) : (
         <FavoriteBorderIcon
           onClick={handleBlogLike}
-          className="text-base ml-0.5 cursor-pointer"
+          style={{ fontSize: "18px" }}
         />
       )}
     </span>

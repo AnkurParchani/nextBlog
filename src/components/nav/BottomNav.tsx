@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { BottomNavigation, BottomNavigationAction, Box } from "@mui/material";
@@ -18,7 +19,6 @@ import {
   setBottomNavUserImg,
 } from "../../../utils/slices/UiSlice";
 import Image from "next/image";
-import { useEffect } from "react";
 import { getLoggedInUser } from "@/actions/user";
 
 const BottomNav = () => {
@@ -27,6 +27,10 @@ const BottomNav = () => {
   const userImg = useSelector(getBottomNavUserImg);
   const value = useSelector(getBottomNavLink);
   const theme = useSelector(getTheme);
+
+  const hoverColor =
+    theme === "dark" ? "hover:bg-gray-900" : "hover:bg-gray-300";
+  const iconColor = theme === "dark" ? "#fff" : "#111";
 
   useEffect(() => {
     async function getUser() {
@@ -37,20 +41,24 @@ const BottomNav = () => {
     getUser();
   }, [dispatch]);
 
-  const iconColor = theme === "dark" ? "text-white" : "text-black";
-
   return (
     <div className="fixed bottom-0 inset-x-0 border-t border-gray-900">
       <Box>
         <BottomNavigation
-          className={`${theme === "dark" ? "bg-[black]" : "bg-gray-200"}`}
           showLabels
+          style={{
+            backgroundColor: `${theme === "dark" ? "#000" : "#E5E7EB"}`,
+          }}
         >
           <BottomNavigationAction
-            className={`hover:bg-gray-900 ${
-              value === "/" ? "text-[#66B2FF]" : iconColor
-            }`}
-            icon={<HomeRoundedIcon />}
+            className={`${value === "/" ? "" : hoverColor}`}
+            icon={
+              <HomeRoundedIcon
+                style={
+                  value === "/" ? { color: "#66b2ff" } : { color: iconColor }
+                }
+              />
+            }
             onClick={() => {
               dispatch(setTitle("Home"));
               dispatch(setBottomNavLink("/"));
@@ -59,10 +67,16 @@ const BottomNav = () => {
           />
 
           <BottomNavigationAction
-            className={`hover:bg-gray-900  ${
-              value === "/search" ? "text-[#66B2FF]" : iconColor
-            }`}
-            icon={<SearchIcon />}
+            className={`${value === "/search" ? "" : hoverColor}`}
+            icon={
+              <SearchIcon
+                style={
+                  value === "/search"
+                    ? { color: "#66b2ff" }
+                    : { color: iconColor }
+                }
+              />
+            }
             onClick={() => {
               dispatch(setTitle("Search"));
               dispatch(setBottomNavLink("/search"));
@@ -71,10 +85,14 @@ const BottomNav = () => {
           />
 
           <BottomNavigationAction
-            className={`hover:bg-gray-900  ${
-              value === "/fav" ? "text-[#66B2FF]" : iconColor
-            }`}
-            icon={<FavoriteIcon />}
+            className={`  ${value === "/fav" ? "" : hoverColor}`}
+            icon={
+              <FavoriteIcon
+                style={
+                  value === "/fav" ? { color: "#66b2ff" } : { color: iconColor }
+                }
+              />
+            }
             onClick={() => {
               dispatch(setTitle("My liked Blogs "));
               dispatch(setBottomNavLink("/fav"));
@@ -83,9 +101,7 @@ const BottomNav = () => {
           />
 
           <BottomNavigationAction
-            className={`hover:bg-gray-900  ${
-              value === "/profile" ? "text-[#66B2FF]" : iconColor
-            }`}
+            className={`${value === "/profile" ? "" : hoverColor}`}
             icon={
               userImg ? (
                 <Image
@@ -96,12 +112,19 @@ const BottomNav = () => {
                   alt="user-img"
                 />
               ) : (
-                <AccountCircleIcon />
+                <AccountCircleIcon
+                  style={
+                    value === "/profile"
+                      ? { color: "#66b2ff" }
+                      : { color: iconColor }
+                  }
+                />
               )
             }
             onClick={() => {
               dispatch(setTitle("My-Profile"));
               dispatch(setBottomNavLink("/profile"));
+
               router.push("/my-profile");
             }}
           />

@@ -33,7 +33,13 @@ const Blog = async ({ blog, userName, userLikedBlogs, userId }: BlogType) => {
             className="rounded-full h-8 w-8"
           />
         ) : (
-          <AccountCircleIcon className="text-gray-400 text-4xl" />
+          <AccountCircleIcon
+            style={{
+              fontSize: "2.25rem",
+              lineHeight: "2.5rem",
+              color: "#9CA3AF",
+            }}
+          />
         )}
         <div className="flex flex-col gap-2 flex-grow">
           <BlogContainer
@@ -93,7 +99,7 @@ async function BlogContainer({
         )}
       </div>
 
-      <div className="flex gap-5 text-sm">
+      <div className="flex gap-5 text-sm mt-3">
         <LikeButton
           userLikedBlogs={userLikedBlogs}
           blogId={blogId}

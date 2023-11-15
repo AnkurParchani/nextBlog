@@ -5,11 +5,10 @@ import TopLogo from "@/components/others/TopLogo";
 import BookIcon from "@mui/icons-material/Book";
 import EmptyBlogList from "@/components/blogs/EmptyBlogList";
 import ReturnToLogin from "@/components/others/ReturnToLogin";
+import Blog from "./Blog";
 
 import { getLikedBlogs, getMyBlogs } from "../../../../utils/blogs/apiBlogs";
-
 import { getUser } from "../../../../utils/users/apiUsers";
-import Blog from "./Blog";
 
 export const dynamic = "force-dynamic";
 
@@ -54,7 +53,7 @@ const page = async () => {
             content="Your posted Blogs will stay here"
             linkTo="/add-blog"
             linkContent="Post a Blog"
-            icon={<BookIcon className="text-9xl text-blue-400" />}
+            icon={<BookIcon style={{ fontSize: "120px", color: "#60A5FA" }} />}
           />
         )}
       </Container>

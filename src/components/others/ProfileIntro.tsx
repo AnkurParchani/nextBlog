@@ -23,7 +23,7 @@ const ProfileIntro = ({
           className="rounded-full"
         />
       ) : (
-        <AccountCircleIcon className="text-7xl text-gray-200" />
+        <AccountCircleIcon style={{ fontSize: "70px", color: "#E5E7EB" }} />
       )}
       <p className="font-semibold capitalize text-blue-300 text-lg">
         {userName}

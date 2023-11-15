@@ -65,7 +65,7 @@ const EditProfile = ({ setAction, user }: EditProfileType) => {
             className="rounded-full"
           />
         ) : (
-          <AccountCircleIcon className="text-8xl text-gray-300" />
+          <AccountCircleIcon style={{ fontSize: "90px", color: "#D1D5DB" }} />
         )}
         <ImgPicker handleFileInputChange={handleFileInputChange} />
       </div>

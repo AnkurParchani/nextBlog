@@ -64,6 +64,12 @@ export const editProfile = async (e: FormData, userImg?: string) => {
     if (data.isOperational || data.status === "fail")
       throw new Error(data.message);
 
+    // Revalidating necessary tags
+    revalidateTag("blogs");
+    revalidateTag("liked-blogs");
+    revalidateTag("blog");
+    revalidateTag("single-user-blogs");
+
     return data;
   } catch (err) {
     return handleClientError(err);

@@ -39,7 +39,7 @@ export default function EditMenuButton({ blog }: { blog: Blog }) {
   return (
     <div>
       <IconButton
-        className="text-white"
+        style={{ color: "#fff" }}
         aria-label="more"
         id="long-button"
         aria-controls={open ? "long-menu" : undefined}
@@ -63,7 +63,7 @@ export default function EditMenuButton({ blog }: { blog: Blog }) {
           <MenuItem
             key={option.title}
             onClick={handleClose}
-            className="text-gray-800"
+            style={{ color: "#1F2937" }}
           >
             <div className="flex gap-2 items-center" data-action={option.title}>
               {" "}

@@ -100,13 +100,14 @@ export function Comment({ comment }: { comment: CommentType }) {
             <Image
               src={userImg}
               alt="user-img"
-              height={30}
-              width={30}
+              height={35}
+              width={35}
               className="rounded-full h-8 w-8"
             />
           ) : (
-            <AccountCircle className="text-4xl text-gray-400" />
+            <AccountCircle style={{ fontSize: "40px", color: "#9CA3AF" }} />
           )}
+
           <div>
             <NameForBlog name={name} month={month} day={day} year={year} />
             {isEdited && <p className="text-gray-400 text-sm">(Edited)</p>}

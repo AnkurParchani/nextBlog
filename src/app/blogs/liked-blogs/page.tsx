@@ -54,7 +54,9 @@ const page = async () => {
             linkContent="Explore"
             linkTo="/"
             content="Blogs you've Liked will stay here.."
-            icon={<FavoriteIcon className="text-8xl text-blue-400" />}
+            icon={
+              <FavoriteIcon style={{ fontSize: "96px", color: "#60A5FA" }} />
+            }
           />
         )}
       </Container>

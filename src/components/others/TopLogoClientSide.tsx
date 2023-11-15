@@ -52,7 +52,10 @@ export const AccountIcon = ({
           className="rounded-full h-6 w-6"
         />
       ) : (
-        <AccountCircleIcon className="text-3xl text-gray-300" />
+        <AccountCircleIcon
+          style={{ fontSize: "30px", color: "#D1D5DB" }}
+          className="text-3xl text-gray-300"
+        />
       )}
     </Link>
   );

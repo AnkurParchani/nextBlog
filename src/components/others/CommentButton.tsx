@@ -2,14 +2,13 @@
 
 import { useState } from "react";
 import toast from "react-hot-toast";
-
 import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineRounded";
 import ModalFormTemplate from "./ModalFormTemplate";
 import Input from "./Input";
 import Button from "./Button";
+import getErrorMessage from "../../../utils/errors/getErrorMessage";
 
 import { addComment } from "@/actions/blog";
-import getErrorMessage from "../../../utils/errors/getErrorMessage";
 import { useRouter } from "next/navigation";
 import { useCookies } from "react-cookie";
 
@@ -22,8 +21,8 @@ const CommentButton = ({
   blogId?: string;
   hasCommentFunctionality?: boolean;
 }) => {
-  const [action, setAction] = useState<string>("");
   const router = useRouter();
+  const [action, setAction] = useState<string>("");
   const [cookie] = useCookies();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -39,11 +38,16 @@ const CommentButton = ({
   ): Promise<string | undefined> {
     try {
       setIsLoading(true);
-      await addComment(event);
+      const data = await addComment(event);
+
       setIsLoading(false);
 
-      toast.success("Comment added successfully");
-      setAction("");
+      if (!data?.error) {
+        toast.success("Comment added successfully");
+        setAction("");
+      } else {
+        return toast.error(getErrorMessage(data));
+      }
     } catch (err) {
       setIsLoading(false);
       return toast.error(getErrorMessage(err));
@@ -52,12 +56,12 @@ const CommentButton = ({
 
   return (
     <div>
-      <span className="text-gray-500 ">
-        {comments}
+      <span className="text-gray-500">
+        <span className="mr-0.5">{comments}</span>
 
         <ChatBubbleOutlineRoundedIcon
           onClick={handleCommentClick}
-          className="text-base ml-0.5 cursor-pointer"
+          style={{ fontSize: "18px" }}
         />
       </span>
 

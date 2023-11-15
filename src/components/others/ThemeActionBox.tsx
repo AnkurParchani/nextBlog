@@ -27,9 +27,21 @@ const ThemeActionBox = () => {
           bottomNavValue="/profile"
           icon={
             currentTheme === "dark" ? (
-              <WbSunnyIcon className="text-3xl text-white" />
+              <WbSunnyIcon
+                style={{
+                  fontSize: "30px",
+                  lineHeight: "36px",
+                  color: "#fff",
+                }}
+              />
             ) : (
-              <DarkModeIcon className="text-3xl text-gray-900" />
+              <DarkModeIcon
+                style={{
+                  fontSize: "30px",
+                  lineHeight: "36px",
+                  color: "#111",
+                }}
+              />
             )
           }
           heading="change theme"
