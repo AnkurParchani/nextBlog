@@ -43,7 +43,6 @@ export async function login(e: FormData) {
     // Returning back to the preious page
     return data;
   } catch (err: unknown) {
-    console.log("inside the catch block of login and logging the error", err);
     return handleClientError(err);
   }
 }

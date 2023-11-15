@@ -21,3 +21,6 @@ export async function GET(request: NextRequest) {
     return handleApiError(err);
   }
 }
+
+// Dummy POST handler to make it dynamic route
+export async function POST(req: Request) {}

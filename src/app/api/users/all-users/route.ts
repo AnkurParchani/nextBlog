@@ -12,3 +12,6 @@ export const GET = async (req: Request) => {
     users,
   });
 };
+
+// Dummy POST handler to make it dynamic route
+export async function POST(req: Request) {}

@@ -11,6 +11,7 @@ export async function addBlog(e: FormData, blogImg?: string) {
   try {
     // Getting the token from the cookies
     const token = getTokenFromCookie();
+    if (!token) return { tokenError: true };
 
     // Getting email and content
     const title = e.get("title");
@@ -89,6 +90,7 @@ export const uploadBlogImg = async (e: FormData) => {
 export async function likeBlog(blogId: string) {
   try {
     const token = getTokenFromCookie();
+    if (!token) return { tokenError: true };
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/likes/like`,
@@ -128,6 +130,7 @@ export async function likeBlog(blogId: string) {
 export const dislikeBlog = async (blogId: string) => {
   try {
     const token = getTokenFromCookie();
+    if (!token) return { tokenError: true };
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/likes/dislike`,
@@ -171,6 +174,7 @@ export const updateBlog = async (
 ) => {
   try {
     const token = getTokenFromCookie();
+    if (!token) return { tokenError: true };
 
     const title = e.get("title");
     const content = e.get("content");
@@ -214,6 +218,7 @@ export const updateBlog = async (
 export const addComment = async (event: FormData) => {
   try {
     const token = getTokenFromCookie();
+    if (!token) return { tokenError: true };
 
     const content = event.get("content");
     const blogId = event.get("blogId");
@@ -254,6 +259,7 @@ export const addComment = async (event: FormData) => {
 export const deleteBlog = async (blogId: string) => {
   try {
     const token = getTokenFromCookie();
+    if (!token) return { tokenError: true };
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${blogId}`,

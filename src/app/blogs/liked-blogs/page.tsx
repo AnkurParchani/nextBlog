@@ -11,14 +11,16 @@ import ReturnToLogin from "@/components/others/ReturnToLogin";
 import { getLikedBlogs } from "../../../../utils/blogs/apiBlogs";
 import { getUser } from "../../../../utils/users/apiUsers";
 
+export const dynamic = "force-dynamic";
+
 const page = async () => {
-  const { blogs } = await getLikedBlogs();
+  const data = await getLikedBlogs();
+  if (data.tokenError) return <ReturnToLogin />;
 
   const user: User = await getUser();
-
   if (!user || !user._id) return <ReturnToLogin />;
 
-  const hasBlogs = blogs.length > 0;
+  const hasBlogs = data.blogs.length > 0;
 
   // Getting all the liked blogs of the user
   let userLikedBlogs: string[];
@@ -38,7 +40,7 @@ const page = async () => {
       <Container>
         {hasBlogs ? (
           <div className="grid grid-cols-1 gap-3">
-            {blogs.map((blog: Blog) => (
+            {data.blogs.map((blog: Blog) => (
               <Blog
                 key={blog._id}
                 userId={user._id}

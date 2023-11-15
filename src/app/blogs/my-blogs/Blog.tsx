@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { BlogWithoutLink } from "@/app/users/blogs/BlogWithoutLink";

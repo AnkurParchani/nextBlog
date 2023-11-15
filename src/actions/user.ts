@@ -11,6 +11,8 @@ import handleClientError from "../../utils/errors/handleClientError";
 export const getLoggedInUser = async () => {
   try {
     const token = getTokenFromCookie();
+    if (!token) return { tokenError: true };
+
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
       cache: "no-cache",
       headers: { Cookie: `token=${token}` },
@@ -31,6 +33,7 @@ export const editProfile = async (e: FormData, userImg?: string) => {
   try {
     // Getting the token from the cookie
     const token = getTokenFromCookie();
+    if (!token) return { tokenError: true };
 
     // Getting name and email and photo of the user
     const name = e.get("name");
@@ -107,6 +110,7 @@ export async function deleteAccount(e: FormData) {
     // Getting the token from the cookies
     const cookieStore = cookies();
     const token = getTokenFromCookie();
+    if (!token) return { tokenError: true };
 
     // Getting Password and confirmation
     const password = e.get("password");

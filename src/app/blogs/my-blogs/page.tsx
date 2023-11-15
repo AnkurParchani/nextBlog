@@ -11,10 +11,14 @@ import { getLikedBlogs, getMyBlogs } from "../../../../utils/blogs/apiBlogs";
 import { getUser } from "../../../../utils/users/apiUsers";
 import Blog from "./Blog";
 
+export const dynamic = "force-dynamic";
+
 const page = async () => {
   const blogs = await getMyBlogs();
+  if (blogs.tokenError) return <ReturnToLogin />;
+
   const user: User = await getUser();
-  if (!user || !user._id) return <ReturnToLogin />;
+  if (!user) return <ReturnToLogin />;
 
   const hasBlogs = blogs.length > 0;
 

@@ -24,6 +24,7 @@ export const getAllUsers = async () => {
 export const getUser = async () => {
   try {
     const token = getTokenFromCookie();
+    if (!token) return { tokenError: true };
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
       cache: "no-cache",
       headers: { Cookie: `token=${token}` },

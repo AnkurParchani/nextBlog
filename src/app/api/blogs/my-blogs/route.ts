@@ -18,3 +18,6 @@ export const GET = catchAsync(async () => {
 
   return NextResponse.json({ status: "success", blogs });
 });
+
+// Dummy POST handler to make it dynamic route
+export async function POST(req: Request) {}

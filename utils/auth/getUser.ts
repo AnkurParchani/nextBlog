@@ -12,6 +12,8 @@ export async function getUser() {
     const cookieStore = cookies();
     const token = cookieStore.get("token")?.value;
 
+    if (!token) return undefined;
+
     // Getting the userId according to the cookie
     const decode: JwtPayload = await verify(
       token as string,

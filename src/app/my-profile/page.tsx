@@ -16,7 +16,7 @@ import { getLoggedInUser } from "@/actions/user";
 
 const page = async () => {
   const user = await getLoggedInUser();
-  if (!user._id) return <ReturnToLogin />;
+  if (!user || !user._id) return <ReturnToLogin />;
 
   return (
     <div>

@@ -3,8 +3,7 @@ import AppError from "./appError";
 
 // The global api Error
 export default function handleApiError(err: unknown) {
-  console.log("inside the catch block of handleapierror");
-  console.log("logging the error of this catch block", err);
+  console.log('Inside the handleApiError and now logging it ---' , err);
   if (err !== null && err !== undefined) {
     // Handling duplicate email error
     if (typeof err === "object" && "code" in err && err.code === 11000) {
@@ -15,8 +14,6 @@ export default function handleApiError(err: unknown) {
       return NextResponse.json(new AppError(400, (err as Error).message));
     }
   }
-
-  console.log(err);
 
   // If don't know what the error is about
   return NextResponse.json({

@@ -10,7 +10,6 @@ import { getUser } from "../../../../../utils/auth/getUser";
 // Getting all the liked blogs of user
 export const GET = catchAsync(async (req: Request) => {
   connectMongoDB();
-
   // Authentication
   const user = await getUser();
   if (!user) return NextResponse.json(new AppError(401, "Please Login first"));
@@ -24,5 +23,11 @@ export const GET = catchAsync(async (req: Request) => {
     .map((blog) => blog.blog)
     .filter((blog) => blog !== null);
 
-  return NextResponse.json({ status: "success", blogs: blogsToShow });
+  return NextResponse.json({
+    status: "success",
+    blogs: blogsToShow,
+  });
 });
+
+// Dummy POST handler to make it dynamic route
+export async function POST(req: Request) {}

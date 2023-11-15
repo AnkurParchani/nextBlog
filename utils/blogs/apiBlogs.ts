@@ -22,7 +22,6 @@ export const getBlogs = async () => {
 // Get all blogs (of a particular user - global ones)
 export const getBlogsOfSingleUser = async (userId: string) => {
   try {
-    console.log("Inside the getblogsofsingleuser");
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/users/blogs?userId=${userId}`,
       {
@@ -33,7 +32,6 @@ export const getBlogsOfSingleUser = async (userId: string) => {
     if (!res.ok) throw new Error("Failed to fetch");
 
     const data = await res.json();
-    console.log(data);
 
     return data.blogs;
   } catch (err) {
@@ -44,7 +42,9 @@ export const getBlogsOfSingleUser = async (userId: string) => {
 // Get my blogs (of current logged in one)
 export const getMyBlogs = async () => {
   try {
-    const token: string = getTokenFromCookie();
+    const token = getTokenFromCookie();
+    if (!token) return { tokenError: true };
+
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/blogs/my-blogs`,
       {
@@ -87,11 +87,12 @@ export const getBlog = async (blogId: string) => {
 export const getLikedBlogs = async () => {
   try {
     const token = getTokenFromCookie();
+    if (!token) return { tokenError: true };
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/likes/my-liked-blogs`,
       {
-        cache: "no-cache",
+        cache: "no-store",
         headers: {
           Cookie: `token=${token}`,
         },
