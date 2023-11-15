@@ -28,8 +28,8 @@ const Blog = async ({ blog, userName, userLikedBlogs, userId }: BlogType) => {
           <Image
             src={userImg}
             alt="user-img"
-            height={30}
-            width={30}
+            height={300}
+            width={300}
             className="rounded-full h-8 w-8"
           />
         ) : (
@@ -92,8 +92,8 @@ async function BlogContainer({
           <Image
             src={blogImg}
             alt="blog-img"
-            width={100}
-            height={100}
+            width={1000}
+            height={1000}
             className="w-full h-auto mt-5"
           />
         )}

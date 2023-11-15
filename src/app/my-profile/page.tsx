@@ -32,7 +32,7 @@ const page = async () => {
           userEmail={user.email}
         />
 
-        <div className="flex flex-col gap-4 capitalize mt-8">
+        <div className="flex flex-col max-w-3xl mx-auto gap-4 capitalize mt-8">
           <div className="bg-blue-800 h-0.5" />
           <ActionBox
             user={user}

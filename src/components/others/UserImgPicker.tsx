@@ -19,8 +19,9 @@ const UserImgPicker = ({
   return (
     <>
       <input
-        type="image"
+        type="file"
         onChange={handleFileInputChange}
+        accept="image/*"
         name="img"
         className="hidden"
         ref={fileInputRef}

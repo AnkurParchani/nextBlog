@@ -18,9 +18,9 @@ const ProfileIntro = ({
         <Image
           src={userPhoto}
           alt="user-photo"
-          height={90}
-          width={90}
-          className="rounded-full"
+          height={200}
+          width={200}
+          className="rounded-full h-24 w-auto"
         />
       ) : (
         <AccountCircleIcon style={{ fontSize: "70px", color: "#E5E7EB" }} />

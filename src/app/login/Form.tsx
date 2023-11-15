@@ -37,7 +37,7 @@ const Form = () => {
   return (
     <form
       action={userLogin}
-      className="flex flex-col gap-5 mt-2"
+      className="flex flex-col gap-5 mt-2 md:mt-10"
       autoComplete="off"
     >
       <Input label="Email" inputId="email" type="email" />

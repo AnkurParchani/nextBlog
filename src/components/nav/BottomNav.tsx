@@ -106,8 +106,8 @@ const BottomNav = () => {
               userImg ? (
                 <Image
                   src={userImg}
-                  width={25}
-                  height={25}
+                  width={250}
+                  height={250}
                   className="rounded-full max-h-7 w-auto"
                   alt="user-img"
                 />

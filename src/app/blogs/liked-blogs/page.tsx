@@ -20,8 +20,6 @@ const page = async () => {
   const user: User = await getUser();
   if (!user || !user._id) return <ReturnToLogin />;
 
-  const hasBlogs = data.blogs.length > 0;
-
   // Getting all the liked blogs of the user
   let userLikedBlogs: string[];
   const fetchUserLikedBlogs = (await getLikedBlogs()).blogs;
@@ -31,6 +29,8 @@ const page = async () => {
     userLikedBlogs = [];
   }
 
+  const blogsToShow = data?.blogs?.filter((blog: Blog) => blog.isGlobal);
+
   return (
     <div>
       <TopLogo />
@@ -38,9 +38,9 @@ const page = async () => {
       <AddBlogIcon />
 
       <Container>
-        {hasBlogs ? (
-          <div className="grid grid-cols-1 gap-3">
-            {data.blogs.map((blog: Blog) => (
+        {blogsToShow && blogsToShow.length > 0 ? (
+          <div className="grid max-w-5xl lg:grid-cols-3 mx-auto grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6 auto-rows-auto items-start content-start">
+            {blogsToShow.map((blog: Blog) => (
               <Blog
                 key={blog._id}
                 userId={user._id}

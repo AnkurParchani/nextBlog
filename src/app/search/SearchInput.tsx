@@ -50,7 +50,7 @@ const SearchInput = ({ blogs, users }: SearchInputType) => {
   return (
     <>
       {/* Search bar */}
-      <div className="grid grid-cols-[auto_1fr_auto] bg-gray-800 border-b py-1 px-3 w-full outline-none text-sm focus:border-[#1d9bf0] duration-200 items-center rounded-lg">
+      <div className="grid grid-cols-[auto_1fr_auto] bg-gray-800 border-b py-1 px-3 w-full outline-none text-sm focus:border-[#1d9bf0] duration-200 items-center rounded-lg max-w-4xl mx-auto">
         <SearchIcon />
 
         <Input

@@ -27,7 +27,7 @@ export default async function Home() {
       <SubNav heading="Home" />
 
       <Container>
-        <div className="grid grid-cols-1 gap-3">
+        <div className="grid max-w-5xl lg:grid-cols-3 mx-auto grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6 auto-rows-auto items-start content-start">
           {blogs.map((blog: Blog) => (
             <Blog key={blog._id} userLikedBlogs={userLikedBlogs} blog={blog} />
           ))}

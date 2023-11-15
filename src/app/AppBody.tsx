@@ -16,7 +16,7 @@ const AppBody = ({ children }: AppBodyType) => {
         theme === "dark"
           ? "bg-black text-gray-300"
           : "bg-gray-200 text-[#1d1d1f]"
-      } overflow-x-hidden min-h-[80vh] `}
+      } overflow-x-hidden min-h-[80vh]`}
     >
       {children}
     </body>

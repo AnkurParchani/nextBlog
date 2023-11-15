@@ -54,13 +54,13 @@ export function BlogWithoutLink({
         <Image
           src={blogImg}
           alt="blog-img"
-          height={100}
-          width={100}
+          height={1000}
+          width={1000}
           className="w-5/6 mx-auto rounded-sm mt-5"
         />
       )}
 
-      {!hideLikeCommentSection && (
+      {!hideLikeCommentSection && isGlobal && (
         <div className="flex text-sm gap-4 mt-3">
           <LikeButton
             blogId={blogId}

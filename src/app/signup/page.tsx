@@ -7,7 +7,7 @@ import TopLogo from "@/components/others/TopLogo";
 
 const page = () => {
   return (
-    <div>
+    <div className="max-w-md mx-auto">
       <TopLogo />
       <SubNav heading="Sign up" />
       <Container>

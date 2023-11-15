@@ -22,12 +22,12 @@ const Checkbox = ({
         id={id}
         name={id}
         defaultChecked={defaultChecked}
-        className={`h-4 w-4 rounded-full appearance-none checked:bg-green-600 bg-red-600 ${externalInputClass}`}
+        className={`h-4 w-4 cursor-pointer rounded-full appearance-none checked:bg-green-600 bg-red-600 ${externalInputClass}`}
       />
       <span
         className={`${
           textBlue ? "text-blue-300" : "text-gray-300"
-        } ${externalLabelClass}`}
+        } ${externalLabelClass} cursor-pointer`}
       >
         {label}
       </span>

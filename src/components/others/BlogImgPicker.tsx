@@ -18,7 +18,7 @@ const BlogImgPicker = ({
   }
 
   return (
-    <>
+    <div className="cursor-pointer">
       {insidePic && (
         <AddPhotoAlternateIcon
           onClick={handleFileClick}
@@ -49,13 +49,14 @@ const BlogImgPicker = ({
       )}
 
       <input
-        type="image"
+        type="file"
+        accept="image/*"
         name="img"
         className="hidden"
         onChange={handleFileInputChange}
         ref={blogImgRef}
       />
-    </>
+    </div>
   );
 };
 

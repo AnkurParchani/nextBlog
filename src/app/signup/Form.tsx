@@ -58,8 +58,8 @@ function Form() {
         {userImg ? (
           <Image
             className="rounded-full"
-            width={90}
-            height={90}
+            width={900}
+            height={900}
             src={userImg}
             alt="user-img"
           />

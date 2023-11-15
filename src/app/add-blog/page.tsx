@@ -5,14 +5,14 @@ import TopLogo from "@/components/others/TopLogo";
 
 const page = () => {
   return (
-    <>
+    <div className="max-w-4xl mx-auto">
       <TopLogo showBackButton />
       <SubNav heading="Add a new Blog" />
 
       <Container>
         <Form />
       </Container>
-    </>
+    </div>
   );
 };
 

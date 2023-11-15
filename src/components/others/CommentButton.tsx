@@ -56,7 +56,7 @@ const CommentButton = ({
 
   return (
     <div>
-      <span className="text-gray-500">
+      <span className="text-gray-500 cursor-pointer">
         <span className="mr-0.5">{comments}</span>
 
         <ChatBubbleOutlineRoundedIcon

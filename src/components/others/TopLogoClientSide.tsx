@@ -20,7 +20,13 @@ export const Logo = () => {
   return (
     <div className="mx-auto">
       <Link href="/" onClick={handleLogoClick}>
-        <Image width={32} height={32} alt="logo" src="/nb-logo.png" />
+        <Image
+          width={50}
+          height={50}
+          alt="logo"
+          className="h-9 w-auto"
+          src="/nb-logo.png"
+        />
       </Link>
     </div>
   );

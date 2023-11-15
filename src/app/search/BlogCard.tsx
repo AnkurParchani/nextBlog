@@ -12,10 +12,10 @@ const FoundBlogs = ({ foundBlogs }: { foundBlogs: Blog[] }) => {
   const router = useRouter();
 
   return (
-    <>
+    <div className="max-w-4xl mx-auto">
       <h1 className="font-medium my-3 text-yellow-300">Found Blogs:-</h1>
 
-      <div className="grid grid-cols-1 gap-3">
+      <div className="grid cursor-pointer max-w-5xl lg:grid-cols-3 mx-auto grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6 auto-rows-auto items-start content-start">
         {foundBlogs.map((blog) => {
           const { img: userImg } = blog.user;
 
@@ -32,8 +32,8 @@ const FoundBlogs = ({ foundBlogs }: { foundBlogs: Blog[] }) => {
                 <Image
                   src={userImg}
                   alt="user-img"
-                  width={30}
-                  height={30}
+                  width={300}
+                  height={300}
                   className="rounded-full h-8 w-8"
                 />
               ) : (
@@ -51,7 +51,7 @@ const FoundBlogs = ({ foundBlogs }: { foundBlogs: Blog[] }) => {
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 

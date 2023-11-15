@@ -14,14 +14,14 @@ const Blog = ({ blog, user, userLikedBlogs }: BlogType) => {
   return (
     <div
       key={blog._id}
-      className="bg-[#111] px-3 py-4 rounded-xl flex gap-2 items-start overflow-x-scroll"
+      className="bg-[#111] px-3 py-4 rounded-xl flex gap-2 items-start overflow-x-clip"
     >
       {userImg ? (
         <Image
           src={userImg}
           alt="user-img"
-          height={30}
-          width={30}
+          height={1000}
+          width={1000}
           className="h-8 w-8 rounded-full"
         />
       ) : (

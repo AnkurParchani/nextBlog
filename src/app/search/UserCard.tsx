@@ -9,7 +9,7 @@ const UserCard = ({ foundUsers }: { foundUsers: User[] }) => {
   const router = useRouter();
 
   return (
-    <div>
+    <div className="max-w-4xl mx-auto ">
       <h1 className="font-medium my-3 text-yellow-300">Found Users:-</h1>
 
       {foundUsers.map((user) => (
@@ -19,14 +19,14 @@ const UserCard = ({ foundUsers }: { foundUsers: User[] }) => {
             dispatch(setBottomNavLink(""));
             router.push(`/users/blogs/?userId=${user._id}`);
           }}
-          className="bg-[#111] px-3 py-4 rounded-xl mt-3 flex gap-2 items-start"
+          className="bg-[#111] cursor-pointer px-3 py-4 rounded-xl mt-3 flex gap-2 items-start"
         >
           {user.img ? (
             <Image
               src={user.img}
               alt="user-img"
-              height={30}
-              width={30}
+              height={300}
+              width={300}
               className="rounded-full h-8 w-8"
             />
           ) : (

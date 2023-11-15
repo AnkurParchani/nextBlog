@@ -44,7 +44,7 @@ const page = async ({
           userEmail={userEmail}
         />
 
-        <div className="grid grid-cols-1 gap-3 mt-5">
+        <div className="grid max-w-5xl lg:grid-cols-3 mx-auto grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6 auto-rows-auto items-start content-start mt-5">
           {blogs.map((blog: Blog) => (
             <div
               key={blog._id}
@@ -55,8 +55,8 @@ const page = async ({
                   src={userImg}
                   alt="user-img"
                   className="rounded-full w-8 h-8"
-                  height={30}
-                  width={30}
+                  height={300}
+                  width={300}
                 />
               ) : (
                 <AccountCircleIcon

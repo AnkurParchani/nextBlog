@@ -24,7 +24,7 @@ const AddBlogIcon = () => {
 
   return (
     <button
-      className="bg-[#1d9bf0] hover:bg-[#41acf4] duration-100 z-30 rounded-full p-2.5 fixed right-4 bottom-16 text-white"
+      className="bg-[#1d9bf0] hover:bg-[#41acf4] duration-100 z-30 rounded-full p-2.5 fixed right-4 bottom-16 text-white "
       onClick={handleClick}
     >
       <AddRoundedIcon style={{ fontSize: "30px" }} />

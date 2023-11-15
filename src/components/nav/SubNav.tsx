@@ -22,9 +22,9 @@ export default function SubNav({
 
   return (
     <div
-      className={`${themeColor} fixed top-11 inset-x-0 z-30 py-1.5 pb-2.5 text-lg tracking-wide border-t border-gray-800 px-4 flex gap-1.5 items-center justify-between`}
+      className={`${themeColor} fixed top-11 inset-x-0 z-30 py-1.5 pb-2.5 text-lg tracking-wide border-t border-gray-800 px-4 flex gap-1.5 items-center justify-between xl:px-80 lg:px-32`}
     >
-      <div className="border-b-2 capitalize border-[#1d9bf0] inline-block font-normal">
+      <div className="border-b-2 capitalize border-[#1d9bf0] font-normal">
         {heading}
       </div>
 

@@ -150,9 +150,9 @@ const Form = () => {
             <Image
               src={blogImg}
               alt="blog-img"
-              height={100}
-              width={100}
-              className="rounded-md w-full h-auto"
+              height={1000}
+              width={1000}
+              className="rounded-md w-1/2 mx-auto h-auto"
             />
 
             <BlogImgPicker

@@ -41,7 +41,7 @@ const page = async ({ params }: { params: { blogId: string } }) => {
   const hasComments = comments.length > 0;
 
   return (
-    <>
+    <div className="max-w-4xl mx-auto">
       <TopLogo showBackButton showUserIcon userImg={userImg} userId={userId} />
       <AddBlogIcon />
 
@@ -78,7 +78,7 @@ const page = async ({ params }: { params: { blogId: string } }) => {
           )}
         </div>
       </Container>
-    </>
+    </div>
   );
 };
 

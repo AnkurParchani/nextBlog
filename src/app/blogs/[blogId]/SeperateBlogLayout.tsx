@@ -34,8 +34,8 @@ export function Blog({
         <Image
           src={blogImg}
           alt="blog-img"
-          height={100}
-          width={100}
+          height={1000}
+          width={1000}
           className="w-5/6 mx-auto mt-5 h-auto rounded-sm "
         />
       )}
@@ -100,8 +100,8 @@ export function Comment({ comment }: { comment: CommentType }) {
             <Image
               src={userImg}
               alt="user-img"
-              height={35}
-              width={35}
+              height={1000}
+              width={1000}
               className="rounded-full h-8 w-8"
             />
           ) : (
