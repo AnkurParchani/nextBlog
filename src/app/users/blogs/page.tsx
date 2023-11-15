@@ -45,7 +45,7 @@ const page = async ({
         />
 
         <div className="grid grid-cols-1 gap-3 mt-5">
-          {blogs.map((blog) => (
+          {blogs.map((blog: Blog) => (
             <div
               key={blog._id}
               className="bg-[#111] px-3 py-4 rounded-xl flex gap-2 items-start"

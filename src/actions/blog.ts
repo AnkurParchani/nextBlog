@@ -61,87 +61,106 @@ export async function addBlog(e: FormData, blogImg?: string) {
 
 // Adding image to the blog
 export const uploadBlogImg = async (e: FormData) => {
-  const img = e.get("img");
+  try {
+    const img = e.get("img");
 
-  if (!(img instanceof File)) throw new Error("Image not provided");
+    if (!(img instanceof File)) throw new Error("Image not provided");
 
-  // Setting name and path for the img
-  const imgName = `${Math.random()}-${img.name}`.replaceAll("/", "");
-  const imgPath = `${supabaseUrl}/storage/v1/object/public/blogs/${imgName}`;
+    // Setting name and path for the img
+    const imgName = `${Math.random()}-${img.name}`.replaceAll("/", "");
+    const imgPath = `${supabaseUrl}/storage/v1/object/public/blogs/${imgName}`;
 
-  // Uploading the img to the bucket
-  const { error } = await supabase.storage.from("blogs").upload(imgName, img);
+    // Uploading the img to the bucket
+    const { error } = await supabase.storage.from("blogs").upload(imgName, img);
 
-  // If any error found while uploading the img
-  if (error) {
-    console.log(error);
-    throw new Error("Something went wrong while uploading the img");
+    // If any error found while uploading the img
+    if (error) {
+      console.log(error);
+      throw new Error("Something went wrong while uploading the img");
+    }
+
+    return imgPath;
+  } catch (err) {
+    return handleClientError(err);
   }
-
-  return imgPath;
 };
 
 // To like blog
 export async function likeBlog(blogId: string) {
-  const token = getTokenFromCookie();
+  try {
+    const token = getTokenFromCookie();
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/likes/like`, {
-    method: "POST",
-    body: JSON.stringify({ blogId }),
-    headers: {
-      "Content-Type": "application/json",
-      Cookie: `token=${token}`,
-    },
-  });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/likes/like`,
+      {
+        cache: "no-cache",
+        method: "POST",
+        body: JSON.stringify({ blogId }),
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: `token=${token}`,
+        },
+      }
+    );
 
-  if (!res.ok) throw new Error("Something went wrong, please try again later");
+    if (!res.ok)
+      throw new Error("Something went wrong, please try again later");
 
-  const data = await res.json();
+    const data = await res.json();
 
-  // If any error found (operational)
-  if (data.isOperational || data.status === "fail")
-    throw new Error(data.message);
+    // If any error found (operational)
+    if (data.isOperational || data.status === "fail")
+      throw new Error(data.message);
 
-  // Revalidating necessary tags
-  revalidateTag("blogs");
-  revalidateTag("blog");
-  revalidateTag("liked-blogs");
-  revalidateTag("single-user-blogs");
+    // Revalidating necessary tags
+    revalidateTag("blogs");
+    revalidateTag("blog");
+    revalidateTag("liked-blogs");
+    revalidateTag("single-user-blogs");
 
-  return data;
+    return data;
+  } catch (err) {
+    return handleClientError(err);
+  }
 }
 
 // To dislike a blog
 export const dislikeBlog = async (blogId: string) => {
-  const token = getTokenFromCookie();
+  try {
+    const token = getTokenFromCookie();
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/likes/dislike`,
-    {
-      method: "POST",
-      body: JSON.stringify({ blogId }),
-      headers: {
-        "Content-Type": "application/json",
-        Cookie: `token=${token}`,
-      },
-    }
-  );
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/likes/dislike`,
+      {
+        cache: "no-cache",
+        method: "POST",
+        body: JSON.stringify({ blogId }),
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: `token=${token}`,
+        },
+      }
+    );
 
-  if (!res.ok) throw new Error("Something went wrong, please try again later");
+    if (!res.ok)
+      throw new Error("Something went wrong, please try again later");
 
-  const data = await res.json();
+    const data = await res.json();
 
-  // If any error found (operational)
-  if (data.isOperational || data.status === "fail")
-    throw new Error(data.message);
+    // If any error found (operational)
+    if (data.isOperational || data.status === "fail")
+      throw new Error(data.message);
 
-  // Revalidating necessary tags
-  revalidateTag("blogs");
-  revalidateTag("liked-blogs");
-  revalidateTag("blog");
-  revalidateTag("single-user-blogs");
+    // Revalidating necessary tags
+    revalidateTag("blogs");
+    revalidateTag("liked-blogs");
+    revalidateTag("blog");
+    revalidateTag("single-user-blogs");
 
-  return data;
+    return data;
+  } catch (err) {
+    return handleClientError(err);
+  }
 };
 
 // Updating a particular blog
@@ -150,100 +169,117 @@ export const updateBlog = async (
   blogId: string,
   blogImg: string | undefined
 ) => {
-  const token = getTokenFromCookie();
+  try {
+    const token = getTokenFromCookie();
 
-  const title = e.get("title");
-  const content = e.get("content");
-  const isGlobal = e.get("global") === "on";
+    const title = e.get("title");
+    const content = e.get("content");
+    const isGlobal = e.get("global") === "on";
 
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${blogId}`,
-    {
-      method: "PATCH",
-      body: JSON.stringify({ title, content, isGlobal, img: blogImg }),
-      headers: {
-        "Content-Type": "application/json",
-        Cookie: `token=${token}`,
-      },
-    }
-  );
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${blogId}`,
+      {
+        cache: "no-cache",
+        method: "PATCH",
+        body: JSON.stringify({ title, content, isGlobal, img: blogImg }),
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: `token=${token}`,
+        },
+      }
+    );
 
-  if (!res.ok) throw new Error("Something went wrong, please try again later");
+    if (!res.ok)
+      throw new Error("Something went wrong, please try again later");
 
-  const data = await res.json();
+    const data = await res.json();
 
-  // If any error found (operational)
-  if (data.isOperational || data.status === "fail")
-    throw new Error(data.message);
+    // If any error found (operational)
+    if (data.isOperational || data.status === "fail")
+      throw new Error(data.message);
 
-  revalidateTag("blogs");
-  revalidateTag("liked-blogs");
-  revalidateTag("blog");
-  revalidateTag("user");
-  revalidateTag("single-user-blogs");
+    revalidateTag("blogs");
+    revalidateTag("liked-blogs");
+    revalidateTag("blog");
+    revalidateTag("user");
+    revalidateTag("single-user-blogs");
 
-  return data;
+    return data;
+  } catch (err) {
+    return handleClientError(err);
+  }
 };
 
 // Adding a comment on the blog
 export const addComment = async (event: FormData) => {
-  const token = getTokenFromCookie();
+  try {
+    const token = getTokenFromCookie();
 
-  const content = event.get("content");
-  const blogId = event.get("blogId");
+    const content = event.get("content");
+    const blogId = event.get("blogId");
 
-  if (!blogId || !content) throw new Error("Please provide all the details");
+    if (!blogId || !content) throw new Error("Please provide all the details");
 
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments`, {
-    method: "POST",
-    body: JSON.stringify({ content, blogId }),
-    headers: {
-      "Content-Type": "application/json",
-      Cookie: `token=${token}`,
-    },
-  });
-
-  if (!res.ok) throw new Error("failed to do the request");
-
-  const data = await res.json();
-
-  // If any error found (operational)
-  if (data.isOperational || data.status === "fail")
-    throw new Error(data.message);
-
-  // Revalidating necessary tags
-  revalidateTag("blogs");
-  revalidateTag("liked-blogs");
-  revalidateTag("blog");
-  revalidateTag("single-user-blogs");
-
-  return data;
-};
-
-// Deleting a blog
-export const deleteBlog = async (blogId: string) => {
-  const token = getTokenFromCookie();
-
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${blogId}`,
-    {
-      method: "DELETE",
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/comments`, {
+      cache: "no-cache",
+      method: "POST",
+      body: JSON.stringify({ content, blogId }),
       headers: {
         "Content-Type": "application/json",
         Cookie: `token=${token}`,
       },
-    }
-  );
+    });
 
-  if (!res.ok) throw new Error("Something went wrong, please try again later");
+    if (!res.ok) throw new Error("failed to do the request");
 
-  const data = await res.json();
+    const data = await res.json();
 
-  // If any error found (operational)
-  if (data.isOperational || data.status === "fail")
-    throw new Error(data.message);
+    // If any error found (operational)
+    if (data.isOperational || data.status === "fail")
+      throw new Error(data.message);
 
-  revalidateTag("blogs");
+    // Revalidating necessary tags
+    revalidateTag("blogs");
+    revalidateTag("liked-blogs");
+    revalidateTag("blog");
+    revalidateTag("single-user-blogs");
 
-  return data;
+    return data;
+  } catch (err) {
+    return handleClientError(err);
+  }
+};
+
+// Deleting a blog
+export const deleteBlog = async (blogId: string) => {
+  try {
+    const token = getTokenFromCookie();
+
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${blogId}`,
+      {
+        cache: "no-cache",
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Cookie: `token=${token}`,
+        },
+      }
+    );
+
+    if (!res.ok)
+      throw new Error("Something went wrong, please try again later");
+
+    const data = await res.json();
+
+    // If any error found (operational)
+    if (data.isOperational || data.status === "fail")
+      throw new Error(data.message);
+
+    revalidateTag("blogs");
+
+    return data;
+  } catch (err) {
+    return handleClientError(err);
+  }
 };

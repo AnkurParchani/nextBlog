@@ -7,6 +7,7 @@ export const getAllUsers = async () => {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_URL}/api/users/all-users`,
       {
+        cache: "no-cache",
         next: { tags: ["users"] },
       }
     );
@@ -24,6 +25,7 @@ export const getUser = async () => {
   try {
     const token = getTokenFromCookie();
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
+      cache: "no-cache",
       headers: { Cookie: `token=${token}` },
     });
 

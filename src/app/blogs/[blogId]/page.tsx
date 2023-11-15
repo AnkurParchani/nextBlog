@@ -74,7 +74,7 @@ const page = async ({ params }: { params: { blogId: string } }) => {
               <InterSection />
 
               <div className="grid grid-cols-1">
-                {comments.map((comment) => (
+                {comments.map((comment: Comment) => (
                   // @ts-ignore
                   <Comment key={comment._id} comment={comment} />
                 ))}

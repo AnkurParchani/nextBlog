@@ -56,7 +56,7 @@ const EditBlog = ({ blog, setAction }: EditBlogType) => {
     }
 
     const imgPath = await uploadBlogImg(formData);
-    setBlogImg(imgPath);
+    setBlogImg(imgPath as string);
   }
 
   return (

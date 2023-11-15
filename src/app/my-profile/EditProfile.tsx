@@ -42,7 +42,7 @@ const EditProfile = ({ setAction, user }: EditProfileType) => {
     }
 
     const imgPath = await uploadUserImg(formData);
-    setUserImg(imgPath);
+    setUserImg(imgPath as string);
   }
 
   return (

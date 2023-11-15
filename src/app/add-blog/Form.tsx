@@ -96,7 +96,7 @@ const Form = () => {
     }
 
     const imgPath = await uploadBlogImg(formData);
-    setBlogImg(imgPath);
+    setBlogImg(imgPath as string);
   }
 
   // The JSX

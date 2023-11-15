@@ -12,6 +12,7 @@ export const getLoggedInUser = async () => {
   try {
     const token = getTokenFromCookie();
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/users`, {
+      cache: "no-cache",
       headers: { Cookie: `token=${token}` },
       next: { tags: ["user"] },
     });
@@ -68,25 +69,29 @@ export const editProfile = async (e: FormData, userImg?: string) => {
 
 // Uploading an image
 export const uploadUserImg = async (e: FormData) => {
-  // Getting the img
-  const img = e.get("img");
+  try {
+    // Getting the img
+    const img = e.get("img");
 
-  if (!(img instanceof File)) throw new Error("Image not provided");
+    if (!(img instanceof File)) throw new Error("Image not provided");
 
-  // Setting name and path for the img
-  const imgName = `${Math.random()}-${img.name}`.replaceAll("/", "");
-  const imgPath = `${supabaseUrl}/storage/v1/object/public/users/${imgName}`;
+    // Setting name and path for the img
+    const imgName = `${Math.random()}-${img.name}`.replaceAll("/", "");
+    const imgPath = `${supabaseUrl}/storage/v1/object/public/users/${imgName}`;
 
-  // Uploading the img to the bucket
-  const { error } = await supabase.storage.from("users").upload(imgName, img);
+    // Uploading the img to the bucket
+    const { error } = await supabase.storage.from("users").upload(imgName, img);
 
-  // If any error found while uploading the img
-  if (error) {
-    console.log(error);
-    throw new Error("Something went wrong while uploading the img");
+    // If any error found while uploading the img
+    if (error) {
+      console.log(error);
+      throw new Error("Something went wrong while uploading the img");
+    }
+
+    return imgPath;
+  } catch (err) {
+    return handleClientError(err);
   }
-
-  return imgPath;
 };
 
 // To logout

@@ -13,8 +13,10 @@ import { getUser } from "../../../../utils/users/apiUsers";
 
 const page = async () => {
   const { blogs } = await getLikedBlogs();
-  const { _id: userId } = await getUser();
-  if (!userId) return <ReturnToLogin />;
+
+  const user: User = await getUser();
+
+  if (!user || !user._id) return <ReturnToLogin />;
 
   const hasBlogs = blogs.length > 0;
 
@@ -39,7 +41,7 @@ const page = async () => {
             {blogs.map((blog: Blog) => (
               <Blog
                 key={blog._id}
-                userId={userId}
+                userId={user._id}
                 blog={blog}
                 userLikedBlogs={userLikedBlogs}
               />
