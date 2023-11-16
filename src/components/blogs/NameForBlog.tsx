@@ -1,3 +1,8 @@
+"use client";
+
+import { useSelector } from "react-redux";
+import { getTheme } from "../../../utils/slices/UiSlice";
+
 type PropType = {
   name: string;
   month: string;
@@ -7,12 +12,16 @@ type PropType = {
 };
 
 const NameForBlog = ({ name, month, day, year, blueTitle }: PropType) => {
+  const theme = useSelector(getTheme);
+  const textColor = theme === "dark" ? "text-gray-100" : "text-gray-900";
+  const blueTitleColor = theme === "dark" ? "text-blue-300" : "text-blue-600";
+
   return (
     <div className="flex justify-between items-center">
       <div className="flex items-center gap-1">
         <p
           className={`${
-            blueTitle ? "text-blue-300" : "text-gray-100"
+            blueTitle ? blueTitleColor : textColor
           } font-medium capitalize`}
         >
           {name}

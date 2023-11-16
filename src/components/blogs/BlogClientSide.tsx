@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setTitle } from "../../../utils/slices/SubNavSlice";
-import { setBottomNavLink } from "../../../utils/slices/UiSlice";
+import { getTheme, setBottomNavLink } from "../../../utils/slices/UiSlice";
 
 export const Blog = ({
   children,
@@ -17,6 +17,7 @@ export const Blog = ({
   userName: string;
 }) => {
   const dispatch = useDispatch();
+  const theme = useSelector(getTheme);
 
   function handleClick() {
     dispatch(setBottomNavLink(""));
@@ -26,7 +27,9 @@ export const Blog = ({
   return (
     <Link
       href={`/blogs/${blogId}`}
-      className="bg-[#111] px-3 py-4 rounded-xl overflow-x-hidden"
+      className={`${
+        theme === "dark" ? "bg-[#111]" : "bg-gray-300"
+      } px-3 py-4 rounded-xl overflow-x-hidden`}
       onClick={handleClick}
     >
       {children}

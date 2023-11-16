@@ -1,5 +1,7 @@
 "use client";
 import { ColorRing, Oval } from "react-loader-spinner";
+import { useSelector } from "react-redux";
+import { getTheme } from "../slices/UiSlice";
 
 export const RingSpinner = ({
   height,
@@ -22,6 +24,8 @@ export const RingSpinner = ({
 };
 
 export const OvalSpinner = () => {
+  const theme = useSelector(getTheme);
+
   return (
     <Oval
       height={40}
@@ -31,7 +35,7 @@ export const OvalSpinner = () => {
       wrapperClass=""
       visible={true}
       ariaLabel="oval-loading"
-      secondaryColor="#1d9bf0"
+      secondaryColor={theme === "dark" ? "#1d9bf0" : "#000"}
       strokeWidth={2}
       strokeWidthSecondary={2}
     />

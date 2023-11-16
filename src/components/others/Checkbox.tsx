@@ -1,3 +1,6 @@
+import { useSelector } from "react-redux";
+import { getTheme } from "../../../utils/slices/UiSlice";
+
 type CheckboxType = {
   id: string;
   label: string;
@@ -15,6 +18,10 @@ const Checkbox = ({
   externalLabelClass,
   externalInputClass,
 }: CheckboxType) => {
+  const theme = useSelector(getTheme);
+
+  const textColor = theme === "dark" ? "text-gray-300" : "text-gray-800";
+
   return (
     <label htmlFor={id} className="flex gap-2 items-center">
       <input
@@ -26,7 +33,7 @@ const Checkbox = ({
       />
       <span
         className={`${
-          textBlue ? "text-blue-300" : "text-gray-300"
+          textBlue ? "text-blue-300" : textColor
         } ${externalLabelClass} cursor-pointer`}
       >
         {label}

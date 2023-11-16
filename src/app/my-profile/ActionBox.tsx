@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setTitle } from "../../../utils/slices/SubNavSlice";
 
 import Link from "next/link";
 import EditProfile from "./EditProfile";
 import DeleteAccount from "./DeleteAccount";
 import Signout from "./Signout";
-import { setBottomNavLink } from "../../../utils/slices/UiSlice";
+import { getTheme, setBottomNavLink } from "../../../utils/slices/UiSlice";
 
 type ActionBoxType = {
   heading: string;
@@ -30,6 +30,7 @@ function ActionBox({
   linkHref,
 }: ActionBoxType) {
   const dispatch = useDispatch();
+  const theme = useSelector(getTheme);
   const [action, setAction] = useState<string>("");
 
   return (
@@ -41,7 +42,9 @@ function ActionBox({
             dispatch(setTitle(subNavTitle));
           }}
           href={linkHref}
-          className="bg-[#111] cursor-pointer flex gap-3 items-center text-white rounded-md px-4 py-4"
+          className={`${
+            theme === "dark" ? "bg-[#111] text-white" : "bg-gray-300 text-black"
+          } cursor-pointer flex gap-3 items-center rounded-md font-medium px-4 py-4`}
         >
           {icon}
           <p>{heading}</p>
@@ -52,7 +55,9 @@ function ActionBox({
             dispatch(setBottomNavLink(bottomNavValue));
             setAction(actionType || "");
           }}
-          className="bg-[#111] cursor-pointer flex gap-3 items-center text-white rounded-md px-4 py-4"
+          className={`${
+            theme === "dark" ? "bg-[#111] text-white" : "bg-gray-300 text-black"
+          } cursor-pointer flex gap-3 items-center rounded-md font-medium px-4 py-4`}
         >
           {icon}
           <p>{heading}</p>

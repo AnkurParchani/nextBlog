@@ -9,6 +9,8 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import FoundBlogs from "./BlogCard";
 import UserCard from "./UserCard";
+import { useSelector } from "react-redux";
+import { getTheme } from "../../../utils/slices/UiSlice";
 
 type SearchInputType = {
   blogs: Blog[];
@@ -17,6 +19,7 @@ type SearchInputType = {
 
 const SearchInput = ({ blogs, users }: SearchInputType) => {
   const [input, setInput] = useState<string>("");
+  const theme = useSelector(getTheme);
 
   // Blogs according to search query
   const foundBlogs = blogs.filter((blog) => {
@@ -50,7 +53,11 @@ const SearchInput = ({ blogs, users }: SearchInputType) => {
   return (
     <>
       {/* Search bar */}
-      <div className="grid grid-cols-[auto_1fr_auto] bg-gray-800 border-b py-1 px-3 w-full outline-none text-sm focus:border-[#1d9bf0] duration-200 items-center rounded-lg max-w-4xl mx-auto">
+      <div
+        className={`grid grid-cols-[auto_1fr_auto] ${
+          theme === "dark" ? "bg-gray-800" : "bg-gray-300"
+        } border-b py-1 px-3 w-full outline-none text-sm items-center rounded-lg max-w-4xl mx-auto`}
+      >
         <SearchIcon />
 
         <Input
@@ -58,7 +65,9 @@ const SearchInput = ({ blogs, users }: SearchInputType) => {
           inputId="search"
           value={input}
           onChange={handleChange}
-          className="w-full font-semibold text-sm bg-gray-800  outline-none"
+          className={`w-full font-semibold text-sm ${
+            theme === "dark" ? "bg-gray-800" : "bg-gray-300"
+          } outline-none`}
           placeholder="Search for any Blogs or Users"
         />
 
@@ -69,7 +78,12 @@ const SearchInput = ({ blogs, users }: SearchInputType) => {
 
       {input.length < 3 && (
         <div className="flex items-center mt-14 flex-col ">
-          <SearchIcon style={{ fontSize: "90px", color: "#374151" }} />
+          <SearchIcon
+            style={{
+              fontSize: "90px",
+              color: theme === "dark" ? "#374151" : "#6c7583",
+            }}
+          />
           <p className="text-gray-500">Search for It...</p>
         </div>
       )}
@@ -89,9 +103,16 @@ const SearchInput = ({ blogs, users }: SearchInputType) => {
 };
 
 function EmptyResults({ input }: { input: string }) {
+  const theme = useSelector(getTheme);
+
   return (
     <div className="flex flex-col items-center mt-14">
-      <SearchOffIcon style={{ fontSize: "90px", color: "#374151" }} />
+      <SearchOffIcon
+        style={{
+          fontSize: "90px",
+          color: theme === "dark" ? "#374151" : "#6c7583",
+        }}
+      />
 
       <p className="text-gray-500 text-center px-2 text-sm">
         Sorry, no results were found for the search query:{" "}

@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import getErrorMessage from "../../../utils/errors/getErrorMessage";
 import Checkbox from "@/components/others/Checkbox";
@@ -14,7 +14,7 @@ import BlogImgPicker from "@/components/others/BlogImgPicker";
 
 import { addBlog, uploadBlogImg } from "@/actions/blog";
 import { RingSpinner } from "../../../utils/others/Spinner";
-import { setBottomNavLink } from "../../../utils/slices/UiSlice";
+import { getTheme, setBottomNavLink } from "../../../utils/slices/UiSlice";
 
 type NumCharType = {
   title: string;
@@ -24,6 +24,7 @@ type NumCharType = {
 const Form = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const theme = useSelector(getTheme);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [blogImg, setBlogImg] = useState<string | undefined>(undefined);
   const [numCharacters, setNumCharacters] = useState<NumCharType>({
@@ -101,7 +102,11 @@ const Form = () => {
 
   // The JSX
   return (
-    <div className="bg-gray-900 p-3 rounded-md">
+    <div
+      className={`${
+        theme === "dark" ? "bg-gray-900" : "bg-gray-300"
+      } p-3 rounded-md`}
+    >
       <form
         action={handleAddBlog}
         className="flex flex-col gap-4"
@@ -113,7 +118,11 @@ const Form = () => {
           placeholder="Title"
           inputId="title"
           onChange={handleTitleChange}
-          className="bg-gray-900 border-b py-1 duration-100 focus:border-blue-400 outline-none font-semibold flex-1 text-white w-full"
+          className={`${
+            theme === "dark"
+              ? "bg-gray-900 text-white"
+              : "bg-gray-300 text-gray-600"
+          } border-b py-1 duration-100 focus:border-blue-400 outline-none font-semibold flex-1  w-full`}
         />
 
         <p
@@ -129,7 +138,11 @@ const Form = () => {
           rows={5}
           placeholder="Content"
           id="content"
-          className="bg-gray-900 font-medium w-full text-white focus:outline-none"
+          className={`${
+            theme === "dark"
+              ? "bg-gray-900 text-white"
+              : "text-gray-600 bg-gray-300"
+          } font-medium w-full focus:outline-none`}
           onChange={handleContentChange}
           value={numCharacters.content}
         />
@@ -166,7 +179,11 @@ const Form = () => {
 
         <Checkbox defaultChecked id="global" label="Make your Blog Global" />
 
-        <button className="bg-[#1d9bf0] hover:bg-[#51aeec] duration-200 self-end px-5 py-1 mt-2 rounded-md text-base outline-none">
+        <button
+          className={`${
+            theme === "dark" ? "bg-[#1d9bf0]" : "bg-blue-300"
+          } hover:bg-[#51aeec] duration-200 self-end px-5 py-1 mt-2 rounded-md text-base outline-none`}
+        >
           {isLoading ? <RingSpinner /> : "Post"}
         </button>
       </form>

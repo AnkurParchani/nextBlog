@@ -2,11 +2,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { getTheme } from "../../../utils/slices/UiSlice";
 
 type BlogTextType = { content: string };
 
 const BlogText = ({ content }: BlogTextType) => {
   const [readMore, setReadMore] = useState<boolean>(true);
+  const theme = useSelector(getTheme);
   const isBig = content.length > 100;
 
   useEffect(() => {
@@ -19,7 +22,11 @@ const BlogText = ({ content }: BlogTextType) => {
 
   return (
     <>
-      <p className="text-sm mt-1 leading-relaxed tracking-wide">
+      <p
+        className={`text-sm mt-1 leading-relaxed tracking-wide ${
+          theme === "dark" ? "" : "text-gray-900"
+        }`}
+      >
         {contentToShow}
         {!readMore && isBig && "..."}
       </p>

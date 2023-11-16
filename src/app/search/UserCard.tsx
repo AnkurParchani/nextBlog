@@ -1,5 +1,5 @@
-import { useDispatch } from "react-redux";
-import { setBottomNavLink } from "../../../utils/slices/UiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getTheme, setBottomNavLink } from "../../../utils/slices/UiSlice";
 import { useRouter } from "next/navigation";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Image from "next/image";
@@ -7,10 +7,17 @@ import Image from "next/image";
 const UserCard = ({ foundUsers }: { foundUsers: User[] }) => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const theme = useSelector(getTheme);
 
   return (
     <div className="max-w-4xl mx-auto ">
-      <h1 className="font-medium my-3 text-yellow-300">Found Users:-</h1>
+      <h1
+        className={`font-medium my-3 ${
+          theme === "dark" ? "text-yellow-300" : "text-yellow-600"
+        }`}
+      >
+        Found Users:-
+      </h1>
 
       {foundUsers.map((user) => (
         <div
@@ -19,7 +26,9 @@ const UserCard = ({ foundUsers }: { foundUsers: User[] }) => {
             dispatch(setBottomNavLink(""));
             router.push(`/users/blogs/?userId=${user._id}`);
           }}
-          className="bg-[#111] cursor-pointer px-3 py-4 rounded-xl mt-3 flex gap-2 items-start"
+          className={`${
+            theme === "dark" ? "bg-[#111]" : "bg-gray-300"
+          } cursor-pointer px-3 py-4 rounded-xl mt-3 flex gap-2 items-start`}
         >
           {user.img ? (
             <Image
@@ -30,12 +39,29 @@ const UserCard = ({ foundUsers }: { foundUsers: User[] }) => {
               className="rounded-full h-8 w-8"
             />
           ) : (
-            <AccountCircleIcon style={{ fontSize: "37px", color: "#9CA3AF" }} />
+            <AccountCircleIcon
+              style={{
+                fontSize: "37px",
+                color: theme === "dark" ? "#9CA3AF" : "#7e7f83",
+              }}
+            />
           )}
 
           <div className="flex-grow">
-            <h1 className="text-blue-300 font-medium">{user.name}</h1>
-            <p className="text-gray-500 font-medium text-xs ">({user.email})</p>
+            <h1
+              className={`${
+                theme === "dark" ? "text-blue-300" : "text-blue-500"
+              } font-medium`}
+            >
+              {user.name}
+            </h1>
+            <p
+              className={`${
+                theme === "dark" ? "text-gray-500" : "text-gray-600"
+              } font-medium text-xs`}
+            >
+              ({user.email})
+            </p>
           </div>
         </div>
       ))}

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 import NameForBlog from "@/components/blogs/NameForBlog";
 import BlogText from "@/components/blogs/BlogText";
@@ -7,7 +8,6 @@ import LikeButton from "@/components/others/LikeButton";
 
 import formatDate from "../../../../lib/formatDate";
 import EditMenuButton from "@/components/others/EditMenuButton";
-import Image from "next/image";
 
 // Template for the Blog (container which will render whole info about a particular blog)
 export function BlogWithoutLink({
