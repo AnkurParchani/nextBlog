@@ -5,11 +5,12 @@ import Blog from "@/components/blogs/Blog";
 import TopLogo from "@/components/others/TopLogo";
 
 import { getBlogs, getLikedBlogs } from "../../utils/blogs/apiBlogs";
+import NotFound from "./not-found";
 
 export default async function Home() {
   // Getting all the blogs
   const blogs = await getBlogs();
-  if (blogs.error) return <p>Failed to get blogs... </p>;
+  if (blogs && blogs.error) return <NotFound />;
 
   // Fetching and setting all liked blogs of user
   const fetchUserLikedBlogs = (await getLikedBlogs()).blogs;

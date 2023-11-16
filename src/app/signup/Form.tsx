@@ -57,7 +57,7 @@ function Form() {
       <div className="flex items-end justify-center">
         {userImg ? (
           <Image
-            className="rounded-full"
+            className="rounded-full h-32 w-auto"
             width={900}
             height={900}
             src={userImg}
