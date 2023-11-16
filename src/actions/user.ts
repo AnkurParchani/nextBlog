@@ -85,10 +85,13 @@ export const uploadUserImg = async (e: FormData) => {
     console.log("logging e.get(img)", img);
 
     console.log("Going inside img instanceof File block");
-    if (!(img instanceof File)) throw new Error("Image not provided");
+    // if (!(img instanceof File)) throw new Error("Image not provided");
+    if (!(img instanceof Buffer)) throw new Error("Image not provided");
+
     console.log("Got out og that block");
 
     // Setting name and path for the img
+    // @ts-ignore
     const imgName = `${Math.random()}-${img.name}`.replaceAll("/", "");
     const imgPath = `${supabaseUrl}/storage/v1/object/public/users/${imgName}`;
 
