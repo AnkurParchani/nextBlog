@@ -1,9 +1,20 @@
 import { RootState } from "@/app/store/store";
 import { createSlice } from "@reduxjs/toolkit";
 
+const getInitialTheme = () => {
+  if (typeof window !== "undefined") {
+    try {
+      return localStorage.getItem("theme") || "dark";
+    } catch (error) {
+      console.error("Error accessing localStorage:", error);
+    }
+  }
+  return "dark"; // Use a default value if localStorage is not available
+};
+
 // The Initial state
 const initialState = {
-  theme: localStorage.getItem("theme") || "dark",
+  theme: getInitialTheme(),
   bottomNavLink: "/",
   bottomNavUserImg: "",
 };
