@@ -15,7 +15,6 @@ const ThemeActionBox = () => {
   function handleClick() {
     const newTheme = currentTheme === "dark" ? "light" : "dark";
     dispatch(setTheme(newTheme));
-    localStorage.setItem("theme", newTheme);
   }
 
   return (
