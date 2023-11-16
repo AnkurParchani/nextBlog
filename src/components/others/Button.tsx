@@ -18,7 +18,7 @@ function Button({ children, onClick, externalClass }: ButtonType) {
       className={`${
         externalClass ? externalClass : "bg-[#1d9bf0] hover:bg-[#51aeec] py-0.5"
       } duration-200 mt-3  rounded-sm text-base ${
-        theme === "dark" ? "text-gray-800" : "text-gray-100"
+        theme === "dark" ? "text-gray-100" : "text-gray-800"
       }`}
     >
       {children}

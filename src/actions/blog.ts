@@ -65,13 +65,13 @@ export const uploadBlogImg = async (e: FormData) => {
   try {
     const img = e.get("img");
 
-    if (!(img instanceof File)) throw new Error("Image not provided");
-
     // Setting name and path for the img
+    // @ts-ignore
     const imgName = `${Math.random()}-${img.name}`.replaceAll("/", "");
     const imgPath = `${supabaseUrl}/storage/v1/object/public/blogs/${imgName}`;
 
     // Uploading the img to the bucket
+    // @ts-ignore
     const { error } = await supabase.storage.from("blogs").upload(imgName, img);
 
     // If any error found while uploading the img
