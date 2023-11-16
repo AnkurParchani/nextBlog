@@ -1,4 +1,7 @@
-import React from "react";
+"use client";
+
+import { useSelector } from "react-redux";
+import { getTheme } from "../../../utils/slices/UiSlice";
 
 type ModalInfoCardType = {
   month?: string;
@@ -13,10 +16,22 @@ const ModalInfoCard = ({
   title,
   contentToShow,
 }: ModalInfoCardType) => {
+  const theme = useSelector(getTheme);
+
   return (
-    <div className="px-4 flex flex-col gap-3 bg-[#333] rounded-md py-3 ">
+    <div
+      className={`px-4 flex flex-col gap-3 ${
+        theme === "dark" ? "bg-[#333]" : "bg-gray-200"
+      } rounded-md py-3 `}
+    >
       <div className="flex gap-3 justify-between">
-        <h1 className="capitalize font-medium text-red-300">{title}</h1>
+        <h1
+          className={`capitalize font-medium ${
+            theme === "dark" ? "text-red-300" : "text-red-600"
+          }`}
+        >
+          {title}
+        </h1>
         <p className="text-xs font-semibold">
           {month} {day}{" "}
         </p>

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 // The Initial state
 const initialState = {
-  theme: "dark",
+  theme: localStorage.getItem("theme") || "dark",
   bottomNavLink: "/",
   bottomNavUserImg: "",
 };

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useCookies } from "react-cookie";
 import toast from "react-hot-toast";
 import ChatBubbleOutlineRoundedIcon from "@mui/icons-material/ChatBubbleOutlineRounded";
 import ModalFormTemplate from "./ModalFormTemplate";
@@ -10,7 +11,8 @@ import getErrorMessage from "../../../utils/errors/getErrorMessage";
 
 import { addComment } from "@/actions/blog";
 import { useRouter } from "next/navigation";
-import { useCookies } from "react-cookie";
+import { useSelector } from "react-redux";
+import { getTheme } from "../../../utils/slices/UiSlice";
 
 const CommentButton = ({
   comments,
@@ -25,6 +27,7 @@ const CommentButton = ({
   const [action, setAction] = useState<string>("");
   const [cookie] = useCookies();
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const theme = useSelector(getTheme);
 
   function handleCommentClick() {
     if (!hasCommentFunctionality) return;
@@ -75,7 +78,7 @@ const CommentButton = ({
           headingColor="text-green-500"
         >
           <Input
-            bgColor="bg-[#222]"
+            bgColor={theme === "dark" ? "bg-[#222]" : "bg-gray-200"}
             label="Say something about this blog..."
             inputId="content"
             type="text"
@@ -83,7 +86,11 @@ const CommentButton = ({
 
           <input type="hidden" value={blogId} name="blogId" />
 
-          <p className="text-xs font-medium leading-snug text-green-400">
+          <p
+            className={`text-xs font-medium leading-snug ${
+              theme === "dark" ? "text-green-400" : "text-green-500"
+            }`}
+          >
             Note:- You won&apos;t be able to delete your comment after posting
             it. So be respectful to the community!
           </p>

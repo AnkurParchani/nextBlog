@@ -11,12 +11,15 @@ import getErrorMessage from "../../../utils/errors/getErrorMessage";
 
 import { deleteAccount } from "@/actions/user";
 import ModalFormTemplate from "@/components/others/ModalFormTemplate";
+import { useSelector } from "react-redux";
+import { getTheme } from "../../../utils/slices/UiSlice";
 
 type DeleteAccountProps = {
   setAction: Dispatch<SetStateAction<string>>;
 };
 
 const DeleteAccount = ({ setAction }: DeleteAccountProps) => {
+  const theme = useSelector(getTheme);
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -52,7 +55,7 @@ const DeleteAccount = ({ setAction }: DeleteAccountProps) => {
         defaultChecked={false}
       />
       <Input
-        bgColor="bg-[#222]"
+        bgColor={theme === "dark" ? "bg-[#222]" : "bg-gray-200"}
         label="Enter your password"
         required
         inputId="password"

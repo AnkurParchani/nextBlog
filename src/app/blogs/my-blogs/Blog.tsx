@@ -1,6 +1,9 @@
+"use client";
 import Image from "next/image";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { BlogWithoutLink } from "@/app/users/blogs/BlogWithoutLink";
+import { useSelector } from "react-redux";
+import { getTheme } from "../../../../utils/slices/UiSlice";
 
 type BlogType = {
   blog: Blog;
@@ -9,12 +12,15 @@ type BlogType = {
 };
 
 const Blog = ({ blog, user, userLikedBlogs }: BlogType) => {
+  const theme = useSelector(getTheme);
   const { img: userImg, _id: userId } = user;
 
   return (
     <div
       key={blog._id}
-      className="bg-[#111] px-3 py-4 rounded-xl flex gap-2 items-start overflow-x-clip"
+      className={`${
+        theme === "dark" ? "bg-[#111]" : "bg-gray-300"
+      } px-3 py-4 rounded-xl flex gap-2 items-start overflow-x-clip`}
     >
       {userImg ? (
         <Image

@@ -11,6 +11,9 @@ import {
 } from "../../../../utils/blogs/apiBlogs";
 import { BlogWithoutLink } from "./BlogWithoutLink";
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import { getTheme } from "../../../../utils/slices/UiSlice";
+import Blog from "./Blog";
 
 const page = async ({
   searchParams: { userId },
@@ -46,26 +49,12 @@ const page = async ({
 
         <div className="grid max-w-5xl lg:grid-cols-3 mx-auto grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 md:gap-6 auto-rows-auto items-start content-start mt-5">
           {blogs.map((blog: Blog) => (
-            <div
+            <Blog
               key={blog._id}
-              className="bg-[#111] px-3 py-4 rounded-xl flex gap-2 items-start"
-            >
-              {userImg ? (
-                <Image
-                  src={userImg}
-                  alt="user-img"
-                  className="rounded-full w-8 h-8"
-                  height={300}
-                  width={300}
-                />
-              ) : (
-                <AccountCircleIcon
-                  style={{ fontSize: "40px", color: "#9CA3AF" }}
-                />
-              )}
-
-              <BlogWithoutLink userLikedBlogs={userLikedBlogs} blog={blog} />
-            </div>
+              blog={blog}
+              userImg={userImg}
+              userLikedBlogs={userLikedBlogs}
+            />
           ))}
         </div>
       </Container>

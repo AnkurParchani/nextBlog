@@ -13,11 +13,14 @@ import getErrorMessage from "../../../utils/errors/getErrorMessage";
 import { signup } from "@/actions/signup";
 import { uploadUserImg } from "@/actions/user";
 import ImgPicker from "@/components/others/UserImgPicker";
+import { useSelector } from "react-redux";
+import { getTheme } from "../../../utils/slices/UiSlice";
 
 function Form() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [userImg, setUserImg] = useState<string | undefined>(undefined);
+  const theme = useSelector(getTheme);
 
   // Signup server action function
   async function userSignup(event: FormData) {
@@ -70,10 +73,26 @@ function Form() {
         <ImgPicker handleFileInputChange={handleFileInputChange} />
       </div>
 
-      <Input label="Name" inputId="name" type="text" />
-      <Input label="Email" inputId="email" type="email" />
-      <Input label="Password" inputId="password" type="password" />
       <Input
+        bgColor={theme === "dark" ? "bg-black" : "bg-gray-300"}
+        label="Name"
+        inputId="name"
+        type="text"
+      />
+      <Input
+        bgColor={theme === "dark" ? "bg-black" : "bg-gray-300"}
+        label="Email"
+        inputId="email"
+        type="email"
+      />
+      <Input
+        bgColor={theme === "dark" ? "bg-black" : "bg-gray-300"}
+        label="Password"
+        inputId="password"
+        type="password"
+      />
+      <Input
+        bgColor={theme === "dark" ? "bg-black" : "bg-gray-300"}
         label="Password Confirm"
         inputId="passwordConfirm"
         type="password"

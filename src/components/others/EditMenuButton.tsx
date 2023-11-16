@@ -9,6 +9,8 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteBlog from "@/app/blogs/my-blogs/DeleteBlog";
 import EditBlog from "@/app/blogs/my-blogs/EditBlog";
+import { useSelector } from "react-redux";
+import { getTheme } from "../../../utils/slices/UiSlice";
 
 const options = [
   { title: "Edit", icon: <EditIcon fontSize="small" /> },
@@ -18,6 +20,7 @@ const options = [
 export default function EditMenuButton({ blog }: { blog: Blog }) {
   const [action, setAction] = React.useState<string>("");
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const theme = useSelector(getTheme);
   const open = Boolean(anchorEl);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -39,7 +42,7 @@ export default function EditMenuButton({ blog }: { blog: Blog }) {
   return (
     <div>
       <IconButton
-        style={{ color: "#fff" }}
+        style={{ color: theme === "dark" ? "#fff" : "#000" }}
         aria-label="more"
         id="long-button"
         aria-controls={open ? "long-menu" : undefined}

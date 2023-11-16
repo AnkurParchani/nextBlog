@@ -1,4 +1,7 @@
+"use client";
 import { ChangeEventHandler } from "react";
+import { useSelector } from "react-redux";
+import { getTheme } from "../../../utils/slices/UiSlice";
 
 type TextAreaType = {
   id: string;
@@ -27,6 +30,7 @@ function TextArea({
   className,
   bgColor,
 }: TextAreaType) {
+  const theme = useSelector(getTheme);
   const requiredClass = "after:content-['*'] after:ml-0.5 after:text-red-500";
   const universalClass = `${
     bgColor ? bgColor : "bg-black"
@@ -35,9 +39,9 @@ function TextArea({
   return (
     <label htmlFor={id}>
       <span
-        className={`px-0.5 font-semibold text-gray-100 tracking-wide ${
-          required && requiredClass
-        }`}
+        className={`px-0.5 font-semibold ${
+          theme === "dark" ? "text-gray-100" : "text-gray-800"
+        } tracking-wide ${required && requiredClass}`}
       >
         {label}
       </span>

@@ -9,12 +9,13 @@ import Button from "@/components/others/Button";
 import getErrorMessage from "../../../utils/errors/getErrorMessage";
 
 import { login } from "@/actions/login";
-import { useDispatch } from "react-redux";
-import { setBottomNavUserImg } from "../../../utils/slices/UiSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getTheme, setBottomNavUserImg } from "../../../utils/slices/UiSlice";
 
 const Form = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const router = useRouter();
+  const theme = useSelector(getTheme);
   const dispatch = useDispatch();
 
   async function userLogin(event: FormData) {
@@ -40,8 +41,18 @@ const Form = () => {
       className="flex flex-col gap-5 mt-2 md:mt-10"
       autoComplete="off"
     >
-      <Input label="Email" inputId="email" type="email" />
-      <Input label="Password" inputId="password" type="password" />
+      <Input
+        bgColor={theme === "dark" ? "bg-black" : "bg-gray-300"}
+        label="Email"
+        inputId="email"
+        type="email"
+      />
+      <Input
+        bgColor={theme === "dark" ? "bg-black" : "bg-gray-300"}
+        label="Password"
+        inputId="password"
+        type="password"
+      />
       <Button onClick={() => setIsLoading(true)}>
         {isLoading ? "Logging in..." : "Login"}
       </Button>

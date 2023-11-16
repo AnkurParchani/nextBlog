@@ -12,6 +12,8 @@ import Checkbox from "@/components/others/Checkbox";
 import { updateBlog, uploadBlogImg } from "@/actions/blog";
 import BlogImgPicker from "@/components/others/BlogImgPicker";
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import { getTheme } from "../../../../utils/slices/UiSlice";
 
 type EditBlogType = {
   blog: Blog;
@@ -21,6 +23,7 @@ type EditBlogType = {
 // Editing the blog (doing the request)
 const EditBlog = ({ blog, setAction }: EditBlogType) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const theme = useSelector(getTheme);
   const {
     content,
     title,
@@ -94,11 +97,11 @@ const EditBlog = ({ blog, setAction }: EditBlogType) => {
           type="text"
           defaultValue={title}
           required
-          bgColor="bg-[#222]"
+          bgColor={theme === "dark" ? "bg-[#222]" : "bg-gray-200"}
         />
 
         <TextArea
-          bgColor="bg-[#222]"
+          bgColor={theme === "dark" ? "bg-[#222]" : "bg-gray-200"}
           cols={5}
           rows={3}
           required
