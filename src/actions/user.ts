@@ -80,24 +80,19 @@ export const editProfile = async (e: FormData, userImg?: string) => {
 export const uploadUserImg = async (e: FormData) => {
   try {
     // Getting the img
-    console.log("inside uploaduserimg");
     const img = e.get("img");
-    console.log("logging the value of img", img);
 
     // Setting name and path for the img
     // @ts-ignore
     const imgName = `${Math.random()}-${img.name}`.replaceAll("/", "");
     const imgPath = `${supabaseUrl}/storage/v1/object/public/users/${imgName}`;
 
-    console.log("imgname", imgName);
-    console.log("imgpath", imgPath);
     // Uploading the img to the bucket
     // @ts-ignore
     const { error } = await supabase.storage.from("users").upload(imgName, img);
 
     // If any error found while uploading the img
     if (error) {
-      console.log("inside error route of supabase upload error", error);
       console.log(error);
       throw new Error("Something went wrong while uploading the img");
     }

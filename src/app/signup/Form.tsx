@@ -42,16 +42,12 @@ function Form() {
   // Uploading the img
   async function handleFileInputChange(e: ChangeEvent<HTMLInputElement>) {
     const formData = new FormData();
-    console.log("Inside handleFileInputChange function");
 
     if (e.target.files) {
-      console.log("inside e.target.files");
-      console.log("logging e.target.files", e.target.files);
       formData.append("img", e.target.files[0]);
     }
 
     const imgPath = await uploadUserImg(formData);
-    console.log("received image path after uploaduserimg", imgPath);
     setUserImg(imgPath as string);
   }
 
