@@ -41,13 +41,9 @@ function Form() {
 
   // Uploading the img
   async function handleFileInputChange(e: ChangeEvent<HTMLInputElement>) {
-    console.log("inside handleFileInputChange");
     const formData = new FormData();
-    console.log("e.target", e.target);
 
     if (e.target.files) {
-      console.log("inside e.target.files");
-      console.log("Value of e.target.files[0]", e.target.files[0]);
       formData.append("img", e.target.files[0]);
     }
 
